@@ -34,6 +34,8 @@ namespace View {
 
         void drawLine(const sf::Vector2f & p1, const sf::Vector2f & p2, const sf::Color & color = sf::Color::White);
 
+        float getFrameRate() const;
+
     private:
         bool m_showFrameRate;
         sf::Font m_font;

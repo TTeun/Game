@@ -10,6 +10,10 @@
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/Graphics/Rect.hpp>
 
+namespace Entities {
+    class Level;
+} // namespace Entities
+
 class Rectangle : public sf::FloatRect {
 
 public:
@@ -49,8 +53,10 @@ public:
 
     Point getSize() const;
 
+    bool isMutuallyFullyVisible(const Rectangle & other, const Entities::Level & level) const;
+
 private:
-        sf::Color m_color;
+    sf::Color m_color;
 };
 
 Rectangle operator+(const Rectangle & rectangle, const Point & point);

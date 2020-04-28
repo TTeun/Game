@@ -3,6 +3,9 @@
 //
 
 #include "mathtools.h"
+
+#include <cassert>
+
 float MathTools::square(float a)
 {
     return a * a;
@@ -11,4 +14,15 @@ float MathTools::square(float a)
 bool MathTools::liesIsInterval(float point, float left, float right, float buffer)
 {
     return point <= right - buffer && point >= left + buffer;
+}
+
+float MathTools::clamp(float a, float min, float max)
+{
+    assert(min < max);
+    if (a < min) {
+        return min;
+    } else if (a > max) {
+        return max;
+    }
+    return a;
 }

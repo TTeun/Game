@@ -60,10 +60,12 @@ namespace View {
     {
         return static_cast<float>(m_dt / 1000000.0);
     }
+
     const sf::FloatRect & Window::getViewRect() const
     {
         return m_viewRect;
     }
+
     void Window::drawRectangle(float x, float y, float width, float height, const sf::Color & color)
     {
         sf::RectangleShape shape({width, height});
@@ -71,6 +73,7 @@ namespace View {
         shape.setFillColor(color);
         draw(shape);
     }
+
     void Window::drawRectangle(const Rectangle & rect)
     {
         drawRectangle(rect.left, rect.top, rect.width, rect.height, rect.getColor());
@@ -83,7 +86,12 @@ namespace View {
         sf::RectangleShape rect({dist, 1.0f});
         rect.setFillColor(color);
         rect.setPosition(p1);
-        rect.rotate(180.0 * std::atan2((p2 - p1).y, (p2 - p1).x) / M_PI);
+        rect.rotate(static_cast<float>(180.0f * std::atan2((p2 - p1).y, (p2 - p1).x) / M_PI));
         draw(rect);
+    }
+
+    float Window::getFrameRate() const
+    {
+        return m_frameRate;
     }
 } // namespace View

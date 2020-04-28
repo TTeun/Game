@@ -5,14 +5,14 @@
 #ifndef SFML_INTERSECTABLEOBJECT_H
 #define SFML_INTERSECTABLEOBJECT_H
 
-#include "../../Aux/shapetools.h"
-#include "../Entities/level.h"
-#include "intersectioninfo.h"
-#include "intersector.h"
+#include "../Entities/terrainblock.h"
 #include "physicsobject.h"
 
 #include <cmath>
-#include <iostream>
+
+namespace Entities {
+    class Level;
+}
 
 namespace Physics {
 

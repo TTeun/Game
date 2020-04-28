@@ -8,6 +8,7 @@
 #include "window.h"
 
 #include <cassert>
+#include <iostream>
 
 void View::DrawInterface::drawLevel(View::Window & window,
                                     const Entities::Level & terrain,
@@ -41,9 +42,9 @@ void View::DrawInterface::drawDebrisExplosions(View::Window & window,
 {
     for (const auto & explosion : debrisExplosionList) {
         for (const auto & debris : explosion.getDebrisVector()) {
-            if (not debris.getShape().intersects(viewRect)) {
-                continue;
-            }
+            //            if (not debris.getShape().intersects(viewRect)) {
+            //                continue;
+            //            }
             window.drawRectangle(debris.getShape());
         }
     }

@@ -4,7 +4,7 @@
 
 #include "entitylist.h"
 
-#include "../../Aux/uniform.h"
+#include <iostream>
 
 Entities::EntityList::EntityList() : m_level(new Level())
 {
@@ -29,7 +29,7 @@ void Entities::EntityList::handleAi(float dt, const RectGraph & rectGraph)
         auto vel           = rectGraph.findDirectionToTarget(enemy.getShape(), getLevel(), 0.9f);
         const float length = std::sqrt(vel.x * vel.x + vel.y * vel.y);
         vel /= length;
-        enemy.setVelocity(dt * vel * 20000.f);
+        enemy.setVelocity(dt * vel * 200000.f);
     }
 }
 
@@ -66,13 +66,7 @@ Entities::Player & Entities::EntityList::getPlayer()
 
 void Entities::EntityList::addDebrisExplosion()
 {
-    m_debrisExplosionVector.emplace_back(m_player.getShape().getPosition() + 0.5f * m_player.getShape().getSize(),
-                                         12,
-                                         Colors::playerColor,
-                                         Colors::outlineColor,
-                                         Uniform(5, 3),
-                                         Uniform(99, 5),
-                                         Uniform(4, 2));
+    m_debrisExplosionVector.emplace_back(m_player.getShape().getPosition() + 0.5f * m_player.getShape().getSize(), 12);
 }
 
 void Entities::EntityList::setLevel(Entities::Level * level)

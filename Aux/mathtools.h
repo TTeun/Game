@@ -7,6 +7,8 @@
 
 namespace MathTools {
 
+    float clamp(float a, float min, float max);
+
     float square(float a);
 
     bool liesIsInterval(float point, float left, float right, float buffer = 0.01f);

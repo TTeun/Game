@@ -7,7 +7,6 @@
 
 #include "Shape/rectangle.h"
 
-#include <SFML/Graphics/Rect.hpp>
 #include <map>
 #include <memory>
 #include <vector>
@@ -40,6 +39,7 @@ private:
     std::map<size_t, float> m_edgesToTarget;
 
     std::unique_ptr<Rectangle> m_target;
+
     bool isNeighbor(size_t i, size_t j) const;
 
     bool isNeighborOfTarget(size_t i) const;

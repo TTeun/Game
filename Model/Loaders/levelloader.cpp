@@ -1,11 +1,9 @@
-//
-// Created by pc on 4/27/20.
-//
-
 #include "levelloader.h"
 
 #include "../../ThirdParty/tinyxml/tinyxml.h"
 #include "../../game.h"
+
+#include <iostream>
 
 struct rect {
     float x, y, width, height;

@@ -4,8 +4,6 @@
 
 #include "level.h"
 
-#include "Shape/line.h"
-#include "Shape/rectangle.h"
 #include "player.h"
 
 #include <algorithm>

@@ -5,7 +5,6 @@
 #ifndef SFML_LEVEL_H
 #define SFML_LEVEL_H
 
-#include "Shape/line.h"
 #include "rectgraph.h"
 #include "terrainblock.h"
 

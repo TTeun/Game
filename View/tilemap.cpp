@@ -106,8 +106,8 @@ bool TileMap::load(const std::string & tileSet, sf::Vector2u tileSize, size_t wi
                 }
             }
 
-            int tu = tileNumber % (m_tileSet.getSize().x / tileSize.x);
-            int tv = tileNumber / (m_tileSet.getSize().x / tileSize.x);
+            size_t tu = tileNumber % (m_tileSet.getSize().x / tileSize.x);
+            size_t tv = tileNumber / (m_tileSet.getSize().x / tileSize.x);
 
             quad[0].texCoords = sf::Vector2f(tu * tileSize.x, tv * tileSize.y);
             quad[1].texCoords = sf::Vector2f((tu + 1) * tileSize.x, tv * tileSize.y);

@@ -4,12 +4,10 @@
 
 #include "player.h"
 
-#include "shapeFactory.h"
-
 namespace Entities {
 
     Player::Player(float x, float y, float height, float width, const sf::Color & color)
-        : Physics::IntersectableObject(Rectangle(Point{width, height}, Point{x, y}, sf::Color::Green))
+        : Physics::IntersectableObject(Rectangle(Point{width, height}, Point{x, y}, color))
     {
         setFeelsGravity(true);
     }

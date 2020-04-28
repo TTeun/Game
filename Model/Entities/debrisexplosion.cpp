@@ -4,16 +4,10 @@
 
 #include "debrisexplosion.h"
 
-Entities::DebrisExplosion::DebrisExplosion(const sf::Vector2f & position,
-                                           size_t count,
-                                           const sf::Color & color,
-                                           const sf::Color & outlineColor,
-                                           const Uniform & sizeUniform,
-                                           const Uniform & directionUniform,
-                                           const Uniform & numberOfPointsUniform)
+Entities::DebrisExplosion::DebrisExplosion(const sf::Vector2f & position, size_t count)
 {
     for (size_t i = 0; i != count; ++i) {
-        m_debrisVector.emplace_back(Debris(position, sizeUniform));
+        m_debrisVector.emplace_back(Debris::create(position));
     }
 }
 

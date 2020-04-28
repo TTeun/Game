@@ -1,7 +1,4 @@
-//
-// Created by pc on 4/28/20.
-//
-
+#include "../Entities/level.h"
 #include "intersectableobject.h"
 
 #include <cassert>
@@ -46,8 +43,9 @@ namespace Physics {
             m_whereIsSnappedTerrain = WhereIsSnappedTerrain::LEFT;
             return;
         }
-        assert(false);
+        m_whereIsSnappedTerrain = WhereIsSnappedTerrain::ABOVE;
     }
+
     void IntersectableObject::updateSnapped(float dt, const Entities::Level & level, const Constants & constants)
     {
         if (m_whereIsSnappedTerrain == WhereIsSnappedTerrain::BELOW) {
@@ -67,6 +65,9 @@ namespace Physics {
                 setWhereIsSnappedTerrain();
                 if (m_whereIsSnappedTerrain == WhereIsSnappedTerrain::BELOW) {
                     m_velocity.y = 0.0f;
+                } else if (m_whereIsSnappedTerrain == WhereIsSnappedTerrain::ABOVE) {
+                    m_snappedTerrainBlock = nullptr;
+                    m_velocity.y          = 0.0f;
                 } else {
                     m_velocity.x = 0.0f;
                 }

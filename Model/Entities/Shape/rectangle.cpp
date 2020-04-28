@@ -4,6 +4,8 @@
 
 #include "rectangle.h"
 
+#include "../level.h"
+
 #include <cassert>
 
 Rectangle::Rectangle(const Point & size, const Point & position, const sf::Color & color) : m_color(color)
@@ -105,6 +107,13 @@ Point Rectangle::getPosition() const
 Point Rectangle::getSize() const
 {
     return {{width, height}};
+}
+bool Rectangle::isMutuallyFullyVisible(const Rectangle & other, const Entities::Level & level) const
+{
+    return not(level.interSects(Line{topRight(), other.topRight()}) ||
+               level.interSects(Line{topLeft(), other.topLeft()}) ||
+               level.interSects(Line{bottomRight(), other.bottomRight()}) ||
+               level.interSects(Line{bottomLeft(), other.bottomLeft()}));
 }
 
 Rectangle operator+(const Rectangle & rectangle, const Point & point)

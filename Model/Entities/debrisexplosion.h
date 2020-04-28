@@ -16,13 +16,7 @@ namespace Entities {
     class DebrisExplosion : Physics::FiniteDuration {
 
     public:
-        DebrisExplosion(const sf::Vector2f & position,
-                        size_t count,
-                        const sf::Color & color,
-                        const sf::Color & outlineColor,
-                        const Uniform & sizeUniform,
-                        const Uniform & directionUniform,
-                        const Uniform & numberOfPointsUniform);
+        DebrisExplosion(const sf::Vector2f & position, size_t count);
 
         const std::list<Debris> & getDebrisVector() const;
 

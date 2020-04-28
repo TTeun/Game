@@ -1,7 +1,3 @@
-//
-// Created by pc on 4/28/20.
-//
-
 #include "line.h"
 
 #include <cmath>
@@ -19,7 +15,7 @@ bool intersection(sf::Vector2f start1, sf::Vector2f end1, sf::Vector2f start2, s
 
     float det = ax * by - ay * bx;
 
-    if (det <= 0.001f)
+    if (std::abs(det) <= 0.001f)
         return false;
 
     float r = (dx * by - dy * bx) / det;

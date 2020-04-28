@@ -1,39 +1,17 @@
-//
-// Created by pc on 4/28/20.
-//
-
 #include "rectgraph.h"
 
+#include "../../Aux/mathtools.h"
 #include "../../View/window.h"
 #include "level.h"
 
 #include <cassert>
-#include <iostream>
-
-static float clamp(float a, float min, float max)
-{
-    assert(min < max);
-    if (a < min) {
-        return min;
-    } else if (a > max) {
-        return max;
-    }
-    return a;
-}
-
-bool canSeeEachOther(const Rectangle & rect1, const Rectangle & rect2, const Entities::Level & level)
-{
-    return not(level.interSects(Line{rect1.topRight(), rect2.topRight()}) ||
-               level.interSects(Line{rect1.topLeft(), rect2.topLeft()}) ||
-               level.interSects(Line{rect1.bottomRight(), rect2.bottomRight()}) ||
-               level.interSects(Line{rect1.bottomLeft(), rect2.bottomLeft()}));
-}
 
 RectGraph::RectGraph(float width, float height, const Entities::Level & level)
 {
     std::vector<sf::FloatRect> terrainRectangles;
+    terrainRectangles.reserve(level.getTerrainBlocks().size());
     for (const auto & terrainBlock : level.getTerrainBlocks()) {
-        terrainRectangles.push_back(terrainBlock->getShape());
+        terrainRectangles.emplace_back(terrainBlock->getShape());
     }
 
     for (const auto & terrainRectangle : terrainRectangles) {
@@ -58,11 +36,11 @@ RectGraph::RectGraph(float width, float height, const Entities::Level & level)
     }
 
     for (size_t i = 0; i != m_rectangles.size() - 1; ++i) {
+        const auto & rect1 = m_rectangles.at(i);
         for (size_t j = i + 1; j != m_rectangles.size(); ++j) {
-            const auto & rect1 = m_rectangles.at(i);
             const auto & rect2 = m_rectangles.at(j);
 
-            if (not canSeeEachOther(rect1, rect2, level)) {
+            if (not rect1.isMutuallyFullyVisible(rect2, level)) {
                 continue;
             } else {
                 m_edges.insert({{i, j}, rect1.getDistance(rect2)});
@@ -81,7 +59,9 @@ void RectGraph::draw(View::Window & window) const
         for (auto i : m_edgesToTarget) {
             window.drawLine(m_rectangles.at(i.first).getCenter(),
                             m_target->getCenter(),
-                            {255, 0, 0, static_cast<sf::Uint8>(255 - clamp(0.3f * i.second, 0, 255))});
+                            {255,
+                             static_cast<sf::Uint8>(MathTools::clamp(0.3f * i.second, 0, 255)),
+                             static_cast<sf::Uint8>(255 - MathTools::clamp(0.3f * i.second, 0, 255))});
         }
     }
 
@@ -94,6 +74,7 @@ void RectGraph::draw(View::Window & window) const
 
 void RectGraph::addTarget(const Rectangle & targetRectangle, const Entities::Level & level, float shrinkFactor)
 {
+    shrinkFactor = 1.0f;
     if (m_rectangles.empty()) {
         return;
     }
@@ -104,7 +85,7 @@ void RectGraph::addTarget(const Rectangle & targetRectangle, const Entities::Lev
     for (size_t i = 0; i != m_rectangles.size(); ++i) {
         const auto & rect1 = m_rectangles.at(i);
 
-        if (not canSeeEachOther(rect1, *shrunkTargetRectangle, level)) {
+        if (not rect1.isMutuallyFullyVisible(*shrunkTargetRectangle, level)) {
             continue;
         } else {
             m_edgesToTarget.insert({i, shrunkTargetRectangle->getDistance(rect1)});
@@ -116,6 +97,8 @@ void RectGraph::addTarget(const Rectangle & targetRectangle, const Entities::Lev
 sf::Vector2f
 RectGraph::findDirectionToTarget(const Rectangle & rectangle, const Entities::Level & level, float shrinkFactor) const
 {
+    shrinkFactor = 1.0f;
+
     if (m_rectangles.empty()) {
         return {0.0f, 0.0f};
     }
@@ -164,7 +147,8 @@ RectGraph::findDirectionToTarget(const Rectangle & rectangle, const Entities::Le
                 continue;
             }
 
-            std::pair<size_t, size_t> edgePair = {std::min(i, minIndex), std::max(i, minIndex)};
+            std::pair<size_t, size_t> edgePair =
+                std::pair<size_t, size_t>(std::min(i, minIndex), std::max(i, minIndex));
 
             const float alt = indices[minIndex].m_dist + m_edges.at(edgePair);
             if (alt < indices[i].m_dist) {
@@ -191,7 +175,7 @@ RectGraph::findDirectionToTarget(const Rectangle & rectangle, const Entities::Le
 
     size_t minIndex = std::numeric_limits<size_t>::max();
     float minDist   = std::numeric_limits<float>::max();
-    if (canSeeEachOther(*m_target, shrunkRectangle, level)) {
+    if (m_target->isMutuallyFullyVisible(shrunkRectangle, level)) {
         minIndex = m_rectangles.size();
         minDist  = m_target->getDistance(shrunkRectangle);
     }
