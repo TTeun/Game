@@ -14,7 +14,7 @@ namespace Entities {
 
     class Level;
 
-    class Player : public Physics::IntersectableObject<Rectangle> {
+    class Player : public Physics::IntersectableObject {
 
     public:
         Player(float x, float y, float height, float width, const sf::Color & color = Colors::playerColor);
@@ -23,18 +23,12 @@ namespace Entities {
 
         void jump(const Physics::Constants & constants);
 
-        void handleHorizontalIntersection(const IntersectionInfo & info, float dt) override;
-
-        void updateNotGrounded(float dt, const Entities::Level & level, const Physics::Constants & constants) override;
-
-        void update(float dt, const Entities::Level & level, const Physics::Constants & constants);
-
     private:
         enum WallDirection { LEFT, RIGHT };
 
         void truncateHorizontalVelocity(const Physics::Constants & constants);
 
-        void isNowWalled(const WallDirection wallDirection);
+        void isNowWalled(WallDirection wallDirection);
 
         void isNowUnWalled();
 

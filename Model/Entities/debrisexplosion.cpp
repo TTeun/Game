@@ -13,8 +13,7 @@ Entities::DebrisExplosion::DebrisExplosion(const sf::Vector2f & position,
                                            const Uniform & numberOfPointsUniform)
 {
     for (size_t i = 0; i != count; ++i) {
-        m_debrisVector.emplace_back(
-            Debris(position, color, outlineColor, sizeUniform, directionUniform, numberOfPointsUniform));
+        m_debrisVector.emplace_back(Debris(position, sizeUniform));
     }
 }
 

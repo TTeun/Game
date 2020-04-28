@@ -10,15 +10,10 @@
 #include <SFML/Graphics/RectangleShape.hpp>
 
 namespace Entities {
-    class Enemy : public Physics::IntersectableObject<Rectangle> {
+    class Enemy : public Physics::IntersectableObject {
 
     public:
-        Enemy(const sf::Vector2f & size, const sf::Vector2f & position)
-            : Physics::IntersectableObject<Rectangle>(Rectangle(size, position))
-        {
-            setFeelsGravity(false);
-            m_mass = 0.2;
-        }
+        Enemy(const sf::Vector2f & size, const sf::Vector2f & position);
 
     private:
     };

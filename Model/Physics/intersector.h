@@ -12,21 +12,14 @@
 
 namespace Physics {
 
-    template <typename T>
     class IntersectableObject;
 
-    template <typename T>
     class Object;
 
     IntersectionInfo
     intersect(const Rectangle & movingRect, const sf::Vector2f & velocity, const Rectangle & staticRect, float dt);
 
-    IntersectionInfo
-    intersect(const IntersectableObject<Rectangle> & movingObject, const Object<Rectangle> & staticObject, float dt);
-
-    IntersectionInfo intersect(const IntersectableObject<sf::ConvexShape> & movingObject,
-                               const Object<Rectangle> & staticObject,
-                               float dt);
+    IntersectionInfo intersect(const IntersectableObject & movingObject, const Object & staticObject, float dt);
 
 } // namespace Physics
 

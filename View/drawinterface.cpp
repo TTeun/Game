@@ -41,11 +41,10 @@ void View::DrawInterface::drawDebrisExplosions(View::Window & window,
 {
     for (const auto & explosion : debrisExplosionList) {
         for (const auto & debris : explosion.getDebrisVector()) {
-            if (not debris.getShape().getGlobalBounds().intersects(viewRect)) {
+            if (not debris.getShape().intersects(viewRect)) {
                 continue;
             }
-
-            window.draw(debris.getShape());
+            window.drawRectangle(debris.getShape());
         }
     }
 }

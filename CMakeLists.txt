@@ -50,7 +50,7 @@ add_executable(sfml main.cpp
         ThirdParty/inih-master/cpp/INIReader.cpp
         ThirdParty/inih-master/cpp/INIReader.h Model/Physics/constants.cpp Model/Physics/deathtimer.cpp Model/Physics/deathtimer.h Model/Physics/finiteduration.h
         ThirdParty/tinyxml/tinystr.cpp ThirdParty/tinyxml/tinystr.h ThirdParty/tinyxml/tinyxml.cpp ThirdParty/tinyxml/tinyxml.h ThirdParty/tinyxml/tinyxmlerror.cpp ThirdParty/tinyxml/tinyxmlparser.cpp
-        View/tilemap.cpp View/tilemap.h Model/Loaders/levelloader.cpp Model/Loaders/levelloader.h Model/Entities/enemy.cpp Model/Entities/enemy.h Model/Entities/rectgraph.cpp Model/Entities/rectgraph.h Model/Entities/Shape/rectangle.cpp Model/Entities/Shape/rectangle.h Model/Entities/Shape/line.cpp Model/Entities/Shape/line.h Model/Entities/Shape/point.cpp Model/Entities/Shape/point.h Aux/mathtools.cpp Aux/mathtools.h)
+        View/tilemap.cpp View/tilemap.h Model/Loaders/levelloader.cpp Model/Loaders/levelloader.h Model/Entities/enemy.cpp Model/Entities/enemy.h Model/Entities/rectgraph.cpp Model/Entities/rectgraph.h Model/Entities/Shape/rectangle.cpp Model/Entities/Shape/rectangle.h Model/Entities/Shape/line.cpp Model/Entities/Shape/line.h Model/Entities/Shape/point.cpp Model/Entities/Shape/point.h Aux/mathtools.cpp Aux/mathtools.h Model/Physics/object.cpp Model/Physics/physicsobject.cpp Model/Physics/intersectionableobject.cpp)
 
 # Find SFML
 find_package(SFML 2.5 COMPONENTS audio graphics window system REQUIRED)

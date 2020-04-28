@@ -13,57 +13,32 @@
 
 namespace Physics {
 
-    template <class T>
-    class PhysicsObject : public Object<T> {
+    class PhysicsObject : public Object {
 
     public:
-        PhysicsObject(T && shape, const sf::Vector2f & velocity) : Object<T>(std::move(shape)), m_velocity(velocity)
-        {
-        }
+        PhysicsObject(Rectangle && shape, const sf::Vector2f & velocity);
 
-        explicit PhysicsObject(T && shape) : Object<T>(std::move(shape))
-        {
-        }
+        explicit PhysicsObject(Rectangle && shape);
 
         void setVelocity(const sf::Vector2f & velocity);
 
-        const sf::Vector2f & getVelocity() const
-        {
-            return m_velocity;
-        }
+        const sf::Vector2f & getVelocity() const;
 
         void update(float dt, const Constants & constants);
 
-        void addForce(float dt, const sf::Vector2f & force)
-        {
-            m_velocity += dt * force / m_mass;
-        }
+        void addForce(float dt, const sf::Vector2f & force);
 
-        void setFeelsGravity(bool feelsGravity)
-        {
-            m_feelsGravity = feelsGravity;
-        }
+        void setFeelsGravity(bool feelsGravity);
 
     protected:
+        void applyGravity(float dt, const Constants & constants);
+
         sf::Vector2f m_velocity;
 
         float m_mass = 1.0f;
 
         bool m_feelsGravity = true;
     };
-
-    template <class T>
-    void PhysicsObject<T>::setVelocity(const sf::Vector2f & velocity)
-    {
-        m_velocity = velocity;
-    }
-
-    template <class T>
-    void PhysicsObject<T>::update(float dt, const Physics::Constants & constants)
-    {
-        m_velocity.y += constants.m_gravitationalConstant * dt;
-        Object<T>::m_shape.move(dt * m_velocity);
-    }
 
 } // namespace Physics
 

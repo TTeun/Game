@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <level name="level1">
-    <Block width="660" height="96" x="0" y="800"/>
+    <Block width="660" height="96" x="0" y="400"/>
     <Block width="640" height="30" x="100" y="750"/>
     <Block width="128" height="670" x="-20" y="0"/>
 </level>

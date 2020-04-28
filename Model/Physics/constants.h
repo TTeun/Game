@@ -16,6 +16,7 @@ namespace Physics {
         const float m_wallJumpYVelocity     = 600.0f;
         const float m_wallJumpXVelocity     = 200.0f;
         const float m_maxHorizontalSpeed    = 500.0f;
+        const float m_maxVerticalSpeed      = 500.0f;
     };
 } // namespace Physics
 

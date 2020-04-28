@@ -14,7 +14,7 @@ namespace View {
     class Window;
 }
 
-class TerrainBlock : public Physics::Object<Rectangle> {
+class TerrainBlock : public Physics::Object {
 public:
     TerrainBlock(const size_t id, float width, float height, const sf::Vector2f & position);
 

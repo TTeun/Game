@@ -99,3 +99,8 @@ bool Rectangle::intersects(const sf::FloatRect & other) const
 {
     return sf::FloatRect::intersects(other);
 }
+
+Rectangle operator+(const Rectangle & rectangle, const Point & point)
+{
+    return Rectangle(rectangle.getSize(), rectangle.getPosition() + point);
+}

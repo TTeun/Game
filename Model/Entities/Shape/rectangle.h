@@ -59,4 +59,6 @@ private:
     //    sf::Color m_color;
 };
 
+Rectangle operator+(const Rectangle & rectangle, const Point & point);
+
 #endif // SFML_RECTANGLE_H

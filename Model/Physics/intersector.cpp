@@ -64,25 +64,9 @@ namespace Physics {
         return info;
     }
 
-    IntersectionInfo intersect(const IntersectableObject<sf::ConvexShape> & movingObject,
-                               const Object<Rectangle> & staticObject,
-                               float dt)
+    IntersectionInfo intersect(const IntersectableObject & movingObject, const Object & staticObject, float dt)
     {
-        return intersect(static_cast<Rectangle>(movingObject.getShape().getGlobalBounds()),
-                         movingObject.getVelocity(),
-                         static_cast<Rectangle>(
-                             sf::FloatRect(staticObject.getShape().getPosition(), staticObject.getShape().getSize())),
-                         dt);
-    }
-
-    IntersectionInfo
-    intersect(const IntersectableObject<Rectangle> & movingObject, const Object<Rectangle> & staticObject, float dt)
-    {
-        intersect(movingObject.getShape(),
-                  movingObject.getVelocity(),
-                  static_cast<Rectangle>(
-                      sf::FloatRect(staticObject.getShape().getPosition(), staticObject.getShape().getSize())),
-                  dt);
+        intersect(movingObject.getShape(), movingObject.getVelocity(), staticObject.getShape(), dt);
     }
 
 } // namespace Physics

@@ -42,11 +42,12 @@ void Game::play()
         m_keyBoardHandler->handleKeyInput(*this);
         if (not m_isPaused) {
             m_model->Entities::EntityList::update(m_window->getDtInSeconds(), *m_constants);
-            const auto cornerRectGraph = m_model->Entities::EntityList::getLevel().getCornerRectGraphWithPlayer(
-                40, 40, m_model->Entities::EntityList::getPlayer());
-            cornerRectGraph.draw(*m_window);
-
-            m_model->Entities::EntityList::handleAi(m_window->getDtInSeconds(), cornerRectGraph);
+            //            const auto cornerRectGraph =
+            //            m_model->Entities::EntityList::getLevel().getCornerRectGraphWithPlayer(
+            //                40, 40, m_model->Entities::EntityList::getPlayer());
+            //            cornerRectGraph.draw(*m_window);
+            //
+            //            m_model->Entities::EntityList::handleAi(m_window->getDtInSeconds(), cornerRectGraph);
         }
         m_window->drawModel(*m_model, getDrawInterface());
 

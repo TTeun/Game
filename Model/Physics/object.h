@@ -5,25 +5,21 @@
 #ifndef SFML_OBJECT_H
 #define SFML_OBJECT_H
 
+#include "../Entities/Shape/rectangle.h"
+
 #include <utility>
 
 namespace Physics {
 
-    template <class T>
     class Object {
 
     public:
-        const T & getShape() const
-        {
-            return m_shape;
-        }
+        const Rectangle & getShape() const;
 
     protected:
-        Object(T && shape) : m_shape(std::move(shape))
-        {
-        }
+        Object(Rectangle && shape);
 
-        T m_shape;
+        Rectangle m_shape;
     };
 } // namespace Physics
 
