@@ -4,7 +4,7 @@
 
 #include "window.h"
 
-#include "../Model/model.h"
+#include "../Model/entitycontroller.h"
 
 #include <sstream>
 
@@ -21,7 +21,7 @@ namespace View {
         clear(Colors::windowClearColor);
     }
 
-    sf::View Window::calculateViewPort(const Entities::Player & player)
+    sf::View Window::calculateViewPort(const Model::Entities::Player & player)
     {
         const auto position   = player.getShape().getPosition();
         const auto velocity   = player.getVelocity();
@@ -32,7 +32,7 @@ namespace View {
         return sf::View(m_viewRect);
     }
 
-    void Window::drawModel(const Model::Model & model, View::DrawInterface & drawInterface)
+    void Window::drawModel(const Model::EntityController & model, View::DrawInterface & drawInterface)
     {
         m_dt = m_clock.getElapsedTime().asMicroseconds();
         m_clock.restart();
@@ -74,7 +74,7 @@ namespace View {
         draw(shape);
     }
 
-    void Window::drawRectangle(const Rectangle & rect)
+    void Window::drawRectangle(const Model::Shape::Rectangle & rect)
     {
         drawRectangle(rect.left, rect.top, rect.width, rect.height, rect.getColor());
     }

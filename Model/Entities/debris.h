@@ -7,22 +7,24 @@
 
 #include <SFML/Graphics/ConvexShape.hpp>
 
-namespace Entities {
+namespace Model {
 
-    class Debris : public Physics::IntersectableObject, public Physics::DeathTimer {
+    namespace Entities {
 
-    public:
-        static Debris create(const sf::Vector2f & position);
+        class Debris : public Physics::PhysicsObject, public Physics::DeathTimer {
 
-        Debris(Debris && debris) = default;
+        public:
+            static Debris create(const sf::Vector2f & position);
 
-    private:
-        Debris(const sf::Vector2f & position,
-               const Uniform & sizeUniform,
-               const Uniform & velocityUniform = Uniform{5, 2});
+            Debris(Debris && debris) = default;
 
-        static Point getRandomVelocity(const Uniform & velocityUniform);
-    };
-} // namespace Entities
+        private:
+            Debris(const sf::Vector2f & position,
+                   const Uniform & sizeUniform,
+                   const Uniform & velocityUniform = Uniform{5, 2});
 
+            static Shape::Point getRandomVelocity(const Uniform & velocityUniform);
+        };
+    } // namespace Entities
+} // namespace Model
 #endif // SFML_DEBRIS_H

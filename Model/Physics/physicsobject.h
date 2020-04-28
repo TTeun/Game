@@ -11,35 +11,35 @@
 #include <SFML/Graphics/ConvexShape.hpp>
 #include <SFML/Window.hpp>
 
-namespace Physics {
+namespace Model {
 
-    class PhysicsObject : public Object {
+    namespace Physics {
 
-    public:
-        PhysicsObject(Rectangle && shape, const sf::Vector2f & velocity);
+        class PhysicsObject : public Object {
 
-        explicit PhysicsObject(Rectangle && shape);
+        public:
+            explicit PhysicsObject(Model::Shape::Rectangle && shape);
 
-        void setVelocity(const sf::Vector2f & velocity);
+            void setVelocity(const sf::Vector2f & velocity);
 
-        const sf::Vector2f & getVelocity() const;
+            const sf::Vector2f & getVelocity() const;
 
-        void update(float dt, const Constants & constants);
+            void update(float dt, const Constants & constants);
 
-        void addForce(float dt, const sf::Vector2f & force);
+            void addForce(float dt, const sf::Vector2f & force);
 
-        void setFeelsGravity(bool feelsGravity);
+            void setFeelsGravity(bool feelsGravity);
 
-    protected:
-        void applyGravity(float dt, const Constants & constants);
+        protected:
+            void applyGravity(float dt, const Constants & constants);
 
-        sf::Vector2f m_velocity;
+            sf::Vector2f m_velocity;
 
-        float m_mass = 1.0f;
+            float m_mass = 1.0f;
 
-        bool m_feelsGravity = true;
-    };
+            bool m_feelsGravity = true;
+        };
 
-} // namespace Physics
-
+    } // namespace Physics
+} // namespace Model
 #endif // SFML_PHYSICSOBJECT_H

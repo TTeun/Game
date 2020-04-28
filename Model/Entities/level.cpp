@@ -6,25 +6,23 @@
 
 #include "player.h"
 
-#include <algorithm>
-
-Entities::Level::Level()
+Model::Entities::Level::Level()
 {
 }
 
-const std::list<std::unique_ptr<TerrainBlock>> & Entities::Level::getTerrainBlocks() const
+const std::list<std::unique_ptr<Model::Entities::TerrainBlock>> & Model::Entities::Level::getTerrainBlocks() const
 {
     return m_terrainBlocks;
 }
 
-size_t Entities::Level::addTerrainBlock(float x, float y, float width, float height)
+size_t Model::Entities::Level::addTerrainBlock(float x, float y, float width, float height)
 {
     const size_t id = m_terrainBlocks.size();
     m_terrainBlocks.emplace_back(new TerrainBlock(id, width, height, {x, y}));
     return id;
 }
 
-bool Entities::Level::interSects(const sf::FloatRect & rect) const
+bool Model::Entities::Level::intersects(const Model::Shape::Rectangle & rect) const
 {
     for (const auto & terrainBlock : m_terrainBlocks) {
         if (terrainBlock->getShape().::sf::FloatRect::intersects(rect)) {
@@ -34,7 +32,7 @@ bool Entities::Level::interSects(const sf::FloatRect & rect) const
     return false;
 }
 
-bool Entities::Level::interSects(const Line & line) const
+bool Model::Entities::Level::intersects(const Model::Shape::Line & line) const
 {
     for (const auto & terrainBlock : m_terrainBlocks) {
         if (terrainBlock->getShape().intersects(line)) {
@@ -44,13 +42,13 @@ bool Entities::Level::interSects(const Line & line) const
     return false;
 }
 
-RectGraph Entities::Level::getCornerRectGraph(float width, float height) const
+Model::DataStructures::RectGraph Model::Entities::Level::getCornerRectGraph(float width, float height) const
 {
-    return RectGraph(width, height, *this);
+    return Model::DataStructures::RectGraph(width, height, *this);
 }
 
-RectGraph
-Entities::Level::getCornerRectGraphWithPlayer(float width, float height, const Entities::Player & player) const
+Model::DataStructures::RectGraph Model::Entities::Level::buildCornerRectGraphWithPlayer(
+    float width, float height, const Model::Entities::Player & player) const
 {
     auto graph = getCornerRectGraph(width, height);
     graph.addTarget(player.getShape(), *this, 0.9f);

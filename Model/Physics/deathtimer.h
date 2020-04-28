@@ -9,19 +9,20 @@
 
 #include <SFML/System/Clock.hpp>
 
-namespace Physics {
+namespace Model {
+    namespace Physics {
 
-    class DeathTimer : public FiniteDuration {
+        class DeathTimer : public FiniteDuration {
 
-    public:
-        explicit DeathTimer(const float deathTime = 1.0f);
+        public:
+            explicit DeathTimer(const float deathTime = 1.0f);
 
-        bool shouldClean() const;
+            bool shouldClean() const override;
 
-    private:
-        const float m_deathTime;
-        sf::Clock m_clock;
-    };
-} // namespace Physics
-
+        private:
+            const float m_deathTime;
+            sf::Clock m_clock;
+        };
+    } // namespace Physics
+} // namespace Model
 #endif // SFML_DEATHTIMER_H

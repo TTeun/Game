@@ -5,8 +5,6 @@
 #ifndef SFML_LEVELLOADER_H
 #define SFML_LEVELLOADER_H
 
-#include "../Entities/level.h"
-
 #include <string>
 
 class Game;

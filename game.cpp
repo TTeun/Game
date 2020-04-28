@@ -5,9 +5,9 @@
 Game::Game()
     : m_window(new View::Window(800, 600, "Game")),
       m_drawInterface(new View::DrawInterface),
-      m_model(new Model::Model()),
+      m_entityController(new Model::EntityController()),
       m_keyBoardHandler(new Controller::KeyBoardHandler),
-      m_constants(Physics::Constants::readIniFile())
+      m_constants(Model::Physics::Constants::readIniFile())
 {
     m_window->setShowFrameRate(true);
 }
@@ -26,29 +26,31 @@ void Game::play()
 
         m_window->clear(Colors::windowClearColor);
         if (not m_isPaused) {
-            m_model->Entities::EntityList::update(m_window->getDtInSeconds(), *m_constants);
+            m_entityController->update(m_window->getDtInSeconds(), *m_constants);
 
-            const auto cornerRectGraph = m_model->Entities::EntityList::getLevel().getCornerRectGraphWithPlayer(
-                40, 40, m_model->Entities::EntityList::getPlayer());
+            const auto cornerRectGraph = m_entityController->getLevel().buildCornerRectGraphWithPlayer(
+                40, 40, static_cast<const Model::EntityController *>(m_entityController.get())->getPlayer()
+
+            );
             cornerRectGraph.draw(*m_window);
 
-            m_model->Entities::EntityList::handleAi(m_window->getDtInSeconds(), cornerRectGraph);
+            m_entityController->handleAi(m_window->getDtInSeconds(), cornerRectGraph);
         }
-        m_window->drawModel(*m_model, getDrawInterface());
+        m_window->drawModel(*m_entityController, getDrawInterface());
 
         m_window->display();
     }
 }
 
-Model::Model & Game::getModel()
+Model::EntityController & Game::getModel()
 {
-    return *m_model;
+    return *m_entityController;
 }
 
 void Game::reset()
 {
-    m_model = std::make_unique<Model::Model>();
-    m_constants.reset(Physics::Constants::readIniFile());
+    m_entityController = std::make_unique<Model::EntityController>();
+    m_constants        = Model::Physics::Constants::readIniFile();
     Model::Loaders::loadLevel("../Assets/Levels/level1.xml", *this);
 }
 
@@ -62,7 +64,7 @@ View::Window & Game::getWindow()
     return *m_window;
 }
 
-const Physics::Constants & Game::getConstants() const
+const Model::Physics::Constants & Game::getConstants() const
 {
     return *m_constants;
 }

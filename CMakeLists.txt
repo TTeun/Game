@@ -12,7 +12,7 @@ add_executable(sfml main.cpp
         Model/Entities/player.h
         colors.h View/window.cpp
         View/window.h
-        Model/Entities/entitylist.cpp Model/Entities/entitylist.h
+        Model/entitycontroller.cpp Model/entitycontroller.h
         Model/Entities/debris.cpp
         Model/Entities/debris.h
         Model/Entities/debrisexplosion.cpp
@@ -20,8 +20,6 @@ add_executable(sfml main.cpp
         Model/Physics/physicsobject.h
         Model/Physics/constants.h
         Aux/uniform.h
-        Model/Entities/shapeFactory.cpp
-        Model/Entities/shapeFactory.h
         Model/Entities/terrainblock.cpp
         Model/Entities/terrainblock.h
         Model/Entities/level.cpp
@@ -32,10 +30,6 @@ add_executable(sfml main.cpp
         Model/Physics/intersectableobject.h
         Controller/keyboardhandler.cpp
         Controller/keyboardhandler.h
-        Model/model.h
-        Model/model.h
-        Aux/shapetools.cpp
-        Aux/shapetools.h
         game.cpp
         game.h
         Aux/uniform.cpp
@@ -46,7 +40,7 @@ add_executable(sfml main.cpp
         ThirdParty/inih-master/cpp/INIReader.cpp
         ThirdParty/inih-master/cpp/INIReader.h Model/Physics/constants.cpp Model/Physics/deathtimer.cpp Model/Physics/deathtimer.h Model/Physics/finiteduration.h
         ThirdParty/tinyxml/tinystr.cpp ThirdParty/tinyxml/tinystr.h ThirdParty/tinyxml/tinyxml.cpp ThirdParty/tinyxml/tinyxml.h ThirdParty/tinyxml/tinyxmlerror.cpp ThirdParty/tinyxml/tinyxmlparser.cpp
-        View/tilemap.cpp View/tilemap.h Model/Loaders/levelloader.cpp Model/Loaders/levelloader.h Model/Entities/enemy.cpp Model/Entities/enemy.h Model/Entities/rectgraph.cpp Model/Entities/rectgraph.h Model/Entities/Shape/rectangle.cpp Model/Entities/Shape/rectangle.h Model/Entities/Shape/line.cpp Model/Entities/Shape/line.h Model/Entities/Shape/point.cpp Model/Entities/Shape/point.h Aux/mathtools.h Aux/mathtools.cpp Model/Physics/object.cpp Model/Physics/physicsobject.cpp Model/Physics/intersectionableobject.cpp)
+        View/tilemap.cpp View/tilemap.h Model/Loaders/levelloader.cpp Model/Loaders/levelloader.h Model/Entities/enemy.cpp Model/Entities/enemy.h Model/DataStructures/rectgraph.cpp Model/DataStructures/rectgraph.h Model/Shape/rectangle.cpp Model/Shape/rectangle.h Model/Shape/line.cpp Model/Shape/line.h Model/Shape/point.cpp Model/Shape/point.h Aux/mathtools.h Aux/mathtools.cpp Model/Physics/object.cpp Model/Physics/physicsobject.cpp Model/Physics/intersectableobject.cpp Aux/constpointerwrapper.h)
 
 # Find SFML
 find_package(SFML 2.5 COMPONENTS audio graphics window system REQUIRED)

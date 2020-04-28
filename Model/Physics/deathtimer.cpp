@@ -4,15 +4,12 @@
 
 #include "deathtimer.h"
 
-namespace Physics {
+Model::Physics::DeathTimer::DeathTimer(const float deathTime) : m_deathTime(deathTime)
+{
+    m_clock.restart();
+}
 
-    DeathTimer::DeathTimer(const float deathTime) : m_deathTime(deathTime)
-    {
-        m_clock.restart();
-    }
-
-    bool DeathTimer::shouldClean() const
-    {
-        return m_clock.getElapsedTime().asSeconds() >= m_deathTime;
-    }
-} // namespace Physics
+bool Model::Physics::DeathTimer::shouldClean() const
+{
+    return m_clock.getElapsedTime().asSeconds() >= m_deathTime;
+}

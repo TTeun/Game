@@ -5,22 +5,23 @@
 #ifndef SFML_OBJECT_H
 #define SFML_OBJECT_H
 
-#include "../Entities/Shape/rectangle.h"
+#include "../Shape/rectangle.h"
 
 #include <utility>
+namespace Model {
 
-namespace Physics {
+    namespace Physics {
 
-    class Object {
+        class Object {
 
-    public:
-        const Rectangle & getShape() const;
+        public:
+            const Model::Shape::Rectangle & getShape() const;
 
-    protected:
-        Object(Rectangle && shape);
+        protected:
+            Object(Model::Shape::Rectangle && shape);
 
-        Rectangle m_shape;
-    };
-} // namespace Physics
-
+            Model::Shape::Rectangle m_shape;
+        };
+    } // namespace Physics
+} // namespace Model
 #endif // SFML_OBJECT_H

@@ -9,24 +9,26 @@
 
 #include <list>
 
-namespace Entities {
+namespace Model {
 
-    class Level;
+    namespace Entities {
 
-    class DebrisExplosion : Physics::FiniteDuration {
+        class Level;
 
-    public:
-        DebrisExplosion(const sf::Vector2f & position, size_t count);
+        class DebrisExplosion : Physics::FiniteDuration {
 
-        const std::list<Debris> & getDebrisVector() const;
+        public:
+            DebrisExplosion(const sf::Vector2f & position, size_t count);
 
-        void update(float dt, const Level & terrain, const Physics::Constants & constants);
+            const std::list<Debris> & getDebrisVector() const;
 
-        bool shouldClean() const;
+            void update(float dt, const Level & terrain, const Physics::Constants & constants);
 
-    private:
-        std::list<Debris> m_debrisVector;
-    };
-} // namespace Entities
+            bool shouldClean() const;
 
+        private:
+            std::list<Debris> m_debrisVector;
+        };
+    } // namespace Entities
+} // namespace Model
 #endif // SFML_DEBRISEXPLOSION_H

@@ -4,10 +4,11 @@
 
 #include "object.h"
 
-const Rectangle & Physics::Object::getShape() const
+const Model::Shape::Rectangle & Model::Physics::Object::getShape() const
 {
     return m_shape;
 }
-Physics::Object::Object(Rectangle && shape) : m_shape(std::move(shape))
+
+Model::Physics::Object::Object(Model::Shape::Rectangle && shape) : m_shape(std::move(shape))
 {
 }

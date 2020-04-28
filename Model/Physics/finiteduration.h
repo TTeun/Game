@@ -5,13 +5,15 @@
 #ifndef SFML_FINITEDURATION_H
 #define SFML_FINITEDURATION_H
 
-namespace Physics {
+namespace Model {
 
-    class FiniteDuration {
+    namespace Physics {
 
-    public:
-        virtual bool shouldClean() const = 0;
-    };
-} // namespace Physics
+        class FiniteDuration {
 
+        public:
+            virtual bool shouldClean() const = 0;
+        };
+    } // namespace Physics
+} // namespace Model
 #endif // SFML_FINITEDURATION_H

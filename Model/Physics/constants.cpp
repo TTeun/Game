@@ -6,13 +6,12 @@
 
 #include "../../ThirdParty/inih-master/cpp/INIReader.h"
 
-Physics::Constants * Physics::Constants::readIniFile()
+std::unique_ptr<Model::Physics::Constants> Model::Physics::Constants::readIniFile()
 {
-
     INIReader iniReader("../Config/physics.ini");
 
     if (iniReader.ParseError() == -1) {
-        return new Constants{};
+        return std::make_unique<Model::Physics::Constants>(Constants{});
     }
 
     double gravitationalConstant = iniReader.GetReal("physics", "gravitational_constant", 0.0f);
@@ -22,10 +21,10 @@ Physics::Constants * Physics::Constants::readIniFile()
     double wallJumpXVelocity     = iniReader.GetReal("physics", "wall_jump_x_velocity", 200.0f);
     double maxHorizontalSpeed    = iniReader.GetReal("physics", "max_horizontal_speed", 200.0f);
 
-    return new Constants{static_cast<float>(gravitationalConstant),
-                         static_cast<float>(surfaceFriction),
-                         static_cast<float>(jumpVelocity),
-                         static_cast<float>(wallJumpYVelocity),
-                         static_cast<float>(wallJumpXVelocity),
-                         static_cast<float>(maxHorizontalSpeed)};
+    return std::make_unique<Model::Physics::Constants>(Constants{static_cast<float>(gravitationalConstant),
+                                                                 static_cast<float>(surfaceFriction),
+                                                                 static_cast<float>(jumpVelocity),
+                                                                 static_cast<float>(wallJumpYVelocity),
+                                                                 static_cast<float>(wallJumpXVelocity),
+                                                                 static_cast<float>(maxHorizontalSpeed)});
 }

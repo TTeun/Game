@@ -9,14 +9,17 @@
 
 #include <SFML/Graphics/RectangleShape.hpp>
 
-namespace Entities {
-    class Enemy : public Physics::IntersectableObject {
-    public:
-        static Enemy create(const sf::Vector2f & position);
+namespace Model {
 
-    private:
-        Enemy(const sf::Vector2f & size, const sf::Vector2f & position);
-    };
-} // namespace Entities
+    namespace Entities {
+        class Enemy : public Physics::IntersectableObject {
+        public:
+            static Enemy create(const sf::Vector2f & position);
 
+        private:
+            Enemy(const sf::Vector2f & size, const sf::Vector2f & position);
+        };
+    } // namespace Entities
+
+} // namespace Model
 #endif // SFML_ENEMY_H

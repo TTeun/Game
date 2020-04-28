@@ -7,7 +7,7 @@
 
 #include "Controller/keyboardhandler.h"
 #include "Model/Physics/constants.h"
-#include "Model/model.h"
+#include "Model/entitycontroller.h"
 #include "View/window.h"
 
 #include <memory>
@@ -29,22 +29,22 @@ public:
 
     void togglePause();
 
-    const Physics::Constants & getConstants() const;
+    const Model::Physics::Constants & getConstants() const;
 
 private:
     void handlePolledEvents(View::Window & window);
 
     View::DrawInterface & getDrawInterface();
 
-    Model::Model & getModel();
+    Model::EntityController & getModel();
 
     View::Window & getWindow();
 
     std::unique_ptr<View::Window> m_window;
     std::unique_ptr<View::DrawInterface> m_drawInterface;
-    std::unique_ptr<Model::Model> m_model;
+    std::unique_ptr<Model::EntityController> m_entityController;
     std::unique_ptr<Controller::KeyBoardHandler> m_keyBoardHandler;
-    std::unique_ptr<const Physics::Constants> m_constants;
+    std::unique_ptr<const Model::Physics::Constants> m_constants;
 
     bool m_isPaused = false;
 };

@@ -4,14 +4,13 @@
 
 #include "drawinterface.h"
 
-#include "../Model/model.h"
+#include "../Model/entitycontroller.h"
 #include "window.h"
 
-#include <cassert>
 #include <iostream>
 
 void View::DrawInterface::drawLevel(View::Window & window,
-                                    const Entities::Level & terrain,
+                                    const Model::Entities::Level & terrain,
                                     const sf::FloatRect & viewRect)
 {
     const auto & terrainBlocks = terrain.getTerrainBlocks();
@@ -31,13 +30,13 @@ void View::DrawInterface::drawLevel(View::Window & window,
     }
 }
 
-void View::DrawInterface::drawPlayer(View::Window & window, const Entities::Player & player)
+void View::DrawInterface::drawPlayer(View::Window & window, const Model::Entities::Player & player)
 {
     window.drawRectangle(player.getShape());
 }
 
 void View::DrawInterface::drawDebrisExplosions(View::Window & window,
-                                               const std::list<Entities::DebrisExplosion> & debrisExplosionList,
+                                               const std::list<Model::Entities::DebrisExplosion> & debrisExplosionList,
                                                const sf::FloatRect & viewRect)
 {
     for (const auto & explosion : debrisExplosionList) {
@@ -51,7 +50,7 @@ void View::DrawInterface::drawDebrisExplosions(View::Window & window,
 }
 
 void View::DrawInterface::drawEnemies(Window & window,
-                                      const std::list<Entities::Enemy> & enemyList,
+                                      const std::list<Model::Entities::Enemy> & enemyList,
                                       const sf::FloatRect & viewRect)
 {
     for (const auto & enemy : enemyList) {
@@ -64,7 +63,7 @@ void View::DrawInterface::drawEnemies(Window & window,
 }
 
 void View::DrawInterface::drawEntities(View::Window & window,
-                                       const Entities::EntityList & entityList,
+                                       const Model::EntityController & entityList,
                                        const sf::FloatRect & viewRect)
 {
     drawLevel(window, entityList.getLevel(), viewRect);
@@ -73,7 +72,7 @@ void View::DrawInterface::drawEntities(View::Window & window,
     drawEnemies(window, entityList.getEnemies(), viewRect);
 }
 
-void View::DrawInterface::drawModel(View::Window & window, const Model::Model & model)
+void View::DrawInterface::drawModel(View::Window & window, const Model::EntityController & model)
 {
     const sf::FloatRect & rect = window.getViewRect();
 

@@ -5,28 +5,28 @@
 #ifndef GAME_PLAYER_H
 #define GAME_PLAYER_H
 
-#include "../../colors.h"
 #include "../Physics/intersectableobject.h"
 
 #include <SFML/Graphics/RectangleShape.hpp>
 
-namespace Entities {
+namespace Model {
 
-    class Level;
+    namespace Entities {
 
-    class Player : public Physics::IntersectableObject {
+        class Level;
 
-    public:
-        Player(float x, float y, float height, float width, const sf::Color & color = Colors::playerColor);
+        class Player : public Physics::IntersectableObject {
 
-        void addHorizontalForce(float force);
+        public:
+            Player(float x, float y, float height, float width, const sf::Color & color);
 
-        void jump(const Physics::Constants & constants);
+            void addHorizontalForce(float force);
 
-    private:
-        void
-        updateSnappedHorizontal(float dt, const Entities::Level & level, const Physics::Constants & constants) override;
-    };
-} // namespace Entities
+            void jump(const Physics::Constants & constants);
 
+        private:
+            void updateSnappedHorizontal(float dt, const Level & level, const Physics::Constants & constants) override;
+        };
+    } // namespace Entities
+} // namespace Model
 #endif // GAME_PLAYER_H

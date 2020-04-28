@@ -15,7 +15,8 @@ public:
     size_t get() const;
 
 private:
-    size_t m_min = 0;
+    size_t m_min = 0ul;
+
     size_t m_range;
 };
 

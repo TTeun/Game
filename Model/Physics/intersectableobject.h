@@ -5,47 +5,49 @@
 #ifndef SFML_INTERSECTABLEOBJECT_H
 #define SFML_INTERSECTABLEOBJECT_H
 
-#include "../Entities/terrainblock.h"
+#include "../../Aux/constpointerwrapper.h"
 #include "physicsobject.h"
 
 #include <cmath>
+namespace Model {
+    namespace Entities {
+        class Level;
+        class TerrainBlock;
+    } // namespace Entities
 
-namespace Entities {
-    class Level;
-}
+    namespace Physics {
 
-namespace Physics {
+        class IntersectableObject : public PhysicsObject {
 
-    class IntersectableObject : public PhysicsObject {
+        public:
+            explicit IntersectableObject(Model::Shape::Rectangle && shape);
 
-    public:
-        IntersectableObject(Rectangle && shape, const sf::Vector2f & velocity);
+            void update(float dt, const Model::Entities::Level & level, const Physics::Constants & constants);
 
-        explicit IntersectableObject(Rectangle && shape);
+        protected:
+            void updateSnapped(float dt, const Model::Entities::Level & level, const Physics::Constants & constants);
 
-        void update(float dt, const Entities::Level & level, const Physics::Constants & constants);
+            void updateUnSnapped(float dt, const Model::Entities::Level & level, const Physics::Constants & constants);
 
-    protected:
-        void updateSnapped(float dt, const Entities::Level & level, const Physics::Constants & constants);
+            void
+            updateSnappedVertical(float dt, const Model::Entities::Level & level, const Physics::Constants & constants);
 
-        void updateUnSnapped(float dt, const Entities::Level & level, const Physics::Constants & constants);
+            virtual void updateSnappedHorizontal(float dt,
+                                                 const Model::Entities::Level & level,
+                                                 const Physics::Constants & constants);
 
-        void updateSnappedVertical(float dt, const Entities::Level & level, const Physics::Constants & constants);
+            bool m_isGrounded = false;
 
-        virtual void
-        updateSnappedHorizontal(float dt, const Entities::Level & level, const Physics::Constants & constants);
+            ConstPointerWrapper<Model::Entities::TerrainBlock> m_snappedTerrainBlock =
+                ConstPointerWrapper<Model::Entities::TerrainBlock>(nullptr);
 
-        bool m_isGrounded = false;
+            enum WhereIsSnappedTerrain { BELOW, RIGHT, LEFT, ABOVE };
 
-        const TerrainBlock * m_snappedTerrainBlock = nullptr;
+            WhereIsSnappedTerrain m_whereIsSnappedTerrain;
 
-        enum WhereIsSnappedTerrain { BELOW, RIGHT, LEFT, ABOVE };
+            WhereIsSnappedTerrain findWhereIsSnappedTerrain() const;
+        };
 
-        WhereIsSnappedTerrain m_whereIsSnappedTerrain;
-
-        WhereIsSnappedTerrain findWhereIsSnappedTerrain() const;
-    };
-
-} // namespace Physics
-
+    } // namespace Physics
+} // namespace Model
 #endif // SFML_INTERSECTABLEOBJECT_H

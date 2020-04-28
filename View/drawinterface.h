@@ -12,23 +12,26 @@
 #include <memory>
 
 namespace Model {
-    class Model;
+    class EntityController;
 
     class Loaders;
 } // namespace Model
 
-namespace Entities {
-    class Level;
+namespace Model {
+    class EntityController;
 
-    class EntityList;
+    namespace Entities {
+        class Level;
 
-    class DebrisExplosion;
+        class DebrisExplosion;
 
-    class Enemy;
+        class Enemy;
 
-    class Player;
+        class Player;
 
-} // namespace Entities
+    } // namespace Entities
+
+} // namespace Model
 
 namespace View {
 
@@ -39,25 +42,27 @@ namespace View {
         friend class Model::Loaders;
 
     public:
-        void drawModel(Window & window, const Model::Model & model);
+        void drawModel(Window & window, const Model::EntityController & model);
 
     private:
         std::map<size_t, std::unique_ptr<const TileMap>> m_levelTileMaps;
 
         void addLevelTileMap(size_t id, const TileMap * tileMap);
 
-        void drawLevel(Window & window, const Entities::Level & terrain, const sf::FloatRect & viewRect);
+        void drawLevel(Window & window, const Model::Entities::Level & terrain, const sf::FloatRect & viewRect);
 
         void
-        drawEntities(View::Window & window, const Entities::EntityList & entityList, const sf::FloatRect & viewRect);
+        drawEntities(View::Window & window, const Model::EntityController & entityList, const sf::FloatRect & viewRect);
 
         void drawDebrisExplosions(Window & window,
-                                  const std::list<Entities::DebrisExplosion> & debrisExplosionList,
+                                  const std::list<Model::Entities::DebrisExplosion> & debrisExplosionList,
                                   const sf::FloatRect & viewRect);
 
-        void drawEnemies(Window & window, const std::list<Entities::Enemy> & enemyList, const sf::FloatRect & viewRect);
+        void drawEnemies(Window & window,
+                         const std::list<Model::Entities::Enemy> & enemyList,
+                         const sf::FloatRect & viewRect);
 
-        void drawPlayer(Window & window, const Entities::Player & player);
+        void drawPlayer(Window & window, const Model::Entities::Player & player);
     };
 } // namespace View
 

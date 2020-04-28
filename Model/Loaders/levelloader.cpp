@@ -26,7 +26,7 @@ static rect getRect(const TiXmlElement * blockElement)
 
 void Model::Loaders::loadLevel(std::string pathToLevelXml, Game & game)
 {
-    Entities::Level * level             = new Entities::Level();
+    auto * level                        = new Entities::Level();
     View::DrawInterface & drawInterface = game.getDrawInterface();
     drawInterface.m_levelTileMaps.clear();
 
@@ -57,5 +57,5 @@ void Model::Loaders::loadLevel(std::string pathToLevelXml, Game & game)
         blockElement = blockElement->NextSiblingElement();
     }
 
-    game.getModel().setLevel(level);
+    game.getModel().setLevel(std::unique_ptr<Entities::Level>(level));
 }

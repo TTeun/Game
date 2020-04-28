@@ -11,11 +11,6 @@ float MathTools::square(float a)
     return a * a;
 }
 
-bool MathTools::liesIsInterval(float point, float left, float right, float buffer)
-{
-    return point <= right - buffer && point >= left + buffer;
-}
-
 float MathTools::clamp(float a, float min, float max)
 {
     assert(min < max);

@@ -445,7 +445,7 @@ private:
     static bool condenseWhiteSpace;
 };
 
-/** The parent class for everything in the Document Object Model.
+/** The parent class for everything in the Document Object EntityController.
         (Except for attributes).
         Nodes have siblings, a parent, and children. A node can be
         in a document, or stand on its own. The type of a TiXmlNode
