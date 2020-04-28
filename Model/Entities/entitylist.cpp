@@ -29,7 +29,7 @@ void Entities::EntityList::handleAi(float dt, const RectGraph & rectGraph)
         auto vel           = rectGraph.findDirectionToTarget(enemy.getShape(), getLevel(), 0.9f);
         const float length = std::sqrt(vel.x * vel.x + vel.y * vel.y);
         vel /= length;
-        enemy.setVelocity(dt * vel * 200000.f);
+        enemy.setVelocity(dt * vel * 20000.f);
     }
 }
 

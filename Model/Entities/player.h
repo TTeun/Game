@@ -24,6 +24,9 @@ namespace Entities {
         void jump(const Physics::Constants & constants);
 
     private:
+        void
+        updateSnappedHorizontal(float dt, const Entities::Level & level, const Physics::Constants & constants) override;
+
         enum WallDirection { LEFT, RIGHT };
 
         void truncateHorizontalVelocity(const Physics::Constants & constants);

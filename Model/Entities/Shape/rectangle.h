@@ -45,18 +45,12 @@ public:
 
     bool intersects(const sf::FloatRect & other) const;
 
-    Point getPosition() const
-    {
-        return topLeft();
-    }
+    Point getPosition() const;
 
-    Point getSize() const
-    {
-        return {{width, height}};
-    }
+    Point getSize() const;
 
 private:
-    //    sf::Color m_color;
+        sf::Color m_color;
 };
 
 Rectangle operator+(const Rectangle & rectangle, const Point & point);

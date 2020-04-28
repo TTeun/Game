@@ -6,14 +6,14 @@
 
 #include <cassert>
 
-Rectangle::Rectangle(const Point & size, const Point & position, const sf::Color & color)
+Rectangle::Rectangle(const Point & size, const Point & position, const sf::Color & color) : m_color(color)
 {
     width  = size.x;
     height = size.y;
     setPosition(position);
 }
 
-Rectangle::Rectangle(const sf::FloatRect & rectangle, const sf::Color & color) : Rect(rectangle)
+Rectangle::Rectangle(const sf::FloatRect & rectangle, const sf::Color & color) : Rect(rectangle), m_color(color)
 {
 }
 
@@ -81,13 +81,12 @@ void Rectangle::move(const Point & point)
 
 void Rectangle::setColor(const sf::Color & color)
 {
-    //    m_color = color;
+    m_color = color;
 }
 
 const sf::Color & Rectangle::getColor() const
 {
-    return sf::Color::White;
-    //    return m_color;
+    return m_color;
 }
 
 bool Rectangle::intersects(const Rectangle & other) const
@@ -98,6 +97,14 @@ bool Rectangle::intersects(const Rectangle & other) const
 bool Rectangle::intersects(const sf::FloatRect & other) const
 {
     return sf::FloatRect::intersects(other);
+}
+Point Rectangle::getPosition() const
+{
+    return topLeft();
+}
+Point Rectangle::getSize() const
+{
+    return {{width, height}};
 }
 
 Rectangle operator+(const Rectangle & rectangle, const Point & point)
