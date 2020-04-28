@@ -38,40 +38,8 @@ namespace Entities {
                 case Physics::IntersectableObject::WhereIsSnappedTerrain::ABOVE: break;
             }
         }
-
-        //        if (not m_hasWallJumped && (m_isWalled || m_timeSinceWalled.getElapsedTime().asSeconds() <=
-        //        m_wallJumpDelay)) {
-        //            m_isGrounded    = false;
-        //            m_hasWallJumped = true;
-        //            m_velocity.y    = -constants.m_wallJumpYVelocity;
-        //            switch (m_wallDirection) {
-        //                case WallDirection::RIGHT: m_velocity.x = -constants.m_wallJumpXVelocity; break;
-        //                case WallDirection::LEFT: m_velocity.x = constants.m_wallJumpXVelocity; break;
-        //            }
-        //        } else if (m_isGrounded) {
-        //            m_isGrounded = false;
-        //            m_velocity.y = -constants.m_jumpVelocity;
     }
 
-    void Player::isNowWalled(const WallDirection wallDirection)
-    {
-        m_isWalled = true;
-        m_timeSinceWalled.restart();
-        m_wallDirection = wallDirection;
-    }
-
-    void Player::isNowUnWalled()
-    {
-        m_isWalled      = false;
-        m_hasWallJumped = false;
-    }
-
-    void Player::truncateHorizontalVelocity(const Physics::Constants & constants)
-    {
-        if (std::abs(m_velocity.x) > constants.m_maxHorizontalSpeed) {
-            m_velocity.x = (m_velocity.x > 0.0f ? 1.0f : (-1.0f)) * constants.m_maxHorizontalSpeed;
-        }
-    }
     void Player::updateSnappedHorizontal(float dt, const Level & level, const Physics::Constants & constants)
     {
         if (m_whereIsSnappedTerrain == WhereIsSnappedTerrain::RIGHT) {

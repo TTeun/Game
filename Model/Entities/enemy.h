@@ -11,11 +11,11 @@
 
 namespace Entities {
     class Enemy : public Physics::IntersectableObject {
-
     public:
-        Enemy(const sf::Vector2f & size, const sf::Vector2f & position);
+        static Enemy create(const sf::Vector2f & position);
 
     private:
+        Enemy(const sf::Vector2f & size, const sf::Vector2f & position);
     };
 } // namespace Entities
 

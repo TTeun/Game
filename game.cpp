@@ -1,7 +1,3 @@
-//
-// Created by pc on 4/27/20.
-//
-
 #include "game.h"
 
 #include "Model/Loaders/levelloader.h"
@@ -25,23 +21,13 @@ void Game::init()
 void Game::play()
 {
     while (m_window->isOpen()) {
-        sf::Event event{};
-        while (m_window->pollEvent(event)) {
-            switch (event.type) {
-                case sf::Event::Closed: m_window->close(); break;
-                case sf::Event::Resized: {
-                    sf::FloatRect visibleArea(0, 0, event.size.width, event.size.height);
-                    m_window->setView(sf::View(visibleArea));
-                } break;
-                default: break;
-            }
-        }
+        handlePolledEvents(*m_window);
+        m_keyBoardHandler->handleKeyInput(*this);
 
         m_window->clear(Colors::windowClearColor);
-
-        m_keyBoardHandler->handleKeyInput(*this);
         if (not m_isPaused) {
             m_model->Entities::EntityList::update(m_window->getDtInSeconds(), *m_constants);
+
             const auto cornerRectGraph = m_model->Entities::EntityList::getLevel().getCornerRectGraphWithPlayer(
                 40, 40, m_model->Entities::EntityList::getPlayer());
             cornerRectGraph.draw(*m_window);
@@ -84,4 +70,18 @@ const Physics::Constants & Game::getConstants() const
 View::DrawInterface & Game::getDrawInterface()
 {
     return *m_drawInterface;
+}
+void Game::handlePolledEvents(View::Window & window)
+{
+    sf::Event event{};
+    while (m_window->pollEvent(event)) {
+        switch (event.type) {
+            case sf::Event::Closed: m_window->close(); break;
+            case sf::Event::Resized: {
+                sf::FloatRect visibleArea(0, 0, event.size.width, event.size.height);
+                m_window->setView(sf::View(visibleArea));
+            } break;
+            default: break;
+        }
+    }
 }

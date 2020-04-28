@@ -2,6 +2,7 @@
 #include "intersectableobject.h"
 
 #include <cassert>
+#include <iostream>
 
 namespace Physics {
 
@@ -23,33 +24,36 @@ namespace Physics {
         }
     }
 
-    void IntersectableObject::setWhereIsSnappedTerrain()
+    IntersectableObject::WhereIsSnappedTerrain IntersectableObject::findWhereIsSnappedTerrain() const
     {
+        assert(m_snappedTerrainBlock);
+
         const auto thisTopLeft        = m_shape.topLeft();
         const auto thisBottomRight    = m_shape.bottomRight();
         const auto terrainTopLeft     = m_snappedTerrainBlock->getShape().topLeft();
         const auto terrainBottomRight = m_snappedTerrainBlock->getShape().bottomRight();
 
-        if (thisTopLeft.y < std::min(terrainTopLeft.y, terrainBottomRight.y) &&
-            thisBottomRight.y <= std::min(terrainTopLeft.y, terrainBottomRight.y)) {
-            m_whereIsSnappedTerrain = WhereIsSnappedTerrain::BELOW;
-            return;
-        } else if (thisTopLeft.x < std::max(terrainTopLeft.x, terrainBottomRight.x) &&
-                   thisBottomRight.x <= std::max(terrainTopLeft.x, terrainBottomRight.x)) {
-            m_whereIsSnappedTerrain = WhereIsSnappedTerrain::RIGHT;
-            return;
-        } else if (thisTopLeft.x >= std::min(terrainTopLeft.x, terrainBottomRight.x) &&
-                   thisBottomRight.x > std::min(terrainTopLeft.x, terrainBottomRight.x)) {
-            m_whereIsSnappedTerrain = WhereIsSnappedTerrain::LEFT;
-            return;
+        if (thisBottomRight.y <= terrainTopLeft.y) {
+            return WhereIsSnappedTerrain::BELOW;
+        } else if (thisBottomRight.x <= terrainTopLeft.x) {
+            return WhereIsSnappedTerrain::RIGHT;
+        } else if (thisTopLeft.x >= terrainBottomRight.x) {
+            return WhereIsSnappedTerrain::LEFT;
+        } else if (thisTopLeft.y >= terrainBottomRight.y) {
+            return WhereIsSnappedTerrain::ABOVE;
         }
-        m_whereIsSnappedTerrain = WhereIsSnappedTerrain::ABOVE;
+
+        std::cout << thisBottomRight.y - terrainTopLeft.y << '\t' << thisBottomRight.x - terrainTopLeft.x << '\t'
+                  << thisTopLeft.x - terrainBottomRight.x << '\t' << thisTopLeft.y - terrainBottomRight.y << '\n';
+
+        assert(false);
     }
 
     void IntersectableObject::updateSnapped(float dt, const Entities::Level & level, const Constants & constants)
     {
-        if (m_whereIsSnappedTerrain == WhereIsSnappedTerrain::BELOW) {
-            updateSnappedBelow(dt, level, constants);
+        if (m_whereIsSnappedTerrain == WhereIsSnappedTerrain::BELOW ||
+            m_whereIsSnappedTerrain == WhereIsSnappedTerrain::ABOVE) {
+            updateSnappedVertical(dt, level, constants);
         } else {
             updateSnappedHorizontal(dt, level, constants);
         }
@@ -62,12 +66,11 @@ namespace Physics {
             if (terrainBlock->getShape().intersects(movedRect)) {
                 m_snappedTerrainBlock = terrainBlock.get();
                 assert(m_snappedTerrainBlock != nullptr);
-                setWhereIsSnappedTerrain();
+                m_whereIsSnappedTerrain = findWhereIsSnappedTerrain();
                 if (m_whereIsSnappedTerrain == WhereIsSnappedTerrain::BELOW) {
                     m_velocity.y = 0.0f;
                 } else if (m_whereIsSnappedTerrain == WhereIsSnappedTerrain::ABOVE) {
-                    m_snappedTerrainBlock = nullptr;
-                    m_velocity.y          = 0.0f;
+                    m_velocity.y = 0.0f;
                 } else {
                     m_velocity.x = 0.0f;
                 }
@@ -76,13 +79,19 @@ namespace Physics {
         }
         m_shape.move(dt * m_velocity);
     }
-    void IntersectableObject::updateSnappedBelow(float dt, const Entities::Level & level, const Constants & constants)
+    void
+    IntersectableObject::updateSnappedVertical(float dt, const Entities::Level & level, const Constants & constants)
     {
-        const auto movedRect = m_shape + m_shape.height * 0.5f * Point{0.0f, 1.0f};
-        if (not m_snappedTerrainBlock->getShape().intersects(movedRect)) {
+        if (m_whereIsSnappedTerrain == WhereIsSnappedTerrain::BELOW) {
+            const auto movedRect = m_shape + m_shape.height * 0.5f * Point{0.0f, 1.0f};
+            if (not m_snappedTerrainBlock->getShape().intersects(movedRect)) {
+                m_snappedTerrainBlock = nullptr;
+            }
+            m_shape.move(dt * m_velocity);
+        } else {
+            assert(m_whereIsSnappedTerrain == WhereIsSnappedTerrain::ABOVE);
             m_snappedTerrainBlock = nullptr;
         }
-        m_shape.move(dt * m_velocity);
     }
     void
     IntersectableObject::updateSnappedHorizontal(float dt, const Entities::Level & level, const Constants & constants)

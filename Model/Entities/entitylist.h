@@ -36,7 +36,7 @@ namespace Entities {
 
         void addDebrisExplosion();
 
-        void addEnemy(const sf::Vector2f & size, const sf::Vector2f & position);
+        void addEnemy(const sf::Vector2f & position);
 
         void update(float dt, const Physics::Constants & constants);
 

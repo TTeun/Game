@@ -30,7 +30,7 @@ namespace Physics {
 
         void updateUnSnapped(float dt, const Entities::Level & level, const Physics::Constants & constants);
 
-        void updateSnappedBelow(float dt, const Entities::Level & level, const Physics::Constants & constants);
+        void updateSnappedVertical(float dt, const Entities::Level & level, const Physics::Constants & constants);
 
         virtual void
         updateSnappedHorizontal(float dt, const Entities::Level & level, const Physics::Constants & constants);
@@ -39,16 +39,11 @@ namespace Physics {
 
         const TerrainBlock * m_snappedTerrainBlock = nullptr;
 
-        enum WhereIsSnappedTerrain {
-            BELOW,
-            RIGHT,
-            LEFT,
-            ABOVE // unused
-        };
+        enum WhereIsSnappedTerrain { BELOW, RIGHT, LEFT, ABOVE };
 
         WhereIsSnappedTerrain m_whereIsSnappedTerrain;
 
-        void setWhereIsSnappedTerrain();
+        WhereIsSnappedTerrain findWhereIsSnappedTerrain() const;
     };
 
 } // namespace Physics

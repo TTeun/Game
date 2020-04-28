@@ -8,9 +8,9 @@
 
 Entities::EntityList::EntityList() : m_level(new Level())
 {
-    addEnemy(sf::Vector2f(20.0f, 20.0f), {200, 200});
-    addEnemy(sf::Vector2f(20.0f, 20.0f), {270, 501});
-    addEnemy(sf::Vector2f(20.0f, 20.0f), {201, 920});
+    addEnemy({200, 200});
+    addEnemy({270, 501});
+    addEnemy({201, 920});
 }
 
 const Entities::Player & Entities::EntityList::getPlayer() const
@@ -79,7 +79,7 @@ const std::list<Entities::Enemy> & Entities::EntityList::getEnemies() const
     return m_enemyVector;
 }
 
-void Entities::EntityList::addEnemy(const sf::Vector2f & size, const sf::Vector2f & position)
+void Entities::EntityList::addEnemy(const sf::Vector2f & position)
 {
-    m_enemyVector.emplace_back(Enemy(size, position));
+    m_enemyVector.emplace_back(Enemy::create(position));
 }

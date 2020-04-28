@@ -32,6 +32,8 @@ public:
     const Physics::Constants & getConstants() const;
 
 private:
+    void handlePolledEvents(View::Window & window);
+
     View::DrawInterface & getDrawInterface();
 
     Model::Model & getModel();

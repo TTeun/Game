@@ -26,20 +26,6 @@ namespace Entities {
     private:
         void
         updateSnappedHorizontal(float dt, const Entities::Level & level, const Physics::Constants & constants) override;
-
-        enum WallDirection { LEFT, RIGHT };
-
-        void truncateHorizontalVelocity(const Physics::Constants & constants);
-
-        void isNowWalled(WallDirection wallDirection);
-
-        void isNowUnWalled();
-
-        bool m_isWalled       = false;
-        bool m_hasWallJumped  = false;
-        float m_wallJumpDelay = 0.1f;
-        sf::Clock m_timeSinceWalled;
-        WallDirection m_wallDirection;
     };
 } // namespace Entities
 
