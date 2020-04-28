@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="sfml"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;CMake Files\..\;CMake Files\..\..\;CMake Files\..\..\..\;CMake Files\..\..\..\..\;CMake Files\..\..\..\..\..\;CMake Files\..\..\..\..\..\..\;CMake Files\..\..\..\..\..\..\usr\;CMake Files\..\..\..\..\..\..\usr\lib\;CMake Files\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\;CMake Files\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\;CMake Files\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\SFML\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/pc/MEGAsync/C++/clion/game/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/home/pc/MEGAsync/C++/clion/game/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/home/pc/MEGAsync/C++/clion/game/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/home/pc/MEGAsync/C++/clion/game/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/home/pc/MEGAsync/C++/clion/game/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/pc/MEGAsync/C++/clion/game/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/home/pc/MEGAsync/C++/clion/game/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/home/pc/MEGAsync/C++/clion/game/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/home/pc/MEGAsync/C++/clion/game/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/home/pc/MEGAsync/C++/clion/game/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/pc/MEGAsync/C++/clion/game/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/home/pc/MEGAsync/C++/clion/game/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/home/pc/MEGAsync/C++/clion/game/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/home/pc/MEGAsync/C++/clion/game/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/home/pc/MEGAsync/C++/clion/game/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="sfml">
+				<Option output="/home/pc/MEGAsync/C++/clion/game/cmake-build-debug/sfml" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/pc/MEGAsync/C++/clion/game/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
+					<Add directory="/usr/include/c++/9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/home/pc/MEGAsync/C++/clion/game/cmake-build-debug/Makefile&quot;  VERBOSE=1 sfml"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/home/pc/MEGAsync/C++/clion/game/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/home/pc/MEGAsync/C++/clion/game/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/home/pc/MEGAsync/C++/clion/game/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="sfml/fast">
+				<Option output="/home/pc/MEGAsync/C++/clion/game/cmake-build-debug/sfml" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/pc/MEGAsync/C++/clion/game/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/9"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/9"/>
+					<Add directory="/usr/include/c++/9/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/9/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j12 -f &quot;/home/pc/MEGAsync/C++/clion/game/cmake-build-debug/Makefile&quot;  VERBOSE=1 sfml/fast"/>
+					<CompileFile command="/usr/bin/make -j12 -f &quot;/home/pc/MEGAsync/C++/clion/game/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j12 -f &quot;/home/pc/MEGAsync/C++/clion/game/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j12 -f &quot;/home/pc/MEGAsync/C++/clion/game/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/pc/MEGAsync/C++/clion/game/Aux/mathtools.cpp">
+			<Option target="sfml"/>
+		</Unit>
+		<Unit filename="/home/pc/MEGAsync/C++/clion/game/Aux/mathtools.h">
+			<Option target="sfml"/>
+		</Unit>
+		<Unit filename="/home/pc/MEGAsync/C++/clion/game/Aux/shapetools.cpp">
+			<Option target="sfml"/>
+		</Unit>
+		<Unit filename="/home/pc/MEGAsync/C++/clion/game/Aux/shapetools.h">
+			<Option target="sfml"/>
+		</Unit>
+		<Unit filename="/home/pc/MEGAsync/C++/clion/game/Aux/uniform.cpp">
+			<Option target="sfml"/>
+		</Unit>
+		<Unit filename="/home/pc/MEGAsync/C++/clion/game/Aux/uniform.h">
+			<Option target="sfml"/>
+		</Unit>
+		<Unit filename="/home/pc/MEGAsync/C++/clion/game/Controller/keyboardhandler.cpp">
+			<Option target="sfml"/>
+		</Unit>
+		<Unit filename="/home/pc/MEGAsync/C++/clion/game/Controller/keyboardhandler.h">
+			<Option target="sfml"/>
+		</Unit>
+		<Unit filename="/home/pc/MEGAsync/C++/clion/game/Controller/keystate.cpp">
+			<Option target="sfml"/>
+		</Unit>
+		<Unit filename="/home/pc/MEGAsync/C++/clion/game/Controller/keystate.h">
+			<Option target="sfml"/>
+		</Unit>
+		<Unit filename="/home/pc/MEGAsync/C++/clion/game/Model/Entities/Shape/line.cpp">
+			<Option target="sfml"/>
+		</Unit>
+		<Unit filename="/home/pc/MEGAsync/C++/clion/game/Model/Entities/Shape/line.h">
+			<Option target="sfml"/>
+		</Unit>
+		<Unit filename="/home/pc/MEGAsync/C++/clion/game/Model/Entities/Shape/point.cpp">
+			<Option target="sfml"/>
+		</Unit>
+		<Unit filename="/home/pc/MEGAsync/C++/clion/game/Model/Entities/Shape/point.h">
+			<Option target="sfml"/>
+		</Unit>
+		<Unit filename="/home/pc/MEGAsync/C++/clion/game/Model/Entities/Shape/rectangle.cpp">
+			<Option target="sfml"/>
+		</Unit>
+		<Unit filename="/home/pc/MEGAsync/C++/clion/game/Model/Entities/Shape/rectangle.h">
+			<Option target="sfml"/>
+		</Unit>
+		<Unit filename="/home/pc/MEGAsync/C++/clion/game/Model/Entities/debris.cpp">
+			<Option target="sfml"/>
+		</Unit>
+		<Unit filename="/home/pc/MEGAsync/C++/clion/game/Model/Entities/debris.h">
+			<Option target="sfml"/>
+		</Unit>
+		<Unit filename="/home/pc/MEGAsync/C++/clion/game/Model/Entities/debrisexplosion.cpp">
+			<Option target="sfml"/>
+		</Unit>
+		<Unit filename="/home/pc/MEGAsync/C++/clion/game/Model/Entities/debrisexplosion.h">
+			<Option target="sfml"/>
+		</Unit>
+		<Unit filename="/home/pc/MEGAsync/C++/clion/game/Model/Entities/enemy.cpp">
+			<Option target="sfml"/>
+		</Unit>
+		<Unit filename="/home/pc/MEGAsync/C++/clion/game/Model/Entities/enemy.h">
+			<Option target="sfml"/>
+		</Unit>
+		<Unit filename="/home/pc/MEGAsync/C++/clion/game/Model/Entities/entitylist.cpp">
+			<Option target="sfml"/>
+		</Unit>
+		<Unit filename="/home/pc/MEGAsync/C++/clion/game/Model/Entities/entitylist.h">
+			<Option target="sfml"/>
+		</Unit>
+		<Unit filename="/home/pc/MEGAsync/C++/clion/game/Model/Entities/level.cpp">
+			<Option target="sfml"/>
+		</Unit>
+		<Unit filename="/home/pc/MEGAsync/C++/clion/game/Model/Entities/level.h">
+			<Option target="sfml"/>
+		</Unit>
+		<Unit filename="/home/pc/MEGAsync/C++/clion/game/Model/Entities/player.cpp">
+			<Option target="sfml"/>
+		</Unit>
+		<Unit filename="/home/pc/MEGAsync/C++/clion/game/Model/Entities/player.h">
+			<Option target="sfml"/>
+		</Unit>
+		<Unit filename="/home/pc/MEGAsync/C++/clion/game/Model/Entities/rectgraph.cpp">
+			<Option target="sfml"/>
+		</Unit>
+		<Unit filename="/home/pc/MEGAsync/C++/clion/game/Model/Entities/rectgraph.h">
+			<Option target="sfml"/>
+		</Unit>
+		<Unit filename="/home/pc/MEGAsync/C++/clion/game/Model/Entities/shapeFactory.cpp">
+			<Option target="sfml"/>
+		</Unit>
+		<Unit filename="/home/pc/MEGAsync/C++/clion/game/Model/Entities/shapeFactory.h">
+			<Option target="sfml"/>
+		</Unit>
+		<Unit filename="/home/pc/MEGAsync/C++/clion/game/Model/Entities/terrainblock.cpp">
+			<Option target="sfml"/>
+		</Unit>
+		<Unit filename="/home/pc/MEGAsync/C++/clion/game/Model/Entities/terrainblock.h">
+			<Option target="sfml"/>
+		</Unit>
+		<Unit filename="/home/pc/MEGAsync/C++/clion/game/Model/Loaders/levelloader.cpp">
+			<Option target="sfml"/>
+		</Unit>
+		<Unit filename="/home/pc/MEGAsync/C++/clion/game/Model/Loaders/levelloader.h">
+			<Option target="sfml"/>
+		</Unit>
+		<Unit filename="/home/pc/MEGAsync/C++/clion/game/Model/Physics/constants.cpp">
+			<Option target="sfml"/>
+		</Unit>
+		<Unit filename="/home/pc/MEGAsync/C++/clion/game/Model/Physics/constants.h">
+			<Option target="sfml"/>
+		</Unit>
+		<Unit filename="/home/pc/MEGAsync/C++/clion/game/Model/Physics/deathtimer.cpp">
+			<Option target="sfml"/>
+		</Unit>
+		<Unit filename="/home/pc/MEGAsync/C++/clion/game/Model/Physics/deathtimer.h">
+			<Option target="sfml"/>
+		</Unit>
+		<Unit filename="/home/pc/MEGAsync/C++/clion/game/Model/Physics/finiteduration.h">
+			<Option target="sfml"/>
+		</Unit>
+		<Unit filename="/home/pc/MEGAsync/C++/clion/game/Model/Physics/intersectableobject.h">
+			<Option target="sfml"/>
+		</Unit>
+		<Unit filename="/home/pc/MEGAsync/C++/clion/game/Model/Physics/intersectioninfo.cpp">
+			<Option target="sfml"/>
+		</Unit>
+		<Unit filename="/home/pc/MEGAsync/C++/clion/game/Model/Physics/intersectioninfo.h">
+			<Option target="sfml"/>
+		</Unit>
+		<Unit filename="/home/pc/MEGAsync/C++/clion/game/Model/Physics/intersector.cpp">
+			<Option target="sfml"/>
+		</Unit>
+		<Unit filename="/home/pc/MEGAsync/C++/clion/game/Model/Physics/intersector.h">
+			<Option target="sfml"/>
+		</Unit>
+		<Unit filename="/home/pc/MEGAsync/C++/clion/game/Model/Physics/object.h">
+			<Option target="sfml"/>
+		</Unit>
+		<Unit filename="/home/pc/MEGAsync/C++/clion/game/Model/Physics/physicsobject.h">
+			<Option target="sfml"/>
+		</Unit>
+		<Unit filename="/home/pc/MEGAsync/C++/clion/game/Model/model.h">
+			<Option target="sfml"/>
+		</Unit>
+		<Unit filename="/home/pc/MEGAsync/C++/clion/game/ThirdParty/inih-master/cpp/INIReader.cpp">
+			<Option target="sfml"/>
+		</Unit>
+		<Unit filename="/home/pc/MEGAsync/C++/clion/game/ThirdParty/inih-master/cpp/INIReader.h">
+			<Option target="sfml"/>
+		</Unit>
+		<Unit filename="/home/pc/MEGAsync/C++/clion/game/ThirdParty/inih-master/ini.c">
+			<Option target="sfml"/>
+		</Unit>
+		<Unit filename="/home/pc/MEGAsync/C++/clion/game/ThirdParty/inih-master/ini.h">
+			<Option target="sfml"/>
+		</Unit>
+		<Unit filename="/home/pc/MEGAsync/C++/clion/game/ThirdParty/tinyxml/tinystr.cpp">
+			<Option target="sfml"/>
+		</Unit>
+		<Unit filename="/home/pc/MEGAsync/C++/clion/game/ThirdParty/tinyxml/tinystr.h">
+			<Option target="sfml"/>
+		</Unit>
+		<Unit filename="/home/pc/MEGAsync/C++/clion/game/ThirdParty/tinyxml/tinyxml.cpp">
+			<Option target="sfml"/>
+		</Unit>
+		<Unit filename="/home/pc/MEGAsync/C++/clion/game/ThirdParty/tinyxml/tinyxml.h">
+			<Option target="sfml"/>
+		</Unit>
+		<Unit filename="/home/pc/MEGAsync/C++/clion/game/ThirdParty/tinyxml/tinyxmlerror.cpp">
+			<Option target="sfml"/>
+		</Unit>
+		<Unit filename="/home/pc/MEGAsync/C++/clion/game/ThirdParty/tinyxml/tinyxmlparser.cpp">
+			<Option target="sfml"/>
+		</Unit>
+		<Unit filename="/home/pc/MEGAsync/C++/clion/game/View/drawinterface.cpp">
+			<Option target="sfml"/>
+		</Unit>
+		<Unit filename="/home/pc/MEGAsync/C++/clion/game/View/drawinterface.h">
+			<Option target="sfml"/>
+		</Unit>
+		<Unit filename="/home/pc/MEGAsync/C++/clion/game/View/tilemap.cpp">
+			<Option target="sfml"/>
+		</Unit>
+		<Unit filename="/home/pc/MEGAsync/C++/clion/game/View/tilemap.h">
+			<Option target="sfml"/>
+		</Unit>
+		<Unit filename="/home/pc/MEGAsync/C++/clion/game/View/window.cpp">
+			<Option target="sfml"/>
+		</Unit>
+		<Unit filename="/home/pc/MEGAsync/C++/clion/game/View/window.h">
+			<Option target="sfml"/>
+		</Unit>
+		<Unit filename="/home/pc/MEGAsync/C++/clion/game/colors.h">
+			<Option target="sfml"/>
+		</Unit>
+		<Unit filename="/home/pc/MEGAsync/C++/clion/game/game.cpp">
+			<Option target="sfml"/>
+		</Unit>
+		<Unit filename="/home/pc/MEGAsync/C++/clion/game/game.h">
+			<Option target="sfml"/>
+		</Unit>
+		<Unit filename="/home/pc/MEGAsync/C++/clion/game/main.cpp">
+			<Option target="sfml"/>
+		</Unit>
+		<Unit filename="/home/pc/MEGAsync/C++/clion/game/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/home/pc/MEGAsync/C++/clion/game/../../../../../../usr/lib/x86_64-linux-gnu/cmake/SFML/SFMLConfig.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\SFML\"/>
+		</Unit>
+		<Unit filename="/home/pc/MEGAsync/C++/clion/game/../../../../../../usr/lib/x86_64-linux-gnu/cmake/SFML/SFMLConfigDependencies.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\SFML\"/>
+		</Unit>
+		<Unit filename="/home/pc/MEGAsync/C++/clion/game/../../../../../../usr/lib/x86_64-linux-gnu/cmake/SFML/SFMLConfigVersion.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\SFML\"/>
+		</Unit>
+		<Unit filename="/home/pc/MEGAsync/C++/clion/game/../../../../../../usr/lib/x86_64-linux-gnu/cmake/SFML/SFMLSharedTargets-none.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\SFML\"/>
+		</Unit>
+		<Unit filename="/home/pc/MEGAsync/C++/clion/game/../../../../../../usr/lib/x86_64-linux-gnu/cmake/SFML/SFMLSharedTargets.cmake">
+			<Option virtualFolder="CMake Files\..\..\..\..\..\..\usr\lib\x86_64-linux-gnu\cmake\SFML\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>
