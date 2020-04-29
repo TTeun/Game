@@ -2,8 +2,8 @@
 // Created by pc on 4/26/20.
 //
 
-#ifndef SFML_DEBRISEXPLOSION_H
-#define SFML_DEBRISEXPLOSION_H
+#ifndef TEUN_GAME_DEBRISEXPLOSION_H
+#define TEUN_GAME_DEBRISEXPLOSION_H
 
 #include "debris.h"
 
@@ -22,7 +22,7 @@ namespace Model {
 
             const std::list<Debris> & getDebrisVector() const;
 
-            void update(float dt, const Level & terrain, const Physics::Constants & constants);
+            void update(float dt, const Level & level, const Physics::Constants & constants);
 
             bool shouldClean() const;
 
@@ -31,4 +31,4 @@ namespace Model {
         };
     } // namespace Entities
 } // namespace Model
-#endif // SFML_DEBRISEXPLOSION_H
+#endif // TEUN_GAME_DEBRISEXPLOSION_H

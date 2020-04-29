@@ -7,12 +7,15 @@
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <iostream>
 
-TileMap::TileMap(const std::string & tileSet, sf::Vector2u tileSize, size_t width, size_t height)
+View::TileMap::TileMap(const std::string & tileSet, sf::Vector2u tileSize, size_t width, size_t height)
 {
     m_wasLoadedCorrectly = load(tileSet, tileSize, width, height);
 }
 
-bool TileMap::load(const std::string & tileSet, sf::Vector2u tileSize, size_t widthInPoints, size_t heightInPoints)
+bool View::TileMap::load(const std::string & tileSet,
+                         sf::Vector2u tileSize,
+                         size_t widthInPoints,
+                         size_t heightInPoints)
 {
     if (!m_tileSet.loadFromFile(tileSet)) {
         return false;
@@ -121,14 +124,14 @@ bool TileMap::load(const std::string & tileSet, sf::Vector2u tileSize, size_t wi
     return true;
 }
 
-void TileMap::draw(sf::RenderTarget & target, sf::RenderStates renderStates) const
+void View::TileMap::draw(sf::RenderTarget & target, sf::RenderStates renderStates) const
 {
     renderStates.transform *= getTransform();
     renderStates.texture = &m_tileSet;
     target.draw(m_vertices, renderStates);
 }
 
-bool TileMap::wasLoadedCorrectly() const
+bool View::TileMap::wasLoadedCorrectly() const
 {
     return m_wasLoadedCorrectly;
 }

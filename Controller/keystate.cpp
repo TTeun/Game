@@ -4,13 +4,13 @@
 
 #include "keystate.h"
 
-Controller::KeyState::KeyState(Controller::KeyState::Behaviour Behaviour, sf::Keyboard::Key Key, float resetTime)
-    : m_resetTime(resetTime), m_behaviour(Behaviour), m_key(Key)
+Controller::KeyState::KeyState(Controller::KeyState::BEHAVIOUR behaviour, sf::Keyboard::Key key, float resetTime)
+    : m_resetTime(resetTime), m_behaviour(behaviour), m_key(key)
 {
     m_clock.restart();
 }
 
-Controller::KeyState::KeyEventType Controller::KeyState::update(bool keyIsPressed)
+Controller::KeyState::KEY_EVENT_TYPE Controller::KeyState::update(bool keyIsPressed)
 {
     if (keyIsPressed && m_isPressed) {
         if (m_resetTime != 0.0f) {

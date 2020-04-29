@@ -2,10 +2,11 @@
 // Created by pc on 4/26/20.
 //
 
-#ifndef SFML_DRAWINTERFACE_H
-#define SFML_DRAWINTERFACE_H
+#ifndef TEUN_GAME_DRAWINTERFACE_H
+#define TEUN_GAME_DRAWINTERFACE_H
 
 #include "tilemap.h"
+#include "../Model/Entities/levelwrapper.h"
 
 #include <list>
 #include <map>
@@ -49,7 +50,7 @@ namespace View {
 
         void addLevelTileMap(size_t id, const TileMap * tileMap);
 
-        void drawLevel(Window & window, const Model::Entities::Level & terrain, const sf::FloatRect & viewRect);
+        void drawLevel(Window & window, const Model::Entities::LevelWrapper &levelWrapper, const sf::FloatRect & viewRect);
 
         void
         drawEntities(View::Window & window, const Model::EntityController & entityList, const sf::FloatRect & viewRect);
@@ -66,4 +67,4 @@ namespace View {
     };
 } // namespace View
 
-#endif // SFML_DRAWINTERFACE_H
+#endif // TEUN_GAME_DRAWINTERFACE_H

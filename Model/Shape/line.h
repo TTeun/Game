@@ -2,8 +2,8 @@
 // Created by pc on 4/28/20.
 //
 
-#ifndef SFML_LINE_H
-#define SFML_LINE_H
+#ifndef TEUN_GAME_LINE_H
+#define TEUN_GAME_LINE_H
 
 #include "point.h"
 
@@ -27,4 +27,4 @@ namespace Model {
         };
     } // namespace Shape
 } // namespace Model
-#endif // SFML_LINE_H
+#endif // TEUN_GAME_LINE_H

@@ -11,10 +11,10 @@ Model::Entities::DebrisExplosion::DebrisExplosion(const sf::Vector2f & position,
     }
 }
 
-void Model::Entities::DebrisExplosion::update(float dt, const Level & terrain, const Physics::Constants & constants)
+void Model::Entities::DebrisExplosion::update(float dt, const Level & level, const Physics::Constants & constants)
 {
     for (auto & debris : m_debrisVector) {
-        debris.update(dt, constants);
+        debris.update(dt, level, constants);
     }
     for (auto it = m_debrisVector.begin(); it != m_debrisVector.end();) {
         if (it->shouldClean()) {

@@ -2,14 +2,15 @@
 // Created by pc on 4/26/20.
 //
 
-#ifndef SFML_CONSTANTS_H
-#define SFML_CONSTANTS_H
+#ifndef TEUN_GAME_CONSTANTS_H
+#define TEUN_GAME_CONSTANTS_H
 
 #include <memory>
 
 namespace Model {
 
     namespace Physics {
+
         struct Constants {
 
             static std::unique_ptr<Constants> readIniFile();
@@ -24,4 +25,4 @@ namespace Model {
         };
     } // namespace Physics
 } // namespace Model
-#endif // SFML_CONSTANTS_H
+#endif // TEUN_GAME_CONSTANTS_H

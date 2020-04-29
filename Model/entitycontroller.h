@@ -1,10 +1,10 @@
-#ifndef GAME_ENTITYLIST_H
-#define GAME_ENTITYLIST_H
+#ifndef TEUN_GAME_ENTITYCONTROLLER_H
+#define TEUN_GAME_ENTITYCONTROLLER_H
 
 #include "../colors.h"
 #include "Entities/debrisexplosion.h"
 #include "Entities/enemy.h"
-#include "Entities/level.h"
+#include "Entities/levelwrapper.h"
 #include "Entities/player.h"
 
 #include <list>
@@ -26,26 +26,26 @@ namespace Model {
     public:
         EntityController();
 
-        const Entities::Level & getLevel() const;
+        const Entities::LevelWrapper & getLevelWrapper() const;
 
-        const std::list<Entities::DebrisExplosion> & getDebrisExplosions() const;
+        const std::list<Entities::DebrisExplosion> &getDebrisExplosions() const;
 
-        const std::list<Entities::Enemy> & getEnemies() const;
+        const std::list<Entities::Enemy> &getEnemies() const;
 
         void addDebrisExplosion();
 
-        void addEnemy(const sf::Vector2f & position);
+        void addEnemy(const sf::Vector2f &position);
 
-        void update(float dt, const Physics::Constants & constants);
+        void update(float dt, const Physics::Constants &constants);
 
         void setLevel(std::unique_ptr<Entities::Level> level);
 
-        void handleAi(float dt, const DataStructures::RectGraph & rectGraph);
+        void handleAi(float dt, const DataStructures::RectGraph &rectGraph);
 
-        const Entities::Player & getPlayer() const;
+        const Entities::Player &getPlayer() const;
 
     private:
-        Entities::Player & getPlayer();
+        Entities::Player &getPlayer();
 
         std::list<Entities::DebrisExplosion> m_debrisExplosionVector;
 
@@ -53,8 +53,8 @@ namespace Model {
 
         Entities::Player m_player = Entities::Player(200, 230, 25, 25, Colors::playerColor);
 
-        std::unique_ptr<Entities::Level> m_level;
+        std::unique_ptr<Entities::LevelWrapper> m_levelWrapper;
     };
 } // namespace Model
 
-#endif // GAME_ENTITYLIST_H
+#endif // TEUN_GAME_ENTITYCONTROLLER_H

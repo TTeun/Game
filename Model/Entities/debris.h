@@ -1,5 +1,5 @@
-#ifndef SFML_DEBRIS_H
-#define SFML_DEBRIS_H
+#ifndef TEUN_GAME_DEBRIS_H
+#define TEUN_GAME_DEBRIS_H
 
 #include "../../Aux/uniform.h"
 #include "../Physics/deathtimer.h"
@@ -11,20 +11,20 @@ namespace Model {
 
     namespace Entities {
 
-        class Debris : public Physics::PhysicsObject, public Physics::DeathTimer {
+        class Debris : public Physics::IntersectableObject, public Physics::DeathTimer {
 
         public:
-            static Debris create(const sf::Vector2f & position);
+            static Debris create(const sf::Vector2f &position);
 
-            Debris(Debris && debris) = default;
+            Debris(Debris &&debris) = default;
 
         private:
-            Debris(const sf::Vector2f & position,
-                   const Uniform & sizeUniform,
-                   const Uniform & velocityUniform = Uniform{5, 2});
+            Debris(const sf::Vector2f &position,
+                   const Aux::Uniform &sizeUniform,
+                   const Aux::Uniform &velocityUniform = Aux::Uniform{5, 2});
 
-            static Shape::Point getRandomVelocity(const Uniform & velocityUniform);
+            static Shape::Point getRandomVelocity(const Aux::Uniform &velocityUniform);
         };
     } // namespace Entities
 } // namespace Model
-#endif // SFML_DEBRIS_H
+#endif // TEUN_GAME_DEBRIS_H

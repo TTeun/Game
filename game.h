@@ -2,8 +2,8 @@
 // Created by pc on 4/27/20.
 //
 
-#ifndef SFML_GAME_H
-#define SFML_GAME_H
+#ifndef TEUN_GAME_GAME_H
+#define TEUN_GAME_GAME_H
 
 #include "Controller/keyboardhandler.h"
 #include "Model/Physics/constants.h"
@@ -49,4 +49,4 @@ private:
     bool m_isPaused = false;
 };
 
-#endif // SFML_GAME_H
+#endif // TEUN_GAME_GAME_H

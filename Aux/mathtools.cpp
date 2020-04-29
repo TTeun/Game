@@ -6,12 +6,12 @@
 
 #include <cassert>
 
-float MathTools::square(float a)
+float Aux::square(float a)
 {
     return a * a;
 }
 
-float MathTools::clamp(float a, float min, float max)
+float Aux::clamp(float a, float min, float max)
 {
     assert(min < max);
     if (a < min) {

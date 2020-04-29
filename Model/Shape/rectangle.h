@@ -2,8 +2,8 @@
 // Created by pc on 4/28/20.
 // topLeft
 
-#ifndef SFML_RECTANGLE_H
-#define SFML_RECTANGLE_H
+#ifndef TEUN_GAME_RECTANGLE_H
+#define TEUN_GAME_RECTANGLE_H
 
 #include "line.h"
 
@@ -12,7 +12,7 @@
 
 namespace Model {
     namespace Entities {
-        class Level;
+        class LevelWrapper;
     } // namespace Entities
 } // namespace Model
 
@@ -59,7 +59,7 @@ namespace Model {
 
             Point getSize() const;
 
-            bool isMutuallyFullyVisible(const Rectangle & other, const Entities::Level & level) const;
+            bool isMutuallyFullyVisible(const Rectangle & other, const Model::Entities::LevelWrapper &levelWrapper) const;
 
         private:
             sf::Color m_color;
@@ -68,4 +68,4 @@ namespace Model {
 } // namespace Model
 Model::Shape::Rectangle operator+(const Model::Shape::Rectangle & rectangle, const Model::Shape::Point & point);
 
-#endif // SFML_RECTANGLE_H
+#endif // TEUN_GAME_RECTANGLE_H

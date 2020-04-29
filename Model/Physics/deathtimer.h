@@ -2,12 +2,13 @@
 // Created by pc on 4/27/20.
 //
 
-#ifndef SFML_DEATHTIMER_H
-#define SFML_DEATHTIMER_H
+#ifndef TEUN_GAME_DEATHTIMER_H
+#define TEUN_GAME_DEATHTIMER_H
 
 #include "finiteduration.h"
 
 #include <SFML/System/Clock.hpp>
+#include <ostream>
 
 namespace Model {
     namespace Physics {
@@ -19,10 +20,12 @@ namespace Model {
 
             bool shouldClean() const override;
 
+            friend std::ostream &operator<<(std::ostream &os, const DeathTimer &timer);
+
         private:
             const float m_deathTime;
             sf::Clock m_clock;
         };
     } // namespace Physics
 } // namespace Model
-#endif // SFML_DEATHTIMER_H
+#endif // TEUN_GAME_DEATHTIMER_H

@@ -8,13 +8,13 @@
 
 Controller::KeyBoardHandler::KeyBoardHandler()
 {
-    m_keyStates.emplace_back(KeyState::Behaviour::DISABLE_UNTIL_RELEASE, sf::Keyboard::P, 0.2f);
-    m_keyStates.emplace_back(KeyState::Behaviour::DISABLE_UNTIL_RELEASE, sf::Keyboard::R, 0.2f);
-    m_keyStates.emplace_back(KeyState::Behaviour::DISABLE_UNTIL_RELEASE, sf::Keyboard::E, 0.002f);
+    m_keyStates.emplace_back(KeyState::BEHAVIOUR::DISABLE_UNTIL_RELEASE, sf::Keyboard::P, 0.2f);
+    m_keyStates.emplace_back(KeyState::BEHAVIOUR::DISABLE_UNTIL_RELEASE, sf::Keyboard::R, 0.2f);
+    m_keyStates.emplace_back(KeyState::BEHAVIOUR::DISABLE_UNTIL_RELEASE, sf::Keyboard::E, 0.002f);
 
-    m_keyStates.emplace_back(KeyState::Behaviour::ALWAYS_FIRE, sf::Keyboard::W);
-    m_keyStates.emplace_back(KeyState::Behaviour::ALWAYS_FIRE, sf::Keyboard::A);
-    m_keyStates.emplace_back(KeyState::Behaviour::ALWAYS_FIRE, sf::Keyboard::D);
+    m_keyStates.emplace_back(KeyState::BEHAVIOUR::ALWAYS_FIRE, sf::Keyboard::W);
+    m_keyStates.emplace_back(KeyState::BEHAVIOUR::ALWAYS_FIRE, sf::Keyboard::A);
+    m_keyStates.emplace_back(KeyState::BEHAVIOUR::ALWAYS_FIRE, sf::Keyboard::D);
 }
 
 void Controller::KeyBoardHandler::handleKeyPress(Game & game, const sf::Keyboard::Key & key)
@@ -40,10 +40,10 @@ void Controller::KeyBoardHandler::handleKeyInput(Game & game)
         const bool keyIsPressed = sf::Keyboard::isKeyPressed(key);
         const auto eventType    = it.update(keyIsPressed);
         switch (eventType) {
-            case KeyState::KeyEventType::NEW_PRESS: handleKeyPress(game, key); break;
-            case KeyState::KeyEventType::RELEASED: handleKeyRelease(game, key); break;
-            case KeyState::KeyEventType::HELD_DOWN:
-                if (it.m_behaviour == KeyState::Behaviour::ALWAYS_FIRE) {
+            case KeyState::KEY_EVENT_TYPE::NEW_PRESS: handleKeyPress(game, key); break;
+            case KeyState::KEY_EVENT_TYPE::RELEASED: handleKeyRelease(game, key); break;
+            case KeyState::KEY_EVENT_TYPE::HELD_DOWN:
+                if (it.m_behaviour == KeyState::BEHAVIOUR::ALWAYS_FIRE) {
                     handleKeyPress(game, key);
                 }
                 break;

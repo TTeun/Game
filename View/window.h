@@ -2,8 +2,8 @@
 // Created by pc on 4/26/20.
 //
 
-#ifndef GAME_WINDOW_H
-#define GAME_WINDOW_H
+#ifndef TEUN_GAME_WINDOW_H
+#define TEUN_GAME_WINDOW_H
 
 #include "../Model/Shape/rectangle.h"
 #include "drawinterface.h"
@@ -51,4 +51,4 @@ namespace View {
     };
 } // namespace View
 
-#endif // GAME_WINDOW_H
+#endif // TEUN_GAME_WINDOW_H

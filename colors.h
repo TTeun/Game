@@ -1,5 +1,5 @@
-#ifndef GAME_COLORS
-#define GAME_COLORS
+#ifndef TEUN_GAME_COLORS_H
+#define TEUN_GAME_COLORS_H
 
 #include <SFML/Graphics/Color.hpp>
 
@@ -11,4 +11,4 @@ namespace Colors {
 
 } // namespace Colors
 
-#endif // GAME_COLORS
+#endif // TEUN_GAME_COLORS_H

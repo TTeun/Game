@@ -2,8 +2,8 @@
 // Created by pc on 4/27/20.
 //
 
-#ifndef SFML_LEVELLOADER_H
-#define SFML_LEVELLOADER_H
+#ifndef TEUN_GAME_LEVELLOADER_H
+#define TEUN_GAME_LEVELLOADER_H
 
 #include <string>
 
@@ -18,4 +18,4 @@ namespace Model {
 
 } // namespace Model
 
-#endif // SFML_LEVELLOADER_H
+#endif // TEUN_GAME_LEVELLOADER_H

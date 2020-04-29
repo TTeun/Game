@@ -2,15 +2,15 @@
 // Created by pc on 4/28/20.
 //
 
-#ifndef SFML_MATHTOOLS_H
-#define SFML_MATHTOOLS_H
+#ifndef TEUN_GAME_MATHTOOLS_H
+#define TEUN_GAME_MATHTOOLS_H
 
-namespace MathTools {
+namespace Aux {
 
     float clamp(float a, float min, float max);
 
     float square(float a);
 
-} // namespace MathTools
+} // namespace Aux
 
-#endif // SFML_MATHTOOLS_H
+#endif // TEUN_GAME_MATHTOOLS_H

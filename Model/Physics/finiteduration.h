@@ -2,8 +2,10 @@
 // Created by pc on 4/27/20.
 //
 
-#ifndef SFML_FINITEDURATION_H
-#define SFML_FINITEDURATION_H
+#ifndef TEUN_GAME_FINITEDURATION_H
+#define TEUN_GAME_FINITEDURATION_H
+
+#include <ostream>
 
 namespace Model {
 
@@ -13,7 +15,11 @@ namespace Model {
 
         public:
             virtual bool shouldClean() const = 0;
+
+            friend std::ostream &operator<<(std::ostream &os, const FiniteDuration &duration) {
+                return os;
+            }
         };
     } // namespace Physics
 } // namespace Model
-#endif // SFML_FINITEDURATION_H
+#endif // TEUN_GAME_FINITEDURATION_H

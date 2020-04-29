@@ -2,37 +2,40 @@
 // Created by pc on 4/28/20.
 //
 
-#ifndef SFML_CONSTPOINTERWRAPPER_H
-#define SFML_CONSTPOINTERWRAPPER_H
+#ifndef TEUN_GAME_CONSTPOINTERWRAPPER_H
+#define TEUN_GAME_CONSTPOINTERWRAPPER_H
 
 #include <cassert>
 
-template <class T>
-class ConstPointerWrapper {
+namespace Aux {
 
-public:
-    explicit ConstPointerWrapper(T * pointer) : m_pointer(pointer)
-    {
-    }
+    template <class T>
+    class ConstPointerWrapper {
 
-    explicit operator bool() const
-    {
-        return (bool)m_pointer;
-    }
+    public:
+        explicit ConstPointerWrapper(T * pointer) : m_pointer(pointer)
+        {
+        }
 
-    const T & get() const
-    {
-        assert(m_pointer);
-        return *m_pointer;
-    }
+        explicit operator bool() const
+        {
+            return (bool)m_pointer;
+        }
 
-    void set(T * pointer)
-    {
-        m_pointer = pointer;
-    }
+        const T & get() const
+        {
+            assert(m_pointer);
+            return *m_pointer;
+        }
 
-private:
-    const T * m_pointer;
-};
+        void set(T * pointer)
+        {
+            m_pointer = pointer;
+        }
 
-#endif // SFML_CONSTPOINTERWRAPPER_H
+    private:
+        const T * m_pointer;
+    };
+}
+// namespace Aux
+#endif // TEUN_GAME_CONSTPOINTERWRAPPER_H

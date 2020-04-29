@@ -2,8 +2,8 @@
 // Created by pc on 4/28/20.
 //
 
-#ifndef SFML_POINT_H
-#define SFML_POINT_H
+#ifndef TEUN_GAME_POINT_H
+#define TEUN_GAME_POINT_H
 
 #include <SFML/System.hpp>
 
@@ -22,4 +22,4 @@ namespace Model {
         };
     } // namespace Shape
 } // namespace Model
-#endif // SFML_POINT_H
+#endif // TEUN_GAME_POINT_H

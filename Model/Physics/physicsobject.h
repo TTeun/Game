@@ -2,8 +2,8 @@
 // Created by pc on 4/26/20.
 //
 
-#ifndef SFML_PHYSICSOBJECT_H
-#define SFML_PHYSICSOBJECT_H
+#ifndef TEUN_GAME_PHYSICSOBJECT_H
+#define TEUN_GAME_PHYSICSOBJECT_H
 
 #include "constants.h"
 #include "object.h"
@@ -42,4 +42,4 @@ namespace Model {
 
     } // namespace Physics
 } // namespace Model
-#endif // SFML_PHYSICSOBJECT_H
+#endif // TEUN_GAME_PHYSICSOBJECT_H

@@ -2,8 +2,8 @@
 // Created by pc on 4/26/20.
 //
 
-#ifndef SFML_OBJECT_H
-#define SFML_OBJECT_H
+#ifndef TEUN_GAME_OBJECT_H
+#define TEUN_GAME_OBJECT_H
 
 #include "../Shape/rectangle.h"
 
@@ -24,4 +24,4 @@ namespace Model {
         };
     } // namespace Physics
 } // namespace Model
-#endif // SFML_OBJECT_H
+#endif // TEUN_GAME_OBJECT_H

@@ -2,8 +2,8 @@
 // Created by pc on 4/27/20.
 //
 
-#ifndef SFML_KEYBOARDHANDLER_H
-#define SFML_KEYBOARDHANDLER_H
+#ifndef TEUN_GAME_KEYBOARDHANDLER_H
+#define TEUN_GAME_KEYBOARDHANDLER_H
 
 #include "keystate.h"
 
@@ -33,4 +33,4 @@ namespace Controller {
 
 } // namespace Controller
 
-#endif // SFML_KEYBOARDHANDLER_H
+#endif // TEUN_GAME_KEYBOARDHANDLER_H

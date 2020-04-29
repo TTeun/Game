@@ -2,8 +2,8 @@
 // Created by pc on 4/26/20.
 //
 
-#ifndef GAME_PLAYER_H
-#define GAME_PLAYER_H
+#ifndef TEUN_GAME_PLAYER_H
+#define TEUN_GAME_PLAYER_H
 
 #include "../Physics/intersectableobject.h"
 
@@ -29,4 +29,4 @@ namespace Model {
         };
     } // namespace Entities
 } // namespace Model
-#endif // GAME_PLAYER_H
+#endif // TEUN_GAME_PLAYER_H

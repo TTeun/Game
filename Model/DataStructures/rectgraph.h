@@ -2,8 +2,8 @@
 // Created by pc on 4/28/20.
 //
 
-#ifndef SFML_RECTGRAPH_H
-#define SFML_RECTGRAPH_H
+#ifndef TEUN_GAME_RECTGRAPH_H
+#define TEUN_GAME_RECTGRAPH_H
 
 #include "../Shape/rectangle.h"
 
@@ -15,8 +15,10 @@ namespace View {
     class Window;
 }
 
-namespace Entities {
-    class Level;
+namespace Model {
+    namespace Entities {
+        class LevelWrapper;
+    }
 }
 
 namespace Model {
@@ -25,15 +27,15 @@ namespace Model {
         class RectGraph {
 
         public:
-            RectGraph(float width, float height, const Entities::Level & level);
+            RectGraph(float width, float height, const Entities::LevelWrapper &levelWrapper);
 
-            void draw(View::Window & window) const;
+            void draw(View::Window &window) const;
 
-            void addTarget(const Shape::Rectangle & targetRectangle, const Entities::Level & level, float shrinkFactor);
+            void addTarget(const Shape::Rectangle &targetRectangle, const Entities::LevelWrapper &levelWrapper, float shrinkFactor);
 
-            sf::Vector2f findDirectionToTarget(const Shape::Rectangle & rectangle,
-                                               const Entities::Level & level,
-                                               float shrinkFactor) const;
+            Model::Shape::Point findDirectionToTarget(const Shape::Rectangle &rectangle,
+                                                      const Model::Entities::LevelWrapper &levelWrapper,
+                                                      float shrinkFactor) const;
 
         private:
             std::map<std::pair<size_t, size_t>, float> m_edges;
@@ -52,4 +54,4 @@ namespace Model {
     } // namespace DataStructures
 } // namespace Model
 
-#endif // SFML_RECTGRAPH_H
+#endif // TEUN_GAME_RECTGRAPH_H

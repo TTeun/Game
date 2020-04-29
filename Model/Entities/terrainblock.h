@@ -2,8 +2,8 @@
 // Created by pc on 4/26/20.
 //
 
-#ifndef SFML_TERRAINBLOCK_H
-#define SFML_TERRAINBLOCK_H
+#ifndef TEUN_GAME_TERRAINBLOCK_H
+#define TEUN_GAME_TERRAINBLOCK_H
 
 #include "../Physics/object.h"
 #include "../Shape/rectangle.h"
@@ -29,4 +29,4 @@ namespace Model {
         };
     } // namespace Entities
 } // namespace Model
-#endif // SFML_TERRAINBLOCK_H
+#endif // TEUN_GAME_TERRAINBLOCK_H

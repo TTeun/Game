@@ -6,11 +6,11 @@
 
 #include <cstdlib>
 
-Uniform::Uniform(size_t min, size_t range) : m_min(min), m_range(range)
+Aux::Uniform::Uniform(size_t min, size_t range) : m_min(min), m_range(range)
 {
 }
 
-size_t Uniform::get() const
+size_t Aux::Uniform::get() const
 {
     if (m_range == 0) {
         return m_min;

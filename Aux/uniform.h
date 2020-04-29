@@ -2,22 +2,24 @@
 // Created by pc on 4/26/20.
 //
 
-#ifndef SFML_UNIFORM_H
-#define SFML_UNIFORM_H
+#ifndef TEUN_GAME_UNIFORM_H
+#define TEUN_GAME_UNIFORM_H
 
 #include <cstddef>
 
-class Uniform {
+namespace Aux {
 
-public:
-    Uniform(size_t min, size_t range);
+    class Uniform {
 
-    size_t get() const;
+    public:
+        Uniform(size_t min, size_t range);
 
-private:
-    size_t m_min = 0ul;
+        size_t get() const;
 
-    size_t m_range;
-};
+    private:
+        size_t m_min = 0ul;
 
-#endif // SFML_UNIFORM_H
+        size_t m_range;
+    };
+} // namespace Aux
+#endif // TEUN_GAME_UNIFORM_H
