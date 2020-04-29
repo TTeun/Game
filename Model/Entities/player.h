@@ -18,15 +18,18 @@ namespace Model {
         class Player : public Physics::IntersectableObject {
 
         public:
-            Player(float x, float y, float height, float width, const sf::Color & color);
+            Player(float x, float y, float height, float width, const sf::Color &color);
 
             void addHorizontalForce(float force);
 
-            void jump(const Physics::Constants & constants);
+            void jump(const Physics::Constants &constants);
 
         private:
-            void updateSnappedHorizontal(float dt, const Level & level, const Physics::Constants & constants) override;
+        protected:
+            void checkAndHandlePressedIntoWall(float dt, const Physics::Constants &constants) override;
+
         };
     } // namespace Entities
 } // namespace Model
+
 #endif // TEUN_GAME_PLAYER_H

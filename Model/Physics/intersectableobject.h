@@ -32,15 +32,13 @@ namespace Model {
             void updateUnSnapped(float dt, const Model::Entities::Level &level, const Physics::Constants &constants);
 
             void
-            updateSnappedVertical(float dt, const Model::Entities::Level &level, const Physics::Constants &constants);
+            updateSnappedHorizontal(float dt, const Model::Entities::Level &level, const Physics::Constants &constants);
 
-            virtual void updateSnappedHorizontal(float dt,
-                                                 const Model::Entities::Level &level,
-                                                 const Physics::Constants &constants);
+            void updateSnappedVertical(float dt,
+                                       const Model::Entities::Level &level,
+                                       const Physics::Constants &constants);
 
-            void checkAndHandlePressedIntoWall(float dt, const Physics::Constants &constants);
-
-            bool m_isGrounded = false;
+            virtual void checkAndHandlePressedIntoWall(float dt, const Physics::Constants &constants);
 
             void unSnap();
 
@@ -53,7 +51,7 @@ namespace Model {
 
             WHERE_IS_SNAPPED_TERRAIN m_whereIsSnappedTerrain;
 
-            WHERE_IS_SNAPPED_TERRAIN findWhereIsSnappedTerrain() const;
+            WHERE_IS_SNAPPED_TERRAIN whichDirectionIsTerrainBlock(const Entities::TerrainBlock &snappedTerrainBlock) const;
         };
 
     } // namespace Physics

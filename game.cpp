@@ -1,5 +1,7 @@
 #include "game.h"
 
+#include <memory>
+
 #include "Model/Loaders/levelloader.h"
 
 Game::Game()
@@ -7,7 +9,7 @@ Game::Game()
           m_drawInterface(new View::DrawInterface),
           m_entityController(new Model::EntityController()),
           m_keyBoardHandler(new Controller::KeyBoardHandler),
-          m_constants(Model::Physics::Constants::readIniFile()) {
+          m_constants(new Model::Physics::Constants()) {
     m_window->setShowFrameRate(true);
 }
 
@@ -44,7 +46,7 @@ Model::EntityController &Game::getModel() {
 
 void Game::reset() {
     m_entityController = std::make_unique<Model::EntityController>();
-    m_constants = Model::Physics::Constants::readIniFile();
+    m_constants = std::make_unique<Model::Physics::Constants>();
     Model::Loaders::loadLevel("../Assets/Levels/level1.xml", *this);
 }
 

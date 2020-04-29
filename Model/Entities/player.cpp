@@ -39,9 +39,7 @@ void Model::Entities::Player::jump(const Physics::Constants &constants) {
     }
 }
 
-void Model::Entities::Player::updateSnappedHorizontal(float dt,
-                                                      const Level &level,
-                                                      const Physics::Constants &constants) {
+void Model::Entities::Player::checkAndHandlePressedIntoWall(float dt, const Model::Physics::Constants &constants) {
     if (m_whereIsSnappedTerrain == WHERE_IS_SNAPPED_TERRAIN::RIGHT) {
         const auto movedRect = m_shape + m_shape.width * 0.5f * Model::Shape::Point{1.0f, 0.0f};
         if (not m_snappedTerrainBlock.get().getShape().intersects(movedRect)) {
@@ -51,13 +49,12 @@ void Model::Entities::Player::updateSnappedHorizontal(float dt,
         applyGravity(dt, constants);
         if (isPressingIntoWall) {
             m_velocity.x = 0.0f;
-            if (m_velocity.y > 40) {
+            if (m_velocity.y > 40.0f) {
                 m_velocity.y = 40.0f;
             }
         } else {
             m_snappedTerrainBlock.set(nullptr);
         }
-        m_shape.move(dt * m_velocity);
     } else if (m_whereIsSnappedTerrain == WHERE_IS_SNAPPED_TERRAIN::LEFT) {
         const auto movedRect = m_shape + m_shape.width * 0.5f * Model::Shape::Point{-1.0f, 0.0f};
         if (not m_snappedTerrainBlock.get().getShape().intersects(movedRect)) {
@@ -67,12 +64,11 @@ void Model::Entities::Player::updateSnappedHorizontal(float dt,
         applyGravity(dt, constants);
         if (isPressingIntoWall) {
             m_velocity.x = 0.0f;
-            if (m_velocity.y > 40) {
+            if (m_velocity.y > 40.0f) {
                 m_velocity.y = 40.0f;
             }
         } else {
             m_snappedTerrainBlock.set(nullptr);
         }
-        m_shape.move(dt * m_velocity);
     }
 }

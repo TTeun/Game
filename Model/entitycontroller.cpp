@@ -25,7 +25,8 @@ void Model::EntityController::handleAi(float dt, const DataStructures::RectGraph
         auto vel = rectGraph.findDirectionToTarget(enemy.getShape(), getLevelWrapper(), 0.9f);
         const float length = std::sqrt(vel.x * vel.x + vel.y * vel.y);
         vel /= length;
-        enemy.setVelocity(dt * vel * 200000.f);
+        enemy.setVelocity(enemy.getVelocity() + dt * vel * 200.f);
+//        enemy.setVelocity(dt * vel * 200000.f);
     }
 }
 
