@@ -8,6 +8,7 @@
 #include "../Shape/rectangle.h"
 
 #include <utility>
+
 namespace Model {
 
     namespace Physics {
@@ -15,10 +16,10 @@ namespace Model {
         class Object {
 
         public:
-            const Model::Shape::Rectangle & getShape() const;
+            const Model::Shape::Rectangle &getShape() const;
 
         protected:
-            Object(Model::Shape::Rectangle && shape);
+            Object(Model::Shape::Rectangle &&shape);
 
             Model::Shape::Rectangle m_shape;
         };

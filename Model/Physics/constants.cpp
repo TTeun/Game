@@ -1,31 +1,22 @@
-////
-//// Created by pc on 4/27/20.
-////
-//
-//#include "constants.h"
-//
-//#include "../../ThirdParty/inih-master/cpp/INIReader.h"
-//
-//std::unique_ptr<Model::Physics::Constants> Model::Physics::Constants::readIniFile() {
-//    INIReader iniReader("../Config/physics.ini");
-//
-//    if (iniReader.ParseError() == -1) {
-//        throw "could not read physiccs file";
-//    }
-//
-//    double gravitationalConstant = iniReader.GetReal("physics", "gravitational_constant", 0.0f);
-//    double surfaceFriction = iniReader.GetReal("physics", "surface_friction", 0.0f);
-//    double jumpVelocity = iniReader.GetReal("physics", "jump_velocity", 0.2f);
-//    double wallJumpYVelocity = iniReader.GetReal("physics", "wall_jump_y_velocity", 200.0f);
-//    double wallJumpXVelocity = iniReader.GetReal("physics", "wall_jump_x_velocity", 200.0f);
-//    double maxHorizontalSpeed = iniReader.GetReal("physics", "max_horizontal_speed", 200.0f);
-//    double maxVerticalSpeed = iniReader.GetReal("physics", "max_vertical_speed", 200.0f);
-//
-//    return std::make_unique<Model::Physics::Constants>(Constants(static_cast<float>(gravitationalConstant),
-//                                                                 static_cast<float>(surfaceFriction),
-//                                                                 static_cast<float>(jumpVelocity),
-//                                                                 static_cast<float>(wallJumpYVelocity),
-//                                                                 static_cast<float>(wallJumpXVelocity),
-//                                                                 static_cast<float>(maxHorizontalSpeed),
-//                                                                 static_cast<float>(maxVerticalSpeed)));
-//}
+#include "constants.h"
+
+Model::Physics::Constants::Constants(std::string path)
+        : m_iniReader(std::make_unique<IniReaderWrapper>(IniReaderWrapper(path))),
+          m_gravitationalConstant(
+                  (m_iniReader->getReal("physics", "gravitational_constant", 0.0f))),
+          m_surfaceFriction((m_iniReader->getReal("physics", "surface_friction", 0.0f))),
+          m_jumpVelocity((m_iniReader->getReal("physics", "jump_velocity", 0.0f))),
+          m_wallJumpYVelocity(
+                  (m_iniReader->getReal("physics", "wall_jump_y_velocity", 0.0f))),
+          m_wallJumpXVelocity(
+                  (m_iniReader->getReal("physics", "wall_jump_x_velocity", 0.0f))),
+          m_maxHorizontalSpeed(
+                  (m_iniReader->getReal("physics", "max_horizontal_speed", 0.0f))),
+          m_maxVerticalSpeed(
+                  (m_iniReader->getReal("physics", "max_vertical_speed", 0.0f))) {
+    m_iniReader.reset(nullptr);
+}
+
+std::unique_ptr<Model::Physics::Constants> Model::Physics::Constants::create(std::string path) {
+    return std::unique_ptr<Constants>(new Constants(std::move(path)));
+}

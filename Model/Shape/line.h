@@ -15,9 +15,9 @@ namespace Model {
         class Line {
 
         public:
-            Line(const sf::Vector2f & p1, const sf::Vector2f & p2);
+            Line(const sf::Vector2f &p1, const sf::Vector2f &p2);
 
-            bool intersects(const Line & otherLine) const;
+            bool intersects(const Line &otherLine) const;
 
             float length() const;
 

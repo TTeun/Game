@@ -20,7 +20,7 @@ namespace Model {
 
         class TerrainBlock : public Physics::Object {
         public:
-            TerrainBlock(size_t id, float width, float height, const sf::Vector2f & position);
+            TerrainBlock(size_t id, float width, float height, const sf::Vector2f &position);
 
             size_t getId() const;
 

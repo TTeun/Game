@@ -4,16 +4,14 @@
 
 #include "debrisexplosion.h"
 
-Model::Entities::DebrisExplosion::DebrisExplosion(const sf::Vector2f & position, size_t count)
-{
+Model::Entities::DebrisExplosion::DebrisExplosion(const sf::Vector2f &position, size_t count) {
     for (size_t i = 0; i != count; ++i) {
         m_debrisVector.emplace_back(Debris::create(position));
     }
 }
 
-void Model::Entities::DebrisExplosion::update(float dt, const Level & level, const Physics::Constants & constants)
-{
-    for (auto & debris : m_debrisVector) {
+void Model::Entities::DebrisExplosion::update(float dt, const Level &level, const Physics::Constants &constants) {
+    for (auto &debris : m_debrisVector) {
         debris.update(dt, level, constants);
     }
     for (auto it = m_debrisVector.begin(); it != m_debrisVector.end();) {
@@ -25,13 +23,11 @@ void Model::Entities::DebrisExplosion::update(float dt, const Level & level, con
     }
 }
 
-const std::list<Model::Entities::Debris> & Model::Entities::DebrisExplosion::getDebrisVector() const
-{
+const std::list<Model::Entities::Debris> &Model::Entities::DebrisExplosion::getDebrisVector() const {
     return m_debrisVector;
 }
 
-bool Model::Entities::DebrisExplosion::shouldClean() const
-{
+bool Model::Entities::DebrisExplosion::shouldClean() const {
     //    return false;
     return m_debrisVector.empty();
 }

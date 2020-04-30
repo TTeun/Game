@@ -34,9 +34,6 @@ namespace Model {
 
             const std::list<std::unique_ptr<TerrainBlock>> &getTerrainBlocks() const;
 
-            DataStructures::RectGraph
-            buildCornerRectGraphWithPlayer(float width, float height, const Player &player) const;
-
         private:
 
             bool intersects(const Shape::Line &line) const;
@@ -44,8 +41,6 @@ namespace Model {
             bool intersects(const Shape::Rectangle &rect) const;
 
             size_t addTerrainBlock(float x, float y, float width, float height);
-
-            DataStructures::RectGraph getCornerRectGraph(float width, float height) const;
 
             std::list<std::unique_ptr<Entities::TerrainBlock>> m_terrainBlocks;
         };

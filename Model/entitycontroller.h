@@ -6,6 +6,7 @@
 #include "Entities/enemy.h"
 #include "Entities/levelwrapper.h"
 #include "Entities/player.h"
+#include "water.h"
 
 #include <list>
 #include <memory>
@@ -26,7 +27,7 @@ namespace Model {
     public:
         EntityController();
 
-        const Entities::LevelWrapper & getLevelWrapper() const;
+        const Entities::LevelWrapper &getLevelWrapper() const;
 
         const std::list<Entities::DebrisExplosion> &getDebrisExplosions() const;
 
@@ -44,6 +45,8 @@ namespace Model {
 
         const Entities::Player &getPlayer() const;
 
+        const Water &getWater() const;
+
     private:
         Entities::Player &getPlayer();
 
@@ -54,6 +57,9 @@ namespace Model {
         Entities::Player m_player = Entities::Player(200, 230, 25, 25, Colors::playerColor);
 
         std::unique_ptr<Entities::LevelWrapper> m_levelWrapper;
+
+        std::unique_ptr<Water> m_water;
+
     };
 } // namespace Model
 

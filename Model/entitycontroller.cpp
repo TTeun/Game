@@ -6,7 +6,9 @@
 
 #include <iostream>
 
-Model::EntityController::EntityController() : m_levelWrapper(new Entities::LevelWrapper()) {
+Model::EntityController::EntityController() : m_levelWrapper(new Entities::LevelWrapper()),
+                                              m_water(new Water(Model::Shape::Rectangle({0.f, 500.f, 200.f, 200.f},
+                                                                                        sf::Color::Blue))) {
     addEnemy({200, 200});
     addEnemy({270, 501});
     addEnemy({201, 920});
@@ -25,8 +27,8 @@ void Model::EntityController::handleAi(float dt, const DataStructures::RectGraph
         auto vel = rectGraph.findDirectionToTarget(enemy.getShape(), getLevelWrapper(), 0.9f);
         const float length = std::sqrt(vel.x * vel.x + vel.y * vel.y);
         vel /= length;
-        enemy.setVelocity(enemy.getVelocity() + dt * vel * 200.f);
-//        enemy.setVelocity(dt * vel * 200000.f);
+//        enemy.setVelocity(enemy.getVelocity() + dt * vel * 200.f);
+        enemy.setVelocity(vel * 60.f);
     }
 }
 
@@ -34,6 +36,8 @@ void Model::EntityController::update(float dt, const Physics::Constants &constan
     if (dt == 0) {
         std::cout << "dt == 0 ???? \n";
     }
+    m_water->update(dt, static_cast<const Model::Entities::LevelWrapper *>( m_levelWrapper.get())->getLevel(),
+                    constants);
     for (auto &explosion : m_debrisExplosionVector) {
         explosion.update(dt, static_cast<const Model::Entities::LevelWrapper *>( m_levelWrapper.get())->getLevel(),
                          constants);
@@ -53,7 +57,7 @@ void Model::EntityController::update(float dt, const Physics::Constants &constan
                     constants);
 }
 
-const Model::Entities::LevelWrapper & Model::EntityController::getLevelWrapper() const {
+const Model::Entities::LevelWrapper &Model::EntityController::getLevelWrapper() const {
     return *m_levelWrapper;
 }
 
@@ -66,7 +70,7 @@ void Model::EntityController::addDebrisExplosion() {
 }
 
 void Model::EntityController::setLevel(std::unique_ptr<Entities::Level> level) {
-    m_levelWrapper->setLevel(std::move(level));
+    m_levelWrapper->initLevelWrapperWithLevel(std::move(level));
 }
 
 const std::list<Model::Entities::Enemy> &Model::EntityController::getEnemies() const {
@@ -75,4 +79,8 @@ const std::list<Model::Entities::Enemy> &Model::EntityController::getEnemies() c
 
 void Model::EntityController::addEnemy(const sf::Vector2f &position) {
     m_enemyVector.emplace_back(Entities::Enemy::create(position));
+}
+
+const Water &Model::EntityController::getWater() const {
+    return *m_water;
 }

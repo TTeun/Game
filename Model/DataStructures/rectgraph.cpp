@@ -2,9 +2,10 @@
 
 #include "../../Aux/mathtools.h"
 #include "../../View/window.h"
-#include "../Entities/level.h"
 
 #include <cassert>
+#include <iostream>
+#include <set>
 
 Model::DataStructures::RectGraph::RectGraph(float width, float height, const Entities::LevelWrapper &levelWrapper) {
     std::vector<Model::Shape::Rectangle> terrainRectangles;
@@ -50,6 +51,12 @@ Model::DataStructures::RectGraph::RectGraph(float width, float height, const Ent
             }
         }
     }
+
+    m_edgeList.resize(m_rectangles.size());
+    for (const auto &it : m_edges) {
+        m_edgeList[it.first.first].push_back(it.first.second);
+    }
+
 }
 
 void Model::DataStructures::RectGraph::draw(View::Window &window) const {
@@ -100,24 +107,19 @@ void Model::DataStructures::RectGraph::addTarget(const Shape::Rectangle &targetR
 Model::Shape::Point Model::DataStructures::RectGraph::findDirectionToTarget(const Shape::Rectangle &rectangle,
                                                                             const Entities::LevelWrapper &levelWrapper,
                                                                             float shrinkFactor) const {
-    // ToDo Per Que?
+    // ToDo omdat anders de vijanden kleiner worden en eigenlijk niet passen!
     shrinkFactor = 1.0f;
 
     if (m_rectangles.empty()) {
         return {0.0f, 0.0f};
     }
-    struct DijkstraInfo {
-        size_t m_index;
-        float m_dist = std::numeric_limits<float>::max();
-        size_t m_prevIndex = std::numeric_limits<size_t>::max();
-        bool m_wasAdded = false;
-    };
 
     std::vector<DijkstraInfo> indices;
     indices.reserve(m_rectangles.size());
     for (size_t i = 0; i != m_rectangles.size(); ++i) {
-        indices.push_back({i, std::numeric_limits<float>::max(), std::numeric_limits<size_t>::max(), false});
+        indices.emplace_back(i);
     }
+
 
     for (size_t i = 0; i != m_rectangles.size(); ++i) {
         if (isNeighborOfTarget(i)) {
@@ -140,19 +142,16 @@ Model::Shape::Point Model::DataStructures::RectGraph::findDirectionToTarget(cons
         }
 
         if (minIndex == std::numeric_limits<size_t>::max()) {
+            // Alle vertices bekeken!
             break;
         }
 
         assert(minIndex < m_rectangles.size());
         indices[minIndex].m_wasAdded = true;
 
-        for (size_t i = 0; i != m_rectangles.size(); ++i) {
-            if (not isNeighbor(i, minIndex)) {
-                continue;
-            }
-
+        for (auto i : m_edgeList.at(minIndex)) {
             std::pair<size_t, size_t> edgePair =
-                    std::pair<size_t, size_t>(std::min(i, minIndex), std::max(i, minIndex));
+                    std::make_pair(std::min(i, minIndex), std::max(i, minIndex));
 
             const float alt = indices[minIndex].m_dist + m_edges.at(edgePair);
             if (alt < indices[i].m_dist) {
@@ -165,7 +164,14 @@ Model::Shape::Point Model::DataStructures::RectGraph::findDirectionToTarget(cons
     const Shape::Rectangle shrunkRectangle = Shape::Rectangle(rectangle.shrink(shrinkFactor));
     std::map<size_t, float> edgesToRectangle;
 
-    const auto &level = levelWrapper.getLevel();
+    size_t minIndex = std::numeric_limits<size_t>::max();
+    float minDist = std::numeric_limits<float>::max();
+
+    if (m_target->isMutuallyFullyVisible(shrunkRectangle, levelWrapper)) {
+        minIndex = m_rectangles.size();
+        minDist = m_target->getDistance(shrunkRectangle);
+    }
+
 
     for (size_t i = 0; i != m_rectangles.size(); ++i) {
         const auto &rect1 = m_rectangles.at(i);
@@ -175,23 +181,14 @@ Model::Shape::Point Model::DataStructures::RectGraph::findDirectionToTarget(cons
             levelWrapper.intersects(Shape::Line{rect1.bottomLeft(), shrunkRectangle.bottomLeft()})) {
             continue;
         } else {
-            edgesToRectangle.insert({i, rect1.getDistance(shrunkRectangle)});
+            const float dist = rect1.getDistance(shrunkRectangle);
+            if (indices[i].m_dist + dist < minDist) {
+                minDist = indices[i].m_dist + dist;
+                minIndex = i;
+            }
         }
     }
 
-    size_t minIndex = std::numeric_limits<size_t>::max();
-    float minDist = std::numeric_limits<float>::max();
-    if (m_target->isMutuallyFullyVisible(shrunkRectangle, levelWrapper)) {
-        minIndex = m_rectangles.size();
-        minDist = m_target->getDistance(shrunkRectangle);
-    }
-
-    for (const auto &it : edgesToRectangle) {
-        if (indices[it.first].m_dist + it.second < minDist) {
-            minDist = indices[it.first].m_dist + it.second;
-            minIndex = it.first;
-        }
-    }
     if (minIndex == m_rectangles.size()) {
         return (m_target->getCenter() - shrunkRectangle.getCenter());
     } else {
@@ -200,6 +197,7 @@ Model::Shape::Point Model::DataStructures::RectGraph::findDirectionToTarget(cons
         }
         return (m_rectangles.at(minIndex).getCenter() - shrunkRectangle.getCenter());
     }
+
 }
 
 bool Model::DataStructures::RectGraph::isNeighborOfTarget(size_t i) const {

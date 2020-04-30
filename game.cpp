@@ -5,11 +5,11 @@
 #include "Model/Loaders/levelloader.h"
 
 Game::Game()
-        : m_window(new View::Window(800, 600, "Game")),
+        : m_window(new View::Window(1200, 800, "Game")),
           m_drawInterface(new View::DrawInterface),
           m_entityController(new Model::EntityController()),
           m_keyBoardHandler(new Controller::KeyBoardHandler),
-          m_constants(new Model::Physics::Constants()) {
+          m_constants(std::move(Model::Physics::Constants::create())) {
     m_window->setShowFrameRate(true);
 }
 
@@ -30,9 +30,10 @@ void Game::play() {
             const auto cornerRectGraph = m_entityController->getLevelWrapper().buildCornerRectGraphWithPlayer(
                     40, 40, static_cast<const Model::EntityController *>(m_entityController.get())->getPlayer()
             );
+
             cornerRectGraph.draw(*m_window);
 
-//            m_entityController->handleAi(m_window->getDtInSeconds(), cornerRectGraph);
+            m_entityController->handleAi(m_window->getDtInSeconds(), cornerRectGraph);
         }
         m_window->drawModel(*m_entityController, getDrawInterface());
 
@@ -46,7 +47,7 @@ Model::EntityController &Game::getModel() {
 
 void Game::reset() {
     m_entityController = std::make_unique<Model::EntityController>();
-    m_constants = std::make_unique<Model::Physics::Constants>();
+    m_constants = Model::Physics::Constants::create();
     Model::Loaders::loadLevel("../Assets/Levels/level1.xml", *this);
 }
 

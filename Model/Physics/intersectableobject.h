@@ -51,7 +51,8 @@ namespace Model {
 
             WHERE_IS_SNAPPED_TERRAIN m_whereIsSnappedTerrain;
 
-            WHERE_IS_SNAPPED_TERRAIN whichDirectionIsTerrainBlock(const Entities::TerrainBlock &snappedTerrainBlock) const;
+            WHERE_IS_SNAPPED_TERRAIN
+            whichDirectionIsTerrainBlock(const Entities::TerrainBlock &snappedTerrainBlock) const;
         };
 
     } // namespace Physics

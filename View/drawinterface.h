@@ -43,27 +43,28 @@ namespace View {
         friend class Model::Loaders;
 
     public:
-        void drawModel(Window & window, const Model::EntityController & model);
+        void drawModel(Window &window, const Model::EntityController &entityController);
 
     private:
         std::map<size_t, std::unique_ptr<const TileMap>> m_levelTileMaps;
 
-        void addLevelTileMap(size_t id, const TileMap * tileMap);
-
-        void drawLevel(Window & window, const Model::Entities::LevelWrapper &levelWrapper, const sf::FloatRect & viewRect);
+        void addLevelTileMap(size_t id, const TileMap *tileMap);
 
         void
-        drawEntities(View::Window & window, const Model::EntityController & entityList, const sf::FloatRect & viewRect);
+        drawLevel(Window &window, const Model::Entities::LevelWrapper &levelWrapper, const sf::FloatRect &viewRect);
 
-        void drawDebrisExplosions(Window & window,
-                                  const std::list<Model::Entities::DebrisExplosion> & debrisExplosionList,
-                                  const sf::FloatRect & viewRect);
+        void
+        drawEntities(View::Window &window, const Model::EntityController &entityController, const sf::FloatRect &viewRect);
 
-        void drawEnemies(Window & window,
-                         const std::list<Model::Entities::Enemy> & enemyList,
-                         const sf::FloatRect & viewRect);
+        void drawDebrisExplosions(Window &window,
+                                  const std::list<Model::Entities::DebrisExplosion> &debrisExplosionList,
+                                  const sf::FloatRect &viewRect);
 
-        void drawPlayer(Window & window, const Model::Entities::Player & player);
+        void drawEnemies(Window &window,
+                         const std::list<Model::Entities::Enemy> &enemyList,
+                         const sf::FloatRect &viewRect);
+
+        void drawPlayer(Window &window, const Model::Entities::Player &player);
     };
 } // namespace View
 

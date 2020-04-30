@@ -23,9 +23,9 @@ namespace Model {
         class Rectangle : public sf::FloatRect {
 
         public:
-            explicit Rectangle(const sf::FloatRect & rectangle, const sf::Color & color = sf::Color::White);
+            explicit Rectangle(const sf::FloatRect &rectangle, const sf::Color &color = sf::Color::White);
 
-            Rectangle(const Point & size, const Point & position, const sf::Color & color = sf::Color::White);
+            Rectangle(const Point &size, const Point &position, const sf::Color &color = sf::Color::White);
 
             sf::Vector2f topLeft() const;
 
@@ -35,37 +35,38 @@ namespace Model {
 
             sf::Vector2f bottomRight() const;
 
-            float getDistance(const Rectangle & other) const;
+            float getDistance(const Rectangle &other) const;
 
             sf::Vector2f getCenter() const;
 
-            bool intersects(const Line & line) const;
+            bool intersects(const Line &line) const;
 
             Rectangle shrink(float factor) const;
 
             void setPosition(sf::Vector2f newPosition);
 
-            void move(const Point & offset);
+            void move(const Point &offset);
 
-            const sf::Color & getColor() const;
+            const sf::Color &getColor() const;
 
-            void setColor(const sf::Color & color);
+            void setColor(const sf::Color &color);
 
-            bool intersects(const Rectangle & other) const;
+            bool intersects(const Rectangle &other) const;
 
-            bool intersects(const sf::FloatRect & other) const;
+            bool intersects(const sf::FloatRect &other) const;
 
             Point getPosition() const;
 
             Point getSize() const;
 
-            bool isMutuallyFullyVisible(const Rectangle & other, const Model::Entities::LevelWrapper &levelWrapper) const;
+            bool
+            isMutuallyFullyVisible(const Rectangle &other, const Model::Entities::LevelWrapper &levelWrapper) const;
 
         private:
             sf::Color m_color;
         };
     } // namespace Shape
 } // namespace Model
-Model::Shape::Rectangle operator+(const Model::Shape::Rectangle & rectangle, const Model::Shape::Point & point);
+Model::Shape::Rectangle operator+(const Model::Shape::Rectangle &rectangle, const Model::Shape::Point &point);
 
 #endif // TEUN_GAME_RECTANGLE_H

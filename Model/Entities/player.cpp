@@ -4,8 +4,6 @@
 
 #include "player.h"
 
-#include "terrainblock.h"
-
 Model::Entities::Player::Player(float x, float y, float height, float width, const sf::Color &color)
         : Physics::IntersectableObject(
         Model::Shape::Rectangle(Model::Shape::Point{width, height}, Model::Shape::Point{x, y}, color)) {
@@ -24,12 +22,12 @@ void Model::Entities::Player::jump(const Physics::Constants &constants) {
                 m_snappedTerrainBlock.set(nullptr);
                 break;
             case Physics::IntersectableObject::WHERE_IS_SNAPPED_TERRAIN::RIGHT:
-                m_velocity.y = -constants.m_jumpVelocity;
+                m_velocity.y = -constants.m_wallJumpYVelocity;
                 m_velocity.x = -constants.m_wallJumpXVelocity;
                 m_snappedTerrainBlock.set(nullptr);
                 break;
             case Physics::IntersectableObject::WHERE_IS_SNAPPED_TERRAIN::LEFT:
-                m_velocity.y = -constants.m_jumpVelocity;
+                m_velocity.y = -constants.m_wallJumpYVelocity;
                 m_velocity.x = constants.m_wallJumpXVelocity;
                 m_snappedTerrainBlock.set(nullptr);
                 break;

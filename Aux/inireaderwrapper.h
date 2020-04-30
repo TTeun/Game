@@ -12,14 +12,14 @@ class IniReaderWrapper {
 
 
 public:
-    explicit IniReaderWrapper(const char *path = "../Config/physics.ini");
+    explicit IniReaderWrapper(std::string path = "../Config/physics.ini");
 
-    float getReal(const std::string &section, const std::string &name, double defaultValue) const {
-        return static_cast<float>( m_reader.GetReal(section, name, defaultValue));
-    }
+    float getReal(const std::string &section, const std::string &name, float defaultValue) const;
 
 private:
     INIReader m_reader;
+    std::string m_path;
+
 
 };
 

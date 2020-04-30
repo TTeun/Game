@@ -38,6 +38,6 @@ bool Model::Entities::LevelWrapper::intersects(const Model::Shape::Rectangle &re
     return m_level->intersects(rect);
 }
 
-void Model::Entities::LevelWrapper::setLevel(std::unique_ptr<Entities::Level> level) {
+void Model::Entities::LevelWrapper::initLevelWrapperWithLevel(std::unique_ptr<Entities::Level> level) {
     m_level = std::move(level);
 }

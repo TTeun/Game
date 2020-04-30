@@ -14,7 +14,7 @@ namespace Model {
 
         public:
 
-            void setLevel(std::unique_ptr<Entities::Level> level);
+            void initLevelWrapperWithLevel(std::unique_ptr<Entities::Level> level);
 
             const Level &getLevel() const;
 
@@ -30,12 +30,13 @@ namespace Model {
             Model::DataStructures::RectGraph buildCornerRectGraphWithPlayer(
                     float width, float height, const Model::Entities::Player &player) const;
 
-
         private:
 
             Level &getLevel();
 
             std::unique_ptr<Entities::Level> m_level;
+
+
         };
 
     }

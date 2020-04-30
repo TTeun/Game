@@ -7,6 +7,8 @@
 
 #include "../Model/Shape/rectangle.h"
 #include "drawinterface.h"
+#include "../Model/Shape/triangle.h"
+#include "../Model/Shape/quadrilateral.h"
 
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
@@ -16,25 +18,29 @@ namespace View {
     class Window : public sf::RenderWindow {
 
     public:
-        Window(uint width, uint height, const char * title, bool showFrameRate = false);
+        Window(uint width, uint height, const char *title, bool showFrameRate = false);
 
         void setShowFrameRate(bool showFrameRate);
 
         float getDtInSeconds() const;
 
-        sf::View calculateViewPort(const Model::Entities::Player & player);
+        sf::View calculateViewPort(const Model::Entities::Player &player);
 
-        const sf::FloatRect & getViewRect() const;
+        const sf::FloatRect &getViewRect() const;
 
-        void drawRectangle(float x, float y, float width, float height, const sf::Color & color = sf::Color::White);
+        void drawRectangle(float x, float y, float width, float height, const sf::Color &color = sf::Color::White);
 
-        void drawRectangle(const Model::Shape::Rectangle & rec);
+        void drawRectangle(const Model::Shape::Rectangle &rec);
 
-        void drawLine(const sf::Vector2f & p1, const sf::Vector2f & p2, const sf::Color & color = sf::Color::White);
+        void drawLine(const sf::Vector2f &p1, const sf::Vector2f &p2, const sf::Color &color = sf::Color::White);
 
         float getFrameRate() const;
 
-        void drawModel(const Model::EntityController & model, DrawInterface & drawInterface);
+        void drawModel(const Model::EntityController &entityController, DrawInterface &drawInterface);
+
+        void drawTriangle(const Model::Shape::Triangle &triangle, const sf::Color &color);
+
+        void drawQuadrilateral(const Model::Shape::Quadrilateral &quadrilateral, const sf::Color &color);
 
     private:
         bool m_showFrameRate;
@@ -48,6 +54,7 @@ namespace View {
 
         sf::FloatRect m_viewRect;
         sf::Vector2f m_viewPortPositionVelocityOffset = {0.0f, 0.0f};
+
     };
 } // namespace View
 

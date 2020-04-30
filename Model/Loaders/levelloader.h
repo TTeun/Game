@@ -13,7 +13,7 @@ namespace Model {
     class Loaders {
 
     public:
-        static void loadLevel(std::string pathToLevelXml, Game & game);
+        static void loadLevel(std::string pathToLevelXml, Game &game);
     };
 
 } // namespace Model

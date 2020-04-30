@@ -9,6 +9,12 @@
 
 #include <iostream>
 
+void View::DrawInterface::drawModel(View::Window &window, const Model::EntityController &entityController) {
+    const sf::FloatRect &rect = window.getViewRect();
+
+    drawEntities(window, entityController, rect);
+}
+
 void View::DrawInterface::drawLevel(View::Window &window,
                                     const Model::Entities::LevelWrapper &levelWrapper,
                                     const sf::FloatRect &viewRect) {
@@ -38,9 +44,9 @@ void View::DrawInterface::drawDebrisExplosions(View::Window &window,
                                                const sf::FloatRect &viewRect) {
     for (const auto &explosion : debrisExplosionList) {
         for (const auto &debris : explosion.getDebrisVector()) {
-            //            if (not debris.getShape().intersects(viewRect)) {
-            //                continue;
-            //            }
+            if (not debris.getShape().intersects(viewRect)) {
+                continue;
+            }
             window.drawRectangle(debris.getShape());
         }
     }
@@ -53,24 +59,25 @@ void View::DrawInterface::drawEnemies(Window &window,
         if (not enemy.getShape().::sf::FloatRect::intersects(viewRect)) {
             continue;
         }
-
         window.drawRectangle(enemy.getShape());
     }
 }
 
 void View::DrawInterface::drawEntities(View::Window &window,
-                                       const Model::EntityController &entityList,
+                                       const Model::EntityController &entityController,
                                        const sf::FloatRect &viewRect) {
-    drawLevel(window, entityList.getLevelWrapper(), viewRect);
-    drawPlayer(window, entityList.getPlayer());
-    drawDebrisExplosions(window, entityList.getDebrisExplosions(), viewRect);
-    drawEnemies(window, entityList.getEnemies(), viewRect);
-}
+    drawLevel(window, entityController.getLevelWrapper(), viewRect);
+    drawPlayer(window, entityController.getPlayer());
+    drawDebrisExplosions(window, entityController.getDebrisExplosions(), viewRect);
+    drawEnemies(window, entityController.getEnemies(), viewRect);
 
-void View::DrawInterface::drawModel(View::Window &window, const Model::EntityController &model) {
-    const sf::FloatRect &rect = window.getViewRect();
+    if (viewRect.intersects(entityController.getWater().getRectangle())) {
+        window.draw(entityController.getWater().getVertexArray());
 
-    drawEntities(window, model, rect);
+//                for (size_t i = 0; i != entityController.getWater().getQuadrilateralCount(); ++i) {
+//            window.drawQuadrilateral(entityController.getWater().getQuardrilateral(i), {0, 0, 200, 100});
+//        }
+    }
 }
 
 void View::DrawInterface::addLevelTileMap(size_t id, const TileMap *tileMap) {

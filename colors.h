@@ -5,8 +5,8 @@
 
 namespace Colors {
 
-    const sf::Color playerColor      = sf::Color(0, 200, 200);
-    const sf::Color outlineColor     = sf::Color(0, 0, 0);
+    const sf::Color playerColor = sf::Color(0, 200, 200);
+    const sf::Color outlineColor = sf::Color(0, 0, 0);
     const sf::Color windowClearColor = sf::Color(0, 255, 255);
 
 } // namespace Colors

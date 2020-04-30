@@ -12,9 +12,3 @@ bool Model::Physics::DeathTimer::shouldClean() const {
     return m_clock.getElapsedTime().asSeconds() >= m_deathTime;
 }
 
-std::ostream &Model::Physics::operator<<(std::ostream &os, const Model::Physics::DeathTimer &timer) {
-    os << static_cast<const FiniteDuration &>(timer) << " m_deathTime: " << timer.m_deathTime
-       << " m_clock.getElapsed().asSeconds(): "
-       << timer.m_clock.getElapsedTime().asSeconds();
-    return os;
-}

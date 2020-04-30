@@ -6,6 +6,7 @@
 #define TEUN_GAME_POINT_H
 
 #include <SFML/System.hpp>
+#include <ostream>
 
 namespace Model {
     namespace Shape {
@@ -14,7 +15,7 @@ namespace Model {
         public:
             Point(float x, float y);
 
-            Point(const sf::Vector2f & point);
+            Point(const sf::Vector2f &point);
 
             float length() const;
 

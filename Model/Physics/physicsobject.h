@@ -18,20 +18,20 @@ namespace Model {
         class PhysicsObject : public Object {
 
         public:
-            explicit PhysicsObject(Model::Shape::Rectangle && shape);
+            explicit PhysicsObject(Model::Shape::Rectangle &&shape);
 
-            void setVelocity(const sf::Vector2f & velocity);
+            void setVelocity(const sf::Vector2f &velocity);
 
-            const sf::Vector2f & getVelocity() const;
+            const sf::Vector2f &getVelocity() const;
 
-            void update(float dt, const Constants & constants);
+            void update(float dt, const Constants &constants);
 
-            void addForce(float dt, const sf::Vector2f & force);
+            void addForce(float dt, const sf::Vector2f &force);
 
             void setFeelsGravity(bool feelsGravity);
 
         protected:
-            void applyGravity(float dt, const Constants & constants);
+            void applyGravity(float dt, const Constants &constants);
 
             sf::Vector2f m_velocity;
 

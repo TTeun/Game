@@ -2,8 +2,7 @@
 
 #include <cmath>
 
-static bool intersection(sf::Vector2f start1, sf::Vector2f end1, sf::Vector2f start2, sf::Vector2f end2)
-{
+static bool intersection(sf::Vector2f start1, sf::Vector2f end1, sf::Vector2f start2, sf::Vector2f end2) {
     float ax = end1.x - start1.x; // direction of line a
     float ay = end1.y - start1.y; // ax and ay as above
 
@@ -24,20 +23,17 @@ static bool intersection(sf::Vector2f start1, sf::Vector2f end1, sf::Vector2f st
     return !(r < 0 || r > 1 || s < 0 || s > 1);
 }
 
-bool Model::Shape::Line::intersects(const Line & otherLine) const
-{
+bool Model::Shape::Line::intersects(const Line &otherLine) const {
     return intersection({m_point1.x, m_point1.y},
                         {m_point2.x, m_point2.y},
                         {otherLine.m_point1.x, otherLine.m_point1.y},
                         {otherLine.m_point2.x, otherLine.m_point2.y});
 }
 
-Model::Shape::Line::Line(const sf::Vector2f & p1, const sf::Vector2f & p2) : m_point1(p1), m_point2(p2)
-{
+Model::Shape::Line::Line(const sf::Vector2f &p1, const sf::Vector2f &p2) : m_point1(p1), m_point2(p2) {
 }
 
-float Model::Shape::Line::length() const
-{
+float Model::Shape::Line::length() const {
     return std::sqrt((m_point1.x - m_point2.x) * (m_point1.x - m_point2.x) +
                      (m_point1.y - m_point2.y) * (m_point1.y - m_point2.y));
 }

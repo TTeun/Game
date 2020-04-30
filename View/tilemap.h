@@ -20,13 +20,13 @@ namespace View {
 
     class TileMap : public sf::Drawable, public sf::Transformable {
     public:
-        TileMap(const std::string & tileSet, sf::Vector2u tileSize, size_t width, size_t height);
+        TileMap(const std::string &tileSet, sf::Vector2u tileSize, size_t width, size_t height);
 
         bool wasLoadedCorrectly() const;
 
-        bool load(const std::string & tileSet, sf::Vector2u tileSize, size_t width, size_t height);
+        bool load(const std::string &tileSet, sf::Vector2u tileSize, size_t width, size_t height);
 
-        virtual void draw(sf::RenderTarget & target, sf::RenderStates renderStates) const;
+        virtual void draw(sf::RenderTarget &target, sf::RenderStates renderStates) const;
 
     private:
         bool m_wasLoadedCorrectly;

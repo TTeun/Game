@@ -29,16 +29,16 @@ public:
 
     void togglePause();
 
-    const Model::Physics::Constants & getConstants() const;
+    const Model::Physics::Constants &getConstants() const;
 
 private:
-    void handlePolledEvents(View::Window & window);
+    void handlePolledEvents(View::Window &window);
 
-    View::DrawInterface & getDrawInterface();
+    View::DrawInterface &getDrawInterface();
 
-    Model::EntityController & getModel();
+    Model::EntityController &getModel();
 
-    View::Window & getWindow();
+    View::Window &getWindow();
 
     std::unique_ptr<View::Window> m_window;
     std::unique_ptr<View::DrawInterface> m_drawInterface;

@@ -5,13 +5,11 @@
 #include "keystate.h"
 
 Controller::KeyState::KeyState(Controller::KeyState::BEHAVIOUR behaviour, sf::Keyboard::Key key, float resetTime)
-    : m_resetTime(resetTime), m_behaviour(behaviour), m_key(key)
-{
+        : m_resetTime(resetTime), m_behaviour(behaviour), m_key(key) {
     m_clock.restart();
 }
 
-Controller::KeyState::KEY_EVENT_TYPE Controller::KeyState::update(bool keyIsPressed)
-{
+Controller::KeyState::KEY_EVENT_TYPE Controller::KeyState::update(bool keyIsPressed) {
     if (keyIsPressed && m_isPressed) {
         if (m_resetTime != 0.0f) {
             if (m_clock.getElapsedTime().asSeconds() >= m_resetTime) {
@@ -32,7 +30,6 @@ Controller::KeyState::KEY_EVENT_TYPE Controller::KeyState::update(bool keyIsPres
     }
 }
 
-const sf::Keyboard::Key & Controller::KeyState::getKey() const
-{
+const sf::Keyboard::Key &Controller::KeyState::getKey() const {
     return m_key;
 }

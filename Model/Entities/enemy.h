@@ -23,8 +23,6 @@ namespace Model {
 
         private:
             Enemy(const sf::Vector2f &size, const sf::Vector2f &position);
-
-            size_t m_myvalue;
         };
 
 

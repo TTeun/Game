@@ -18,11 +18,11 @@ namespace Model {
         class DebrisExplosion : Physics::FiniteDuration {
 
         public:
-            DebrisExplosion(const sf::Vector2f & position, size_t count);
+            DebrisExplosion(const sf::Vector2f &position, size_t count);
 
-            const std::list<Debris> & getDebrisVector() const;
+            const std::list<Debris> &getDebrisVector() const;
 
-            void update(float dt, const Level & level, const Physics::Constants & constants);
+            void update(float dt, const Level &level, const Physics::Constants &constants);
 
             bool shouldClean() const;
 

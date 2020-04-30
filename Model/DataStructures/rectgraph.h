@@ -31,13 +31,26 @@ namespace Model {
 
             void draw(View::Window &window) const;
 
-            void addTarget(const Shape::Rectangle &targetRectangle, const Entities::LevelWrapper &levelWrapper, float shrinkFactor);
+            void addTarget(const Shape::Rectangle &targetRectangle, const Entities::LevelWrapper &levelWrapper,
+                           float shrinkFactor);
 
             Model::Shape::Point findDirectionToTarget(const Shape::Rectangle &rectangle,
                                                       const Model::Entities::LevelWrapper &levelWrapper,
                                                       float shrinkFactor) const;
 
         private:
+            struct DijkstraInfo {
+                DijkstraInfo(size_t index) : m_index(index) {
+
+                }
+
+                size_t m_index;
+                float m_dist = std::numeric_limits<float>::max();
+                size_t m_prevIndex = std::numeric_limits<size_t>::max();
+                bool m_wasAdded = false;
+            };
+
+
             std::map<std::pair<size_t, size_t>, float> m_edges;
 
             std::vector<Shape::Rectangle> m_rectangles;
@@ -45,6 +58,8 @@ namespace Model {
             std::map<size_t, float> m_edgesToTarget;
 
             std::unique_ptr<Shape::Rectangle> m_target;
+
+            std::vector<std::vector<size_t>> m_edgeList;
 
             bool isNeighbor(size_t i, size_t j) const;
 

@@ -20,8 +20,6 @@ namespace Model {
 
             bool shouldClean() const override;
 
-            friend std::ostream &operator<<(std::ostream &os, const DeathTimer &timer);
-
         private:
             const float m_deathTime;
             sf::Clock m_clock;
