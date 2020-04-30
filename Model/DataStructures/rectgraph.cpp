@@ -52,9 +52,9 @@ Model::DataStructures::RectGraph::RectGraph(float width, float height, const Ent
         }
     }
 
-    m_edgeList.resize(m_rectangles.size());
+    m_edgeArray.resize(m_rectangles.size());
     for (const auto &it : m_edges) {
-        m_edgeList[it.first.first].push_back(it.first.second);
+        m_edgeArray[it.first.first].push_back(it.first.second);
     }
 
 }
@@ -114,56 +114,11 @@ Model::Shape::Point Model::DataStructures::RectGraph::findDirectionToTarget(cons
         return {0.0f, 0.0f};
     }
 
-    std::vector<DijkstraInfo> indices;
-    indices.reserve(m_rectangles.size());
-    for (size_t i = 0; i != m_rectangles.size(); ++i) {
-        indices.emplace_back(i);
-    }
-
-
-    for (size_t i = 0; i != m_rectangles.size(); ++i) {
-        if (isNeighborOfTarget(i)) {
-            indices[i].m_dist = m_edgesToTarget.at(i);
-            indices[i].m_prevIndex = m_rectangles.size();
-        }
-    }
-
-    while (true) {
-        // Find index with smallest distance that is not yet added
-        size_t minIndex = std::numeric_limits<size_t>::max();
-        float minDist = std::numeric_limits<float>::max();
-        for (size_t i = 0; i != m_rectangles.size(); ++i) {
-            if (not indices[i].m_wasAdded) {
-                if (indices[i].m_dist <= minDist) {
-                    minDist = indices[i].m_dist;
-                    minIndex = i;
-                }
-            }
-        }
-
-        if (minIndex == std::numeric_limits<size_t>::max()) {
-            // Alle vertices bekeken!
-            break;
-        }
-
-        assert(minIndex < m_rectangles.size());
-        indices[minIndex].m_wasAdded = true;
-
-        for (auto i : m_edgeList.at(minIndex)) {
-            std::pair<size_t, size_t> edgePair =
-                    std::make_pair(std::min(i, minIndex), std::max(i, minIndex));
-
-            const float alt = indices[minIndex].m_dist + m_edges.at(edgePair);
-            if (alt < indices[i].m_dist) {
-                indices[i].m_dist = alt;
-                indices[i].m_prevIndex = minIndex;
-            }
-        }
-    }
+    auto dijkstraVertices = buildDijkstraVertices();
 
     const Shape::Rectangle shrunkRectangle = Shape::Rectangle(rectangle.shrink(shrinkFactor));
-    std::map<size_t, float> edgesToRectangle;
 
+    std::map<size_t, float> edgesToRectangle;
     size_t minIndex = std::numeric_limits<size_t>::max();
     float minDist = std::numeric_limits<float>::max();
 
@@ -172,18 +127,14 @@ Model::Shape::Point Model::DataStructures::RectGraph::findDirectionToTarget(cons
         minDist = m_target->getDistance(shrunkRectangle);
     }
 
-
     for (size_t i = 0; i != m_rectangles.size(); ++i) {
         const auto &rect1 = m_rectangles.at(i);
-        if (levelWrapper.intersects(Shape::Line{rect1.topRight(), shrunkRectangle.topRight()}) ||
-            levelWrapper.intersects(Shape::Line{rect1.topLeft(), shrunkRectangle.topLeft()}) ||
-            levelWrapper.intersects(Shape::Line{rect1.bottomRight(), shrunkRectangle.bottomRight()}) ||
-            levelWrapper.intersects(Shape::Line{rect1.bottomLeft(), shrunkRectangle.bottomLeft()})) {
+        if (not rect1.isMutuallyFullyVisible(shrunkRectangle, levelWrapper)) {
             continue;
         } else {
             const float dist = rect1.getDistance(shrunkRectangle);
-            if (indices[i].m_dist + dist < minDist) {
-                minDist = indices[i].m_dist + dist;
+            if (dijkstraVertices[i].m_dist + dist < minDist) {
+                minDist = dijkstraVertices[i].m_dist + dist;
                 minIndex = i;
             }
         }
@@ -197,7 +148,6 @@ Model::Shape::Point Model::DataStructures::RectGraph::findDirectionToTarget(cons
         }
         return (m_rectangles.at(minIndex).getCenter() - shrunkRectangle.getCenter());
     }
-
 }
 
 bool Model::DataStructures::RectGraph::isNeighborOfTarget(size_t i) const {
@@ -209,4 +159,74 @@ bool Model::DataStructures::RectGraph::isNeighbor(size_t i, size_t j) const {
         return isNeighbor(j, i);
     }
     return (m_edges.find({i, j}) != m_edges.end() || m_edges.find({j, i}) != m_edges.end());
+}
+
+
+std::vector<Model::DataStructures::RectGraph::DijkstraInfo>
+Model::DataStructures::RectGraph::buildDijkstraVertices() const {
+
+    auto dijkstraVertices = createEmptyDijkstraVertices();
+    addDijkstraEdgesToTarget(dijkstraVertices);
+
+    while (true) {
+        // Find index with smallest distance that is not yet added
+        auto[minIndex, minDist] = findClosestNotYetAdded(dijkstraVertices);
+
+        if (minIndex == std::numeric_limits<size_t>::max()) {
+            // Alle vertices bekeken!
+            break;
+        }
+
+        assert(minIndex < m_rectangles.size());
+        dijkstraVertices[minIndex].m_wasAdded = true;
+
+        for (auto i : m_edgeArray.at(minIndex)) {
+            std::pair<size_t, size_t> edgePair =
+                    std::make_pair(std::min(i, minIndex), std::max(i, minIndex));
+
+            const float alt = dijkstraVertices[minIndex].m_dist + m_edges.at(edgePair);
+            if (alt < dijkstraVertices[i].m_dist) {
+                dijkstraVertices[i].m_dist = alt;
+                dijkstraVertices[i].m_prevIndex = minIndex;
+            }
+        }
+    }
+    return dijkstraVertices;
+}
+
+void Model::DataStructures::RectGraph::addDijkstraEdgesToTarget(
+        std::vector<Model::DataStructures::RectGraph::DijkstraInfo> &dijkstraVertices) const {
+    for (size_t i = 0; i != m_rectangles.size(); ++i) {
+        if (isNeighborOfTarget(i)) {
+            dijkstraVertices[i].m_dist = m_edgesToTarget.at(i);
+            dijkstraVertices[i].m_prevIndex = m_rectangles.size();
+        }
+    }
+
+}
+
+std::vector<Model::DataStructures::RectGraph::DijkstraInfo>
+Model::DataStructures::RectGraph::createEmptyDijkstraVertices() const {
+    std::vector<DijkstraInfo> dijkstraVertices;
+    dijkstraVertices.reserve(m_rectangles.size());
+    for (size_t i = 0; i != m_rectangles.size(); ++i) {
+        dijkstraVertices.emplace_back(i);
+    }
+    return dijkstraVertices;
+}
+
+std::pair<size_t, float>
+Model::DataStructures::RectGraph::findClosestNotYetAdded(
+        const std::vector<Model::DataStructures::RectGraph::DijkstraInfo> &dijkstraVertices) const {
+    size_t minIndex = std::numeric_limits<size_t>::max();
+    float minDist = std::numeric_limits<float>::max();
+    for (size_t i = 0; i != m_rectangles.size(); ++i) {
+        if (not dijkstraVertices[i].m_wasAdded) {
+            if (dijkstraVertices[i].m_dist <= minDist) {
+                minDist = dijkstraVertices[i].m_dist;
+                minIndex = i;
+            }
+        }
+    }
+    return {minIndex, minDist};
 }

@@ -50,6 +50,13 @@ namespace Model {
                 bool m_wasAdded = false;
             };
 
+            std::vector<DijkstraInfo> buildDijkstraVertices() const;
+
+            std::vector<DijkstraInfo> createEmptyDijkstraVertices() const;
+
+            void addDijkstraEdgesToTarget(std::vector<DijkstraInfo> &dijkstraVertices) const;
+
+            std::pair<size_t, float> findClosestNotYetAdded(const std::vector<DijkstraInfo> &) const;
 
             std::map<std::pair<size_t, size_t>, float> m_edges;
 
@@ -59,7 +66,7 @@ namespace Model {
 
             std::unique_ptr<Shape::Rectangle> m_target;
 
-            std::vector<std::vector<size_t>> m_edgeList;
+            std::vector<std::vector<size_t>> m_edgeArray;
 
             bool isNeighbor(size_t i, size_t j) const;
 
