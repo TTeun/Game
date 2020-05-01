@@ -13,13 +13,9 @@ namespace Controller {
     class KeyState {
         friend class KeyBoardHandler;
 
-        enum BEHAVIOUR {
-            DISABLE_UNTIL_RELEASE, ALWAYS_FIRE
-        };
+        enum BEHAVIOUR { DISABLE_UNTIL_RELEASE, ALWAYS_FIRE };
 
-        enum KEY_EVENT_TYPE {
-            NEW_PRESS, RELEASED, HELD_DOWN, NONE
-        };
+        enum KEY_EVENT_TYPE { NEW_PRESS, RELEASED, HELD_DOWN, NONE };
 
     public:
         KeyState(BEHAVIOUR behaviour, sf::Keyboard::Key key, float resetTime = 0.5f);
@@ -27,7 +23,7 @@ namespace Controller {
     private:
         KEY_EVENT_TYPE update(bool keyIsPressed);
 
-        const sf::Keyboard::Key &getKey() const;
+        const sf::Keyboard::Key & getKey() const;
 
         const float m_resetTime = 0.0f;
         sf::Clock m_clock;

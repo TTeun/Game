@@ -5,8 +5,6 @@
 #ifndef TEUN_GAME_FINITEDURATION_H
 #define TEUN_GAME_FINITEDURATION_H
 
-#include <ostream>
-
 namespace Model {
 
     namespace Physics {
@@ -15,10 +13,6 @@ namespace Model {
 
         public:
             virtual bool shouldClean() const = 0;
-
-            friend std::ostream &operator<<(std::ostream &os, const FiniteDuration &duration) {
-                return os;
-            }
         };
     } // namespace Physics
 } // namespace Model

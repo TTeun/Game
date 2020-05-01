@@ -3,20 +3,26 @@
 //
 
 #include "player.h"
-#include "../../View/drawinterface.h"
 
-Model::Entities::Player::Player(float x, float y, float height, float width, const sf::Color &color)
-        : Physics::IntersectableObject(
-        Model::Shapes::ColoredRectangle(Model::Shapes::Point{width, height}, Model::Shapes::Point{x, y}, color)) {
+#include "../../View/drawinterface.h"
+#include "../Physics/constants.h"
+#include "terrainblock.h"
+
+Model::Entities::Player::Player(float x, float y, float height, float width, const sf::Color & color)
+    : Physics::IntersectableObject(
+          Model::Geometry::ColoredRectangle(Model::Geometry::Point{width, height}, Model::Geometry::Point{x, y}, color))
+{
     setFeelsGravity(true);
-//    m_shape.setColor(color);
+    //    m_shape.setColor(color);
 }
 
-void Model::Entities::Player::addHorizontalForce(float force) {
+void Model::Entities::Player::addHorizontalForce(float force)
+{
     m_velocity.x += force / m_mass;
 }
 
-void Model::Entities::Player::jump(const Physics::Constants &constants) {
+void Model::Entities::Player::jump(const Physics::Constants & constants)
+{
     if (m_snappedTerrainBlock) {
         switch (m_whereIsSnappedTerrain) {
             case Physics::IntersectableObject::WHERE_IS_SNAPPED_TERRAIN::BELOW:
@@ -33,15 +39,15 @@ void Model::Entities::Player::jump(const Physics::Constants &constants) {
                 m_velocity.x = constants.m_wallJumpXVelocity;
                 m_snappedTerrainBlock.set(nullptr);
                 break;
-            case Physics::IntersectableObject::WHERE_IS_SNAPPED_TERRAIN::ABOVE:
-                break;
+            case Physics::IntersectableObject::WHERE_IS_SNAPPED_TERRAIN::ABOVE: break;
         }
     }
 }
 
-void Model::Entities::Player::checkAndHandlePressedIntoWall(float dt, const Model::Physics::Constants &constants) {
+void Model::Entities::Player::checkAndHandlePressedIntoWall(float dt, const Model::Physics::Constants & constants)
+{
     if (m_whereIsSnappedTerrain == WHERE_IS_SNAPPED_TERRAIN::RIGHT) {
-        const auto movedRect = m_shape + m_shape.width * 0.5f * Model::Shapes::Point{1.0f, 0.0f};
+        const auto movedRect = m_shape + m_shape.width * 0.5f * Model::Geometry::Point{1.0f, 0.0f};
         if (not m_snappedTerrainBlock.get().getShape().intersects(movedRect)) {
             m_snappedTerrainBlock.set(nullptr);
         }
@@ -56,7 +62,7 @@ void Model::Entities::Player::checkAndHandlePressedIntoWall(float dt, const Mode
             m_snappedTerrainBlock.set(nullptr);
         }
     } else if (m_whereIsSnappedTerrain == WHERE_IS_SNAPPED_TERRAIN::LEFT) {
-        const auto movedRect = m_shape + m_shape.width * 0.5f * Model::Shapes::Point{-1.0f, 0.0f};
+        const auto movedRect = m_shape + m_shape.width * 0.5f * Model::Geometry::Point{-1.0f, 0.0f};
         if (not m_snappedTerrainBlock.get().getShape().intersects(movedRect)) {
             m_snappedTerrainBlock.set(nullptr);
         }
@@ -73,6 +79,7 @@ void Model::Entities::Player::checkAndHandlePressedIntoWall(float dt, const Mode
     }
 }
 
-void Model::Entities::Player::draw(View::Window &window) const {
+void Model::Entities::Player::draw(View::Window & window) const
+{
     View::DrawInterface::draw(*this, window);
 }

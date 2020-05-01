@@ -17,14 +17,14 @@ namespace Model {
 
 namespace Model {
 
-    namespace Shapes {
+    namespace Geometry {
 
         class Rectangle : public sf::FloatRect {
 
         public:
-            explicit Rectangle(const sf::FloatRect &rectangle);
+            explicit Rectangle(const sf::FloatRect & rectangle);
 
-            Rectangle(const Point &size, const Point &position);
+            Rectangle(const Point & size, const Point & position);
 
             sf::Vector2f topLeft() const;
 
@@ -34,31 +34,32 @@ namespace Model {
 
             sf::Vector2f bottomRight() const;
 
-            float getDistance(const Rectangle &other) const;
+            float getDistance(const Rectangle & other) const;
 
             sf::Vector2f getCenter() const;
 
-            bool intersects(const Line &line) const;
+            bool intersects(const Line & line) const;
 
-            bool intersects(const Rectangle &other) const;
+            bool intersects(const Rectangle & other) const;
 
-            bool intersects(const sf::FloatRect &other) const;
+            Model::Geometry::Vector2d getVectorToOtherRectangle(const Model::Geometry::Rectangle & other) const;
 
             Rectangle shrink(float factor) const;
 
             void setPosition(sf::Vector2f newPosition);
 
-            void move(const Point &offset);
+            void move(const Point & offset);
 
             Point getPosition() const;
 
             Point getSize() const;
 
-            bool
-            isMutuallyFullyVisible(const Rectangle &other, const Model::Entities::LevelWrapper &levelWrapper) const;
+            bool isMutuallyFullyVisible(const Rectangle & other,
+                                        const Model::Entities::LevelWrapper & levelWrapper) const;
         };
-    } // namespace Shapes
+    } // namespace Geometry
 } // namespace Model
-Model::Shapes::Rectangle operator+(const Model::Shapes::Rectangle &rectangle, const Model::Shapes::Point &point);
+Model::Geometry::Rectangle operator+(const Model::Geometry::Rectangle & rectangle,
+                                     const Model::Geometry::Point & point);
 
 #endif // TEUN_GAME_RECTANGLE_H

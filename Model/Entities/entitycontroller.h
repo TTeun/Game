@@ -6,7 +6,7 @@
 #include "enemy.h"
 #include "levelwrapper.h"
 #include "player.h"
-#include "../water.h"
+#include "water.h"
 
 #include <list>
 #include <memory>
@@ -29,35 +29,38 @@ namespace Model {
         public:
             EntityController();
 
-            void draw(View::Window &window) const override;
+            void draw(View::Window & window) const override;
 
-            const Entities::LevelWrapper &getLevelWrapper() const;
+            const Entities::LevelWrapper & getLevelWrapper() const;
 
-            Entities::LevelWrapper &getLevelWrapper();
+            Entities::LevelWrapper & getLevelWrapper();
 
-            const std::list<Entities::DebrisExplosion> &getDebrisExplosions() const;
+            const std::list<Entities::DebrisExplosion> & getDebrisExplosions() const;
 
-            const std::list<Entities::Enemy> &getEnemies() const;
+            const std::list<Entities::Enemy> & getEnemies() const;
 
             void addDebrisExplosion();
 
-            void addEnemy(const sf::Vector2f &position);
+            void addEnemy(const Geometry::Point & position);
 
-            void update(float dt, const Physics::Constants &constants);
+            void update(float dt, const Physics::Constants & constants);
 
             void setLevel(std::unique_ptr<Entities::Level> level);
 
             void handleAi(float dt);
 
-            const Entities::Player &getPlayer() const;
+            const Entities::Player & getPlayer() const;
 
-            const Water &getWater() const;
+            const Water & getWater() const;
 
-            void addPlayer(float x = 200.0f, float y = 230.0f, float width = 25, float height = 25,
-                           const sf::Color &color = Colors::playerColor);
+            void addPlayer(float x                 = 200.0f,
+                           float y                 = 230.0f,
+                           float width             = 25,
+                           float height            = 25,
+                           const sf::Color & color = Colors::playerColor);
 
         private:
-            Entities::Player &getPlayer();
+            Entities::Player & getPlayer();
 
             std::list<Entities::DebrisExplosion> m_debrisExplosionVector;
 
@@ -69,7 +72,7 @@ namespace Model {
 
             std::unique_ptr<Water> m_water;
         };
-    } // namespace Model
-}
+    } // namespace Entities
+} // namespace Model
 
 #endif // TEUN_GAME_ENTITYCONTROLLER_H

@@ -4,11 +4,12 @@
 
 #include "deathtimer.h"
 
-Model::Physics::DeathTimer::DeathTimer(const float deathTime) : m_deathTime(deathTime) {
+Model::Physics::DeathTimer::DeathTimer(const float deathTime) : m_deathTime(deathTime)
+{
     m_clock.restart();
 }
 
-bool Model::Physics::DeathTimer::shouldClean() const {
+bool Model::Physics::DeathTimer::shouldClean() const
+{
     return m_clock.getElapsedTime().asSeconds() >= m_deathTime;
 }
-

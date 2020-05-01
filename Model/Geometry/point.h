@@ -6,21 +6,28 @@
 #define TEUN_GAME_POINT_H
 
 #include <SFML/System.hpp>
-#include <ostream>
 
 namespace Model {
-    namespace Shapes {
+    namespace Geometry {
 
         class Point : public sf::Vector2f {
         public:
+            Point() = default;
+
             Point(float x, float y);
 
-            Point(const sf::Vector2f &point);
+            Point(const sf::Vector2f & point);
 
             float length() const;
 
             void normalize();
         };
-    } // namespace Shapes
+
+        typedef Point Vector2d;
+
+    } // namespace Geometry
 } // namespace Model
+
+#include <ostream>
+
 #endif // TEUN_GAME_POINT_H

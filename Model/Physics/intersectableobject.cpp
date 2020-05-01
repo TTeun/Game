@@ -1,14 +1,19 @@
 #include "intersectableobject.h"
 
+#include "../Entities/level.h"
+#include "constants.h"
+
 #include <iostream>
 
-Model::Physics::IntersectableObject::IntersectableObject(Model::Shapes::ColoredRectangle &&shape)
-        : PhysicsObject(std::move(shape)) {
+Model::Physics::IntersectableObject::IntersectableObject(Model::Geometry::ColoredRectangle && shape)
+    : PhysicsObject(std::move(shape))
+{
 }
 
 void Model::Physics::IntersectableObject::update(float dt,
-                                                 const Model::Entities::Level &level,
-                                                 const Constants &constants) {
+                                                 const Model::Entities::Level & level,
+                                                 const Constants & constants)
+{
     if (m_snappedTerrainBlock) {
         updateSnapped(dt, level, constants);
     } else {
@@ -18,11 +23,12 @@ void Model::Physics::IntersectableObject::update(float dt,
 
 Model::Physics::IntersectableObject::WHERE_IS_SNAPPED_TERRAIN
 Model::Physics::IntersectableObject::whichDirectionIsTerrainBlock(
-        const Model::Entities::TerrainBlock &snappedTerrainBlock) const {
+    const Model::Entities::TerrainBlock & snappedTerrainBlock) const
+{
 
-    const auto thisTopLeft = m_shape.topLeft();
-    const auto thisBottomRight = m_shape.bottomRight();
-    const auto terrainTopLeft = snappedTerrainBlock.getShape().topLeft();
+    const auto thisTopLeft        = m_shape.topLeft();
+    const auto thisBottomRight    = m_shape.bottomRight();
+    const auto terrainTopLeft     = snappedTerrainBlock.getShape().topLeft();
     const auto terrainBottomRight = snappedTerrainBlock.getShape().bottomRight();
 
     if (thisBottomRight.y <= terrainTopLeft.y) {
@@ -35,15 +41,16 @@ Model::Physics::IntersectableObject::whichDirectionIsTerrainBlock(
         return WHERE_IS_SNAPPED_TERRAIN::ABOVE;
     }
 
-//    std::cout << thisBottomRight.y - terrainTopLeft.y << '\t' << thisBottomRight.x - terrainTopLeft.x << '\t'
-//              << thisTopLeft.x - terrainBottomRight.x << '\t' << thisTopLeft.y - terrainBottomRight.y << '\n';
+    //    std::cout << thisBottomRight.y - terrainTopLeft.y << '\t' << thisBottomRight.x - terrainTopLeft.x << '\t'
+    //              << thisTopLeft.x - terrainBottomRight.x << '\t' << thisTopLeft.y - terrainBottomRight.y << '\n';
 
-//    assert(false);
+    //    assert(false);
 }
 
 void Model::Physics::IntersectableObject::updateSnapped(float dt,
-                                                        const Model::Entities::Level &level,
-                                                        const Constants &constants) {
+                                                        const Model::Entities::Level & level,
+                                                        const Constants & constants)
+{
     if (m_whereIsSnappedTerrain == WHERE_IS_SNAPPED_TERRAIN::BELOW ||
         m_whereIsSnappedTerrain == WHERE_IS_SNAPPED_TERRAIN::ABOVE) {
         updateSnappedHorizontal(dt, level, constants);
@@ -53,11 +60,12 @@ void Model::Physics::IntersectableObject::updateSnapped(float dt,
 }
 
 void Model::Physics::IntersectableObject::updateUnSnapped(float dt,
-                                                          const Model::Entities::Level &level,
-                                                          const Constants &constants) {
+                                                          const Model::Entities::Level & level,
+                                                          const Constants & constants)
+{
     applyGravity(dt, constants);
-    const auto movedRect = Model::Shapes::Rectangle(m_shape).shrink(1.f) + dt * m_velocity;
-    for (const auto &terrainBlock : level.getTerrainBlocks()) {
+    const auto movedRect = Model::Geometry::Rectangle(m_shape).shrink(1.f) + dt * m_velocity;
+    for (const auto & terrainBlock : level.getTerrainBlocks()) {
         if (terrainBlock->getShape().intersects(movedRect)) {
             m_snappedTerrainBlock.set(terrainBlock.get());
             assert(m_snappedTerrainBlock);
@@ -76,16 +84,17 @@ void Model::Physics::IntersectableObject::updateUnSnapped(float dt,
 }
 
 void Model::Physics::IntersectableObject::updateSnappedHorizontal(float dt,
-                                                                  const Model::Entities::Level &level,
-                                                                  const Constants &constants) {
+                                                                  const Model::Entities::Level & level,
+                                                                  const Constants & constants)
+{
     if (m_whereIsSnappedTerrain == WHERE_IS_SNAPPED_TERRAIN::BELOW) {
-        const auto lowerRect = m_shape + m_shape.height * 0.5f * Model::Shapes::Point{0.0f, 1.0f};
+        const auto lowerRect = m_shape + m_shape.height * 0.5f * Model::Geometry::Point{0.0f, 1.0f};
         if (not m_snappedTerrainBlock.get().getShape().intersects(lowerRect) || m_velocity.y > 0.0f) {
             unSnap();
         }
 
-        const auto movedRect = Model::Shapes::Rectangle(m_shape).shrink(1.f) + dt * m_velocity;
-        for (const auto &terrainBlock : level.getTerrainBlocks()) {
+        const auto movedRect = Model::Geometry::Rectangle(m_shape).shrink(1.f) + dt * m_velocity;
+        for (const auto & terrainBlock : level.getTerrainBlocks()) {
             if (terrainBlock->getShape().intersects(movedRect)) {
                 const auto intersectDirection = whichDirectionIsTerrainBlock(*terrainBlock);
                 if (intersectDirection == RIGHT || intersectDirection == LEFT) {
@@ -102,13 +111,14 @@ void Model::Physics::IntersectableObject::updateSnappedHorizontal(float dt,
 }
 
 void Model::Physics::IntersectableObject::updateSnappedVertical(float dt,
-                                                                const Model::Entities::Level &level,
-                                                                const Constants &constants) {
+                                                                const Model::Entities::Level & level,
+                                                                const Constants & constants)
+{
 
     checkAndHandlePressedIntoWall(dt, constants);
-    m_velocity.x = 0.0f;
-    const auto movedRect = Model::Shapes::Rectangle(m_shape).shrink(1.f) + dt * m_velocity;
-    for (const auto &terrainBlock : level.getTerrainBlocks()) {
+    m_velocity.x         = 0.0f;
+    const auto movedRect = Model::Geometry::Rectangle(m_shape).shrink(1.f) + dt * m_velocity;
+    for (const auto & terrainBlock : level.getTerrainBlocks()) {
         if (terrainBlock->getShape().intersects(movedRect)) {
             const auto intersectDirection = whichDirectionIsTerrainBlock(*terrainBlock);
             if (intersectDirection == WHERE_IS_SNAPPED_TERRAIN::BELOW) {
@@ -122,7 +132,8 @@ void Model::Physics::IntersectableObject::updateSnappedVertical(float dt,
 }
 
 void Model::Physics::IntersectableObject::checkAndHandlePressedIntoWall(float dt,
-                                                                        const Model::Physics::Constants &constants) {
+                                                                        const Model::Physics::Constants & constants)
+{
     if (not(m_whereIsSnappedTerrain == WHERE_IS_SNAPPED_TERRAIN::RIGHT ||
             m_whereIsSnappedTerrain == WHERE_IS_SNAPPED_TERRAIN::LEFT)) {
 
@@ -130,12 +141,10 @@ void Model::Physics::IntersectableObject::checkAndHandlePressedIntoWall(float dt
         return;
     }
 
-
-    const auto movedRect = m_shape + m_shape.width * 0.5f *
-                                     Model::Shapes::Point{
-                                             m_whereIsSnappedTerrain == WHERE_IS_SNAPPED_TERRAIN::RIGHT ? 1.0f : -1.0f,
-                                             0.0f
-                                     };
+    const auto movedRect =
+        m_shape +
+        m_shape.width * 0.5f *
+            Model::Geometry::Point{m_whereIsSnappedTerrain == WHERE_IS_SNAPPED_TERRAIN::RIGHT ? 1.0f : -1.0f, 0.0f};
 
     if (not m_snappedTerrainBlock.get().getShape().intersects(movedRect)) {
         unSnap();
@@ -148,6 +157,7 @@ void Model::Physics::IntersectableObject::checkAndHandlePressedIntoWall(float dt
     }
 }
 
-void Model::Physics::IntersectableObject::unSnap() {
+void Model::Physics::IntersectableObject::unSnap()
+{
     m_snappedTerrainBlock.set(nullptr);
 }

@@ -6,7 +6,6 @@
 #define TEUN_GAME_TERRAINBLOCK_H
 
 #include "../Physics/object.h"
-#include "../Shapes/rectangle.h"
 
 #include <SFML/Graphics/RectangleShape.hpp>
 
@@ -20,9 +19,9 @@ namespace Model {
 
         class TerrainBlock : public Physics::Object {
         public:
-            TerrainBlock(size_t id, float width, float height, const sf::Vector2f &position);
+            TerrainBlock(const size_t id, float width, float height, const Geometry::Point & position);
 
-            TerrainBlock(size_t id, Model::Shapes::ColoredRectangle &&coloredRectangle);
+            TerrainBlock(size_t id, Model::Geometry::ColoredRectangle && coloredRectangle);
 
             size_t getId() const;
 

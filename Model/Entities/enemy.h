@@ -5,16 +5,15 @@
 #ifndef TEUN_GAME_ENEMY_H
 #define TEUN_GAME_ENEMY_H
 
+#include "../../View/drawable.h"
 #include "../Physics/intersectableobject.h"
 #include "ai.h"
-#include "../../View/drawable.h"
 
 namespace View {
     class DrawInterface;
 
     class Window;
-}
-
+} // namespace View
 
 namespace Model {
 
@@ -22,19 +21,18 @@ namespace Model {
 
         class Enemy : public Physics::IntersectableObject, public Model::Entities::Ai, public View::Drawable {
         public:
-            static Enemy create(const sf::Vector2f &position);
+            static Enemy create(const Geometry::Point & position);
 
-            void draw(View::Window &window) const override;
+            void draw(View::Window & window) const override;
 
         protected:
-            void handleAi(float dt, const EntityController &entityController) override;
+            void handleAi(float dt, const EntityController & entityController) override;
 
         private:
-            Enemy(const sf::Vector2f &size, const sf::Vector2f &position);
+            Enemy(const sf::Vector2f & size, const Geometry::Point & position);
         };
 
-
     } // namespace Entities
-
 } // namespace Model
+
 #endif // TEUN_GAME_ENEMY_H

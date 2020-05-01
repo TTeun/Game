@@ -1,32 +1,37 @@
 #ifndef TEUN_GAME_DEBRIS_H
 #define TEUN_GAME_DEBRIS_H
 
-#include "../../Aux/uniform.h"
+#include "../../View/drawable.h"
 #include "../Physics/deathtimer.h"
 #include "../Physics/intersectableobject.h"
 
 #include <SFML/Graphics/ConvexShape.hpp>
 
+namespace Aux {
+    class Uniform;
+}
+
 namespace Model {
 
     namespace Entities {
 
-    class Debris : public Physics::IntersectableObject, public Physics::DeathTimer, public View::Drawable {
+        class Debris : public Physics::IntersectableObject, public Physics::DeathTimer, public View::Drawable {
 
         public:
-        void draw(View::Window &window) const override;
+            void draw(View::Window & window) const override;
 
-        static Debris create(const sf::Vector2f &position);
+            static Debris create(const Geometry::Point & position);
 
-            Debris(Debris &&debris) = default;
+            Debris(Debris && debris) = default;
 
         private:
-            Debris(const sf::Vector2f &position,
-                   const Aux::Uniform &sizeUniform,
-                   const Aux::Uniform &velocityUniform = Aux::Uniform{5, 2});
+            Debris(const Geometry::Point & position,
+                   const Aux::Uniform & sizeUniform,
+                   const Aux::Uniform & velocityUniform);
 
-            static Shapes::Point getRandomVelocity(const Aux::Uniform &velocityUniform);
+            static Geometry::Point getRandomVelocity(const Aux::Uniform & velocityUniform);
         };
     } // namespace Entities
 } // namespace Model
+
 #endif // TEUN_GAME_DEBRIS_H

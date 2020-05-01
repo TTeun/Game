@@ -6,10 +6,10 @@
 #define TEUN_GAME_DRAWABLE_H
 
 namespace Model {
-    namespace Shapes {
+    namespace Geometry {
         class Rectangle;
     }
-}
+} // namespace Model
 
 namespace View {
 
@@ -20,11 +20,8 @@ namespace View {
     class Drawable {
 
     public:
-        virtual void
-        draw(View::Window &window) const = 0;
-
+        virtual void draw(View::Window & window) const = 0;
     };
-}
+} // namespace View
 
-
-#endif //TEUN_GAME_DRAWABLE_H
+#endif // TEUN_GAME_DRAWABLE_H

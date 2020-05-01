@@ -5,9 +5,8 @@
 #ifndef TEUN_GAME_LEVEL_H
 #define TEUN_GAME_LEVEL_H
 
-#include "terrainblock.h"
-#include "../DataStructures/rectgraph.h"
 #include "../../View/drawable.h"
+#include "terrainblock.h"
 
 #include <list>
 #include <memory>
@@ -25,7 +24,7 @@ namespace Model {
     namespace Entities {
         class Player;
 
-    class Level  : public View::Drawable{
+        class Level : public View::Drawable {
 
             friend LevelWrapper;
             friend Loaders;
@@ -33,17 +32,16 @@ namespace Model {
         public:
             Level();
 
-        void draw(View::Window &window) const override;
+            void draw(View::Window & window) const override;
 
-        const std::list<std::unique_ptr<TerrainBlock>> &getTerrainBlocks() const;
+            const std::list<std::unique_ptr<TerrainBlock>> & getTerrainBlocks() const;
 
         private:
+            bool intersects(const Geometry::Line & line) const;
 
-            bool intersects(const Shapes::Line &line) const;
+            bool intersects(const Geometry::Rectangle & rect) const;
 
-            bool intersects(const Shapes::Rectangle &rect) const;
-
-            size_t addTerrainBlock(Model::Shapes::ColoredRectangle &&coloredRectangle);
+            size_t addTerrainBlock(Model::Geometry::ColoredRectangle && coloredRectangle);
 
             std::list<std::unique_ptr<Entities::TerrainBlock>> m_terrainBlocks;
         };

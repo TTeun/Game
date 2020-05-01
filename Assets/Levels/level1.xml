@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <level name="level1">
-    <Block width="2000" height="32" x="90" y="800"/>
+    <Block width="200" height="32" x="90" y="800"/>
+    <Block width="200" height="32" x="590" y="800"/>
+    <Block width="200" height="32" x="990" y="800"/>
+    <Block width="1200" height="32" x="490" y="1200"/>
+    <Block width="100" height="32" x="1090" y="1000"/>
+    <Block width="32" height="632" x="1300" y="600"/>
     <Block width="200" height="32" x="590" y="600"/>
     <Block width="32" height="400" x="600" y="400"/>
     <Block width="32" height="400" x="300" y="400"/>

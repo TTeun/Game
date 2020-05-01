@@ -10,14 +10,14 @@
 #include <SFML/System/Vector2.hpp>
 
 namespace Model {
-    namespace Shapes {
+    namespace Geometry {
 
         class Line {
 
         public:
-            Line(const sf::Vector2f &p1, const sf::Vector2f &p2);
+            Line(const Point & p1, const Point & p2);
 
-            bool intersects(const Line &otherLine) const;
+            bool intersects(const Line & otherLine) const;
 
             float length() const;
 
@@ -25,6 +25,6 @@ namespace Model {
             Point m_point1;
             Point m_point2;
         };
-    } // namespace Shapes
+    } // namespace Geometry
 } // namespace Model
 #endif // TEUN_GAME_LINE_H

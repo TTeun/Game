@@ -9,29 +9,33 @@
 
 namespace Aux {
 
-    template<class T>
+    template <class T>
     class ConstPointerWrapper {
 
     public:
-        explicit ConstPointerWrapper(T *pointer) : m_pointer(pointer) {
+        explicit ConstPointerWrapper(T * pointer) : m_pointer(pointer)
+        {
         }
 
-        explicit operator bool() const {
-            return (bool) m_pointer;
+        explicit operator bool() const
+        {
+            return (bool)m_pointer;
         }
 
-        const T &get() const {
+        const T & get() const
+        {
             assert(m_pointer);
             return *m_pointer;
         }
 
-        void set(T *pointer) {
+        void set(T * pointer)
+        {
             m_pointer = pointer;
         }
 
     private:
-        const T *m_pointer;
+        const T * m_pointer;
     };
-}
+} // namespace Aux
 // namespace Aux
 #endif // TEUN_GAME_CONSTPOINTERWRAPPER_H

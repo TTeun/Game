@@ -21,12 +21,12 @@ namespace Controller {
     public:
         KeyBoardHandler();
 
-        void handleKeyInput(Game &game);
+        void handleKeyInput(Game & game);
 
     private:
-        void handleKeyRelease(Game &game, const sf::Keyboard::Key &key);
+        void handleKeyRelease(Game & game, const sf::Keyboard::Key & key);
 
-        void handleKeyPress(Game &game, const sf::Keyboard::Key &key);
+        void handleKeyPress(Game & game, const sf::Keyboard::Key & key);
 
         std::vector<KeyState> m_keyStates;
     };

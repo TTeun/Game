@@ -5,12 +5,9 @@
 #ifndef TEUN_GAME_CONSTANTS_H
 #define TEUN_GAME_CONSTANTS_H
 
-#include <memory>
-#include <utility>
-#include "../Entities/level.h"
-
-#include "../../ThirdParty/inih-master/cpp/INIReader.h"
 #include "../../Aux/inireaderwrapper.h"
+
+#include <memory>
 
 namespace Model {
 
@@ -22,7 +19,6 @@ namespace Model {
             static std::unique_ptr<Constants> create(std::string path = "../Config/physics.ini");
 
         private:
-
             explicit Constants(std::string path = "../Config/physics.ini");
 
             std::unique_ptr<IniReaderWrapper> m_iniReader;
@@ -35,8 +31,6 @@ namespace Model {
             const float m_wallJumpXVelocity;
             const float m_maxHorizontalSpeed;
             const float m_maxVerticalSpeed;
-
-
         };
     } // namespace Physics
 } // namespace Model

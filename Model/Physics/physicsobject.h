@@ -5,7 +5,6 @@
 #ifndef TEUN_GAME_PHYSICSOBJECT_H
 #define TEUN_GAME_PHYSICSOBJECT_H
 
-#include "constants.h"
 #include "object.h"
 
 #include <SFML/Graphics/ConvexShape.hpp>
@@ -15,25 +14,27 @@ namespace Model {
 
     namespace Physics {
 
+        class Constants;
+
         class PhysicsObject : public Object {
 
         public:
-            explicit PhysicsObject(Shapes::ColoredRectangle &&shape);
+            explicit PhysicsObject(Geometry::ColoredRectangle && shape);
 
-            void setVelocity(const sf::Vector2f &velocity);
+            void setVelocity(const Geometry::Vector2d & velocity);
 
-            const sf::Vector2f &getVelocity() const;
+            const Geometry::Vector2d & getVelocity() const;
 
-            void update(float dt, const Constants &constants);
+            void update(float dt, const Constants & constants);
 
-            void addForce(float dt, const sf::Vector2f &force);
+            void addForce(float dt, const Geometry::Vector2d & force);
 
             void setFeelsGravity(bool feelsGravity);
 
         protected:
-            void applyGravity(float dt, const Constants &constants);
+            void applyGravity(float dt, const Constants & constants);
 
-            sf::Vector2f m_velocity;
+            Model::Geometry::Vector2d m_velocity;
 
             float m_mass = 1.0f;
 

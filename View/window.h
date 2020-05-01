@@ -5,11 +5,11 @@
 #ifndef TEUN_GAME_WINDOW_H
 #define TEUN_GAME_WINDOW_H
 
-#include "../Model/Shapes/rectangle.h"
-#include "../Model/Shapes/triangle.h"
-#include "../Model/Shapes/quadrilateral.h"
-#include "drawinterface.h"
 #include "../Model/Entities/entitycontroller.h"
+#include "../Model/Geometry/quadrilateral.h"
+#include "../Model/Geometry/rectangle.h"
+#include "../Model/Geometry/triangle.h"
+#include "drawinterface.h"
 
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
@@ -19,31 +19,31 @@ namespace View {
     class Window : public sf::RenderWindow {
 
     public:
-        Window(uint width, uint height, const char *title, bool showFrameRate = false);
+        Window(uint width, uint height, const char * title, bool showFrameRate = false);
 
         void setShowFrameRate(bool showFrameRate);
 
         float getDtInSeconds() const;
 
-        sf::View calculateViewPort(const Model::Entities::Player &player);
+        sf::View calculateViewPort(const Model::Entities::Player & player);
 
-        const Model::Shapes::Rectangle &getViewRect() const;
+        const Model::Geometry::Rectangle & getViewRect() const;
 
-        void drawRectangle(float x, float y, float width, float height, const sf::Color &color = sf::Color::White);
+        void drawRectangle(float x, float y, float width, float height, const sf::Color & color = sf::Color::White);
 
-        void drawRectangle(const Model::Shapes::ColoredRectangle &rect);
+        void drawRectangle(const Model::Geometry::ColoredRectangle & rect);
 
-        void drawLine(const sf::Vector2f &p1, const sf::Vector2f &p2, const sf::Color &color = sf::Color::White);
+        void drawLine(const sf::Vector2f & p1, const sf::Vector2f & p2, const sf::Color & color = sf::Color::White);
 
         float getFrameRate() const;
 
-        void drawModel(const Model::Entities::EntityController &entityController, DrawInterface &drawInterface);
+        void drawModel(const Model::Entities::EntityController & entityController, DrawInterface & drawInterface);
 
-        void drawTriangle(const Model::Shapes::Triangle &triangle, const sf::Color &color);
+        void drawTriangle(const Model::Geometry::Triangle & triangle, const sf::Color & color);
 
-        void drawQuadrilateral(const Model::Shapes::Quadrilateral &quadrilateral, const sf::Color &color);
+        void drawQuadrilateral(const Model::Geometry::Quadrilateral & quadrilateral, const sf::Color & color);
 
-        void drawRectangle(const Model::Shapes::Rectangle &rect, const sf::Color &color = sf::Color::Black);
+        void drawRectangle(const Model::Geometry::Rectangle & rect, const sf::Color & color = sf::Color::Black);
 
     private:
         bool m_showFrameRate;
@@ -55,9 +55,8 @@ namespace View {
 
         float m_dt = 0.1;
 
-        Model::Shapes::Rectangle m_viewRect;
+        Model::Geometry::Rectangle m_viewRect;
         sf::Vector2f m_viewPortPositionVelocityOffset = {0.0f, 0.0f};
-
     };
 } // namespace View
 

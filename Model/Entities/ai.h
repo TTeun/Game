@@ -9,16 +9,12 @@ namespace Model {
     namespace Entities {
         class EntityController;
 
-
         class Ai {
 
         protected:
-
-            virtual void handleAi(float dt, const Model::Entities::EntityController &entityController) = 0;
-
+            virtual void handleAi(float dt, const Model::Entities::EntityController & entityController) = 0;
         };
-    }
-}
+    } // namespace Entities
+} // namespace Model
 
-
-#endif //TEUN_GAME_AI_H
+#endif // TEUN_GAME_AI_H

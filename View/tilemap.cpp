@@ -7,18 +7,20 @@
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <iostream>
 
-View::TileMap::TileMap(const std::string &tileSet, sf::Vector2u tileSize, size_t width, size_t height) {
+View::TileMap::TileMap(const std::string & tileSet, sf::Vector2u tileSize, size_t width, size_t height)
+{
     m_wasLoadedCorrectly = load(tileSet, tileSize, width, height);
 }
 
-bool View::TileMap::load(const std::string &tileSet,
+bool View::TileMap::load(const std::string & tileSet,
                          sf::Vector2u tileSize,
                          size_t widthInPoints,
-                         size_t heightInPoints) {
+                         size_t heightInPoints)
+{
     if (!m_tileSet.loadFromFile(tileSet)) {
         return false;
     }
-    const size_t width = widthInPoints / tileSize.x;
+    const size_t width  = widthInPoints / tileSize.x;
     const size_t height = heightInPoints / tileSize.y;
 
     const size_t heightRemainder = heightInPoints % tileSize.y;
@@ -62,7 +64,7 @@ bool View::TileMap::load(const std::string &tileSet,
             size_t tu = tileNumber % (m_tileSet.getSize().x / tileSize.x);
             size_t tv = tileNumber / (m_tileSet.getSize().x / tileSize.x);
 
-            sf::Vertex *quad = &m_vertices[(i + j * width) * 4];
+            sf::Vertex * quad = &m_vertices[(i + j * width) * 4];
 
             quad[0].position = sf::Vector2f(i * tileSize.x, j * tileSize.y);
             quad[1].position = sf::Vector2f((i + 1) * tileSize.x, j * tileSize.y);
@@ -80,7 +82,7 @@ bool View::TileMap::load(const std::string &tileSet,
 
     if (heightRemainder > 0) {
         for (size_t i = 0; i < width; ++i) {
-            sf::Vertex *quad = &m_vertices[count * 4];
+            sf::Vertex * quad = &m_vertices[count * 4];
 
             quad[0].position = sf::Vector2f(i * tileSize.x, height * tileSize.y);
             quad[1].position = sf::Vector2f((i + 1) * tileSize.x, height * tileSize.y);
@@ -122,12 +124,14 @@ bool View::TileMap::load(const std::string &tileSet,
     return true;
 }
 
-void View::TileMap::draw(sf::RenderTarget &target, sf::RenderStates renderStates) const {
+void View::TileMap::draw(sf::RenderTarget & target, sf::RenderStates renderStates) const
+{
     renderStates.transform *= getTransform();
     renderStates.texture = &m_tileSet;
     target.draw(m_vertices, renderStates);
 }
 
-bool View::TileMap::wasLoadedCorrectly() const {
+bool View::TileMap::wasLoadedCorrectly() const
+{
     return m_wasLoadedCorrectly;
 }

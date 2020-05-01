@@ -8,8 +8,6 @@
 #include "../../Aux/constpointerwrapper.h"
 #include "physicsobject.h"
 
-#include <cmath>
-
 namespace Model {
     namespace Entities {
         class Level;
@@ -22,37 +20,35 @@ namespace Model {
         class IntersectableObject : public PhysicsObject {
 
         public:
-            explicit IntersectableObject(Model::Shapes::ColoredRectangle &&shape);
+            explicit IntersectableObject(Model::Geometry::ColoredRectangle && shape);
 
-            void update(float dt, const Model::Entities::Level &level, const Physics::Constants &constants);
+            void update(float dt, const Model::Entities::Level & level, const Physics::Constants & constants);
 
         protected:
-            void updateSnapped(float dt, const Model::Entities::Level &level, const Physics::Constants &constants);
+            void updateSnapped(float dt, const Model::Entities::Level & level, const Physics::Constants & constants);
 
-            void updateUnSnapped(float dt, const Model::Entities::Level &level, const Physics::Constants &constants);
+            void updateUnSnapped(float dt, const Model::Entities::Level & level, const Physics::Constants & constants);
+
+            void updateSnappedHorizontal(float dt,
+                                         const Model::Entities::Level & level,
+                                         const Physics::Constants & constants);
 
             void
-            updateSnappedHorizontal(float dt, const Model::Entities::Level &level, const Physics::Constants &constants);
+            updateSnappedVertical(float dt, const Model::Entities::Level & level, const Physics::Constants & constants);
 
-            void updateSnappedVertical(float dt,
-                                       const Model::Entities::Level &level,
-                                       const Physics::Constants &constants);
-
-            virtual void checkAndHandlePressedIntoWall(float dt, const Physics::Constants &constants);
+            virtual void checkAndHandlePressedIntoWall(float dt, const Physics::Constants & constants);
 
             void unSnap();
 
             Aux::ConstPointerWrapper<Model::Entities::TerrainBlock> m_snappedTerrainBlock =
-                    Aux::ConstPointerWrapper<Model::Entities::TerrainBlock>(nullptr);
+                Aux::ConstPointerWrapper<Model::Entities::TerrainBlock>(nullptr);
 
-            enum WHERE_IS_SNAPPED_TERRAIN {
-                BELOW, RIGHT, LEFT, ABOVE
-            };
+            enum WHERE_IS_SNAPPED_TERRAIN { BELOW, RIGHT, LEFT, ABOVE };
 
             WHERE_IS_SNAPPED_TERRAIN m_whereIsSnappedTerrain;
 
             WHERE_IS_SNAPPED_TERRAIN
-            whichDirectionIsTerrainBlock(const Entities::TerrainBlock &snappedTerrainBlock) const;
+            whichDirectionIsTerrainBlock(const Entities::TerrainBlock & snappedTerrainBlock) const;
         };
 
     } // namespace Physics

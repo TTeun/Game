@@ -8,7 +8,6 @@
 #include "finiteduration.h"
 
 #include <SFML/System/Clock.hpp>
-#include <ostream>
 
 namespace Model {
     namespace Physics {
@@ -26,4 +25,5 @@ namespace Model {
         };
     } // namespace Physics
 } // namespace Model
+
 #endif // TEUN_GAME_DEATHTIMER_H
