@@ -4,19 +4,19 @@
 
 #include "window.h"
 
-#include "../Model/entitycontroller.h"
+#include "../Model/Entities/entitycontroller.h"
 
 #include <sstream>
 #include <iostream>
 
 View::Window::Window(uint width, uint height, const char *title, bool showFrameRate)
-        : sf::RenderWindow(sf::VideoMode(width, height), title), m_showFrameRate(showFrameRate) {
+        : sf::RenderWindow(sf::VideoMode(width, height), title), m_showFrameRate(showFrameRate),
+          m_viewRect({200, 200}, {200, 00}) {
     if (!m_font.loadFromFile("../Assets/arial.ttf")) {
     }
     m_text.setFont(m_font);
     m_text.setCharacterSize(18); // in pixels, not points!
     m_text.setFillColor(sf::Color::Black);
-    //        setVerticalSyncEnabled(true);
     clear(Colors::windowClearColor);
 }
 
@@ -26,11 +26,13 @@ sf::View View::Window::calculateViewPort(const Model::Entities::Player &player) 
     const auto windowSize = sf::Vector2f{static_cast<float>(getSize().x), static_cast<float>(getSize().y)};
 
     m_viewPortPositionVelocityOffset = 0.999f * m_viewPortPositionVelocityOffset + 0.001f * velocity;
-    m_viewRect = sf::FloatRect(position - 0.5f * windowSize + 0.2f * m_viewPortPositionVelocityOffset, windowSize);
-    return sf::View(m_viewRect);
+    m_viewRect = Model::Shapes::Rectangle(windowSize,
+                                          position - 0.5f * windowSize + 0.2f * m_viewPortPositionVelocityOffset);
+    return sf::View(sf::FloatRect{m_viewRect.getPosition(), m_viewRect.getSize()});
 }
 
-void View::Window::drawModel(const Model::EntityController &entityController, View::DrawInterface &drawInterface) {
+void
+View::Window::drawModel(const Model::Entities::EntityController &entityController, View::DrawInterface &drawInterface) {
     m_dt = m_clock.getElapsedTime().asMicroseconds();
     m_clock.restart();
 
@@ -56,7 +58,7 @@ float View::Window::getDtInSeconds() const {
     return static_cast<float>(m_dt / 1000000.0);
 }
 
-const sf::FloatRect &View::Window::getViewRect() const {
+const Model::Shapes::Rectangle &View::Window::getViewRect() const {
     return m_viewRect;
 }
 
@@ -67,8 +69,12 @@ void View::Window::drawRectangle(float x, float y, float width, float height, co
     draw(shape);
 }
 
-void View::Window::drawRectangle(const Model::Shape::Rectangle &rect) {
+void View::Window::drawRectangle(const Model::Shapes::ColoredRectangle &rect) {
     drawRectangle(rect.left, rect.top, rect.width, rect.height, rect.getColor());
+}
+
+void View::Window::drawRectangle(const Model::Shapes::Rectangle &rect, const sf::Color &color) {
+    drawRectangle(rect.left, rect.top, rect.width, rect.height, color);
 }
 
 void View::Window::drawLine(const sf::Vector2f &p1, const sf::Vector2f &p2, const sf::Color &color) {
@@ -85,7 +91,7 @@ float View::Window::getFrameRate() const {
     return m_frameRate;
 }
 
-void View::Window::drawTriangle(const Model::Shape::Triangle &triangle, const sf::Color &color) {
+void View::Window::drawTriangle(const Model::Shapes::Triangle &triangle, const sf::Color &color) {
     sf::ConvexShape shape(3);
     shape.setFillColor(color);
 
@@ -95,7 +101,7 @@ void View::Window::drawTriangle(const Model::Shape::Triangle &triangle, const sf
     draw(shape);
 }
 
-void View::Window::drawQuadrilateral(const Model::Shape::Quadrilateral &quadrilateral, const sf::Color &color) {
+void View::Window::drawQuadrilateral(const Model::Shapes::Quadrilateral &quadrilateral, const sf::Color &color) {
     sf::ConvexShape shape(4);
     shape.setFillColor(color);
 

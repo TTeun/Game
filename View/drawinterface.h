@@ -5,12 +5,8 @@
 #ifndef TEUN_GAME_DRAWINTERFACE_H
 #define TEUN_GAME_DRAWINTERFACE_H
 
-#include "tilemap.h"
 #include "../Model/Entities/levelwrapper.h"
-
-#include <list>
-#include <map>
-#include <memory>
+#include "../Model/Entities/entitycontroller.h"
 
 namespace Model {
     class EntityController;
@@ -43,28 +39,31 @@ namespace View {
         friend class Model::Loaders;
 
     public:
-        void drawModel(Window &window, const Model::EntityController &entityController);
+        void drawModel(Window &window, const Model::Entities::EntityController &entityController);
 
-    private:
-        std::map<size_t, std::unique_ptr<const TileMap>> m_levelTileMaps;
+        static void
+        draw(const Model::Entities::Enemy &enemy, View::Window &window);
 
-        void addLevelTileMap(size_t id, const TileMap *tileMap);
+        static void
+        draw(const Model::Entities::Level &enemy, View::Window &window);
 
-        void
-        drawLevel(Window &window, const Model::Entities::LevelWrapper &levelWrapper, const sf::FloatRect &viewRect);
+        static void
+        draw(const Model::Entities::Debris &enemy, View::Window &window);
 
-        void
-        drawEntities(View::Window &window, const Model::EntityController &entityController, const sf::FloatRect &viewRect);
+        static void
+        draw(const Model::Entities::DebrisExplosion &debrisExplosion, View::Window &window);
 
-        void drawDebrisExplosions(Window &window,
-                                  const std::list<Model::Entities::DebrisExplosion> &debrisExplosionList,
-                                  const sf::FloatRect &viewRect);
+        static void
+        draw(const Model::Entities::EntityController &entityController, View::Window &window);
 
-        void drawEnemies(Window &window,
-                         const std::list<Model::Entities::Enemy> &enemyList,
-                         const sf::FloatRect &viewRect);
+        static void
+        draw(const Model::Entities::Player &player, View::Window &window);
 
-        void drawPlayer(Window &window, const Model::Entities::Player &player);
+        static void
+        draw(const Model::DataStructures::RectGraph &rectGraph, View::Window &window);
+
+        static void draw(const Water &player, View::Window &window);
+
     };
 } // namespace View
 

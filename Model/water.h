@@ -6,7 +6,8 @@
 #define TEUN_GAME_WATER_H
 
 #include "Entities/level.h"
-#include "Shape/quadrilateral.h"
+#include "Shapes/quadrilateral.h"
+#include "../View/drawable.h"
 
 namespace Model {
     namespace Physics {
@@ -14,18 +15,19 @@ namespace Model {
     }
 }
 
-class Water {
+class Water : public View::Drawable {
 
 public:
-    Water(Model::Shape::Rectangle &&rectangle);
+    Water(Model::Shapes::Rectangle &&rectangle);
 
+    void draw(View::Window &window) const override;
 
     void update(float dt,
                 const Model::Entities::Level &level,
                 const Model::Physics::Constants &constants);
 
 
-    const Model::Shape::Rectangle &getRectangle() const;
+    const Model::Shapes::Rectangle &getRectangle() const;
 
     const sf::VertexArray &getVertexArray() const;
 
@@ -41,19 +43,19 @@ private:
     public:
         Wave(float amplitude, float angularFrequency, float waveLength);
 
-        float m_amplitude = 1.0f;
-        float m_waveLength = 50.0f;
-        float m_angularFrequency = 2.0f;
+        const float m_amplitude;
+        const float m_waveLength;
+        const float m_angularFrequency;
     };
 
 
     std::vector<Wave> m_waves;
 
-    const Model::Shape::Rectangle m_rectangle;
+    const Model::Shapes::Rectangle m_shape;
 
     float m_time = 0.0f;
 
-    const size_t m_quadrilateralCount = 20;
+    const size_t m_quadrilateralCount = 25;
 
 };
 

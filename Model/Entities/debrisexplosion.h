@@ -15,12 +15,14 @@ namespace Model {
 
         class Level;
 
-        class DebrisExplosion : Physics::FiniteDuration {
+    class DebrisExplosion : Physics::FiniteDuration, public View::Drawable {
 
         public:
             DebrisExplosion(const sf::Vector2f &position, size_t count);
 
-            const std::list<Debris> &getDebrisVector() const;
+        void draw(View::Window &window) const override;
+
+        const std::list<Debris> &getDebrisVector() const;
 
             void update(float dt, const Level &level, const Physics::Constants &constants);
 

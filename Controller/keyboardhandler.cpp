@@ -9,7 +9,7 @@
 Controller::KeyBoardHandler::KeyBoardHandler() {
     m_keyStates.emplace_back(KeyState::BEHAVIOUR::DISABLE_UNTIL_RELEASE, sf::Keyboard::P, 0.2f);
     m_keyStates.emplace_back(KeyState::BEHAVIOUR::DISABLE_UNTIL_RELEASE, sf::Keyboard::R, 0.2f);
-    m_keyStates.emplace_back(KeyState::BEHAVIOUR::DISABLE_UNTIL_RELEASE, sf::Keyboard::E, 0.002f);
+    m_keyStates.emplace_back(KeyState::BEHAVIOUR::DISABLE_UNTIL_RELEASE, sf::Keyboard::E, 0.2f);
 
     m_keyStates.emplace_back(KeyState::BEHAVIOUR::ALWAYS_FIRE, sf::Keyboard::W);
     m_keyStates.emplace_back(KeyState::BEHAVIOUR::ALWAYS_FIRE, sf::Keyboard::A);
@@ -28,10 +28,10 @@ void Controller::KeyBoardHandler::handleKeyPress(Game &game, const sf::Keyboard:
             game.reset();
             break;
         case sf::Keyboard::A:
-            entityList.m_player.addHorizontalForce(-1200 * window.getDtInSeconds());
+            entityList.getPlayer().addHorizontalForce(-1200 * window.getDtInSeconds());
             break;
         case sf::Keyboard::D:
-            entityList.m_player.addHorizontalForce(1200 * window.getDtInSeconds());
+            entityList.getPlayer().addHorizontalForce(1200 * window.getDtInSeconds());
             break;
         case sf::Keyboard::W:
             entityList.getPlayer().jump(game.getConstants());

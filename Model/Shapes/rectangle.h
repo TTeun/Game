@@ -7,7 +7,6 @@
 
 #include "line.h"
 
-#include <SFML/Graphics/Color.hpp>
 #include <SFML/Graphics/Rect.hpp>
 
 namespace Model {
@@ -18,14 +17,14 @@ namespace Model {
 
 namespace Model {
 
-    namespace Shape {
+    namespace Shapes {
 
         class Rectangle : public sf::FloatRect {
 
         public:
-            explicit Rectangle(const sf::FloatRect &rectangle, const sf::Color &color = sf::Color::White);
+            explicit Rectangle(const sf::FloatRect &rectangle);
 
-            Rectangle(const Point &size, const Point &position, const sf::Color &color = sf::Color::White);
+            Rectangle(const Point &size, const Point &position);
 
             sf::Vector2f topLeft() const;
 
@@ -41,19 +40,15 @@ namespace Model {
 
             bool intersects(const Line &line) const;
 
+            bool intersects(const Rectangle &other) const;
+
+            bool intersects(const sf::FloatRect &other) const;
+
             Rectangle shrink(float factor) const;
 
             void setPosition(sf::Vector2f newPosition);
 
             void move(const Point &offset);
-
-            const sf::Color &getColor() const;
-
-            void setColor(const sf::Color &color);
-
-            bool intersects(const Rectangle &other) const;
-
-            bool intersects(const sf::FloatRect &other) const;
 
             Point getPosition() const;
 
@@ -61,12 +56,9 @@ namespace Model {
 
             bool
             isMutuallyFullyVisible(const Rectangle &other, const Model::Entities::LevelWrapper &levelWrapper) const;
-
-        private:
-            sf::Color m_color;
         };
-    } // namespace Shape
+    } // namespace Shapes
 } // namespace Model
-Model::Shape::Rectangle operator+(const Model::Shape::Rectangle &rectangle, const Model::Shape::Point &point);
+Model::Shapes::Rectangle operator+(const Model::Shapes::Rectangle &rectangle, const Model::Shapes::Point &point);
 
 #endif // TEUN_GAME_RECTANGLE_H

@@ -11,10 +11,12 @@ namespace Model {
 
     namespace Entities {
 
-        class Debris : public Physics::IntersectableObject, public Physics::DeathTimer {
+    class Debris : public Physics::IntersectableObject, public Physics::DeathTimer, public View::Drawable {
 
         public:
-            static Debris create(const sf::Vector2f &position);
+        void draw(View::Window &window) const override;
+
+        static Debris create(const sf::Vector2f &position);
 
             Debris(Debris &&debris) = default;
 
@@ -23,7 +25,7 @@ namespace Model {
                    const Aux::Uniform &sizeUniform,
                    const Aux::Uniform &velocityUniform = Aux::Uniform{5, 2});
 
-            static Shape::Point getRandomVelocity(const Aux::Uniform &velocityUniform);
+            static Shapes::Point getRandomVelocity(const Aux::Uniform &velocityUniform);
         };
     } // namespace Entities
 } // namespace Model

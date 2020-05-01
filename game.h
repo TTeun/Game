@@ -7,7 +7,7 @@
 
 #include "Controller/keyboardhandler.h"
 #include "Model/Physics/constants.h"
-#include "Model/entitycontroller.h"
+#include "Model/Entities/entitycontroller.h"
 #include "View/window.h"
 
 #include <memory>
@@ -36,13 +36,13 @@ private:
 
     View::DrawInterface &getDrawInterface();
 
-    Model::EntityController &getModel();
+    Model::Entities::EntityController &getModel();
 
     View::Window &getWindow();
 
     std::unique_ptr<View::Window> m_window;
     std::unique_ptr<View::DrawInterface> m_drawInterface;
-    std::unique_ptr<Model::EntityController> m_entityController;
+    std::unique_ptr<Model::Entities::EntityController> m_entityController;
     std::unique_ptr<Controller::KeyBoardHandler> m_keyBoardHandler;
     std::unique_ptr<const Model::Physics::Constants> m_constants;
 

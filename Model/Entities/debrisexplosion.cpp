@@ -3,6 +3,7 @@
 //
 
 #include "debrisexplosion.h"
+#include "../../View/drawinterface.h"
 
 Model::Entities::DebrisExplosion::DebrisExplosion(const sf::Vector2f &position, size_t count) {
     for (size_t i = 0; i != count; ++i) {
@@ -30,4 +31,8 @@ const std::list<Model::Entities::Debris> &Model::Entities::DebrisExplosion::getD
 bool Model::Entities::DebrisExplosion::shouldClean() const {
     //    return false;
     return m_debrisVector.empty();
+}
+
+void Model::Entities::DebrisExplosion::draw(View::Window &window) const {
+    View::DrawInterface::draw(*this, window);
 }

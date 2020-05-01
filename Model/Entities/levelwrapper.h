@@ -18,17 +18,22 @@ namespace Model {
 
             const Level &getLevel() const;
 
-            size_t addTerrainBlock(float x, float y, float width, float height);
+            bool intersects(const Shapes::Line &line) const;
 
-            bool intersects(const Shape::Line &line) const;
-
-            bool intersects(const Shape::Rectangle &rect) const;
-
+            bool intersects(const Shapes::Rectangle &rect) const;
 
             Model::DataStructures::RectGraph getCornerRectGraph(float width, float height) const;
 
+            void setCornerRectGraph(float width, float height);
+
+            void addPlayerToCornerRectGraph(const Model::Entities::Player &player);
+
+            const Model::DataStructures::RectGraph &getCornerRectGraphWithTarget() const;
+
             Model::DataStructures::RectGraph buildCornerRectGraphWithPlayer(
                     float width, float height, const Model::Entities::Player &player) const;
+
+            const Model::DataStructures::RectGraph &getCornerRectGraph() const;
 
         private:
 
@@ -36,7 +41,7 @@ namespace Model {
 
             std::unique_ptr<Entities::Level> m_level;
 
-
+            std::unique_ptr<Model::DataStructures::RectGraph> m_cornerRectGraph;
         };
 
     }

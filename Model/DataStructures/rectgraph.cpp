@@ -2,32 +2,32 @@
 
 #include "../../Aux/mathtools.h"
 #include "../../View/window.h"
+#include "../../View/drawinterface.h"
 
 #include <cassert>
-#include <iostream>
 #include <set>
 
 Model::DataStructures::RectGraph::RectGraph(float width, float height, const Entities::LevelWrapper &levelWrapper) {
-    std::vector<Model::Shape::Rectangle> terrainRectangles;
+    std::vector<Model::Shapes::Rectangle> terrainRectangles;
     terrainRectangles.reserve(levelWrapper.getLevel().getTerrainBlocks().size());
     for (const auto &terrainBlock : levelWrapper.getLevel().getTerrainBlocks()) {
         terrainRectangles.emplace_back(terrainBlock->getShape());
     }
 
-    const auto sizeOfObject = Model::Shape::Point(width, height);
+    const auto sizeOfObject = Model::Shapes::Point(width, height);
     for (const auto &terrainRectangle : terrainRectangles) {
         const auto position = terrainRectangle.topLeft();
         const auto size = terrainRectangle.getSize();
 
         m_rectangles.push_back(
-                Shape::Rectangle(sizeOfObject, position - sizeOfObject).shrink(
+                Shapes::Rectangle(sizeOfObject, position - sizeOfObject).shrink(
                         0.999f));
-        m_rectangles.push_back(Shape::Rectangle(sizeOfObject, position + size).shrink(0.999f));
+        m_rectangles.push_back(Shapes::Rectangle(sizeOfObject, position + size).shrink(0.999f));
         m_rectangles.push_back(
-                Shape::Rectangle(sizeOfObject, position + Model::Shape::Point{size.x, -height}).shrink(
+                Shapes::Rectangle(sizeOfObject, position + Model::Shapes::Point{size.x, -height}).shrink(
                         0.999f));
         m_rectangles.push_back(
-                Shape::Rectangle(sizeOfObject, position + Model::Shape::Point{-width, size.y}).shrink(
+                Shapes::Rectangle(sizeOfObject, position + Model::Shapes::Point{-width, size.y}).shrink(
                         0.999f));
     }
 
@@ -60,28 +60,10 @@ Model::DataStructures::RectGraph::RectGraph(float width, float height, const Ent
 }
 
 void Model::DataStructures::RectGraph::draw(View::Window &window) const {
-    for (const auto &rectangle : m_rectangles) {
-        window.drawRectangle(rectangle);
-    }
-    if (m_target) {
-        window.drawRectangle(*m_target);
-        for (auto i : m_edgesToTarget) {
-            window.drawLine(m_rectangles.at(i.first).getCenter(),
-                            m_target->getCenter(),
-                            {255,
-                             static_cast<sf::Uint8>(Aux::clamp(0.3f * i.second, 0, 255)),
-                             static_cast<sf::Uint8>(255 - Aux::clamp(0.3f * i.second, 0, 255))});
-        }
-    }
-
-    for (const auto &edge : m_edges) {
-        window.drawLine(m_rectangles.at(edge.first.first).getCenter(),
-                        m_rectangles.at(edge.first.second).getCenter(),
-                        {100, 100, 100});
-    }
+    View::DrawInterface::draw(*this, window);
 }
 
-void Model::DataStructures::RectGraph::addTarget(const Shape::Rectangle &targetRectangle,
+void Model::DataStructures::RectGraph::addTarget(const Shapes::Rectangle &targetRectangle,
                                                  const Entities::LevelWrapper &levelWrapper,
                                                  float shrinkFactor) {
     shrinkFactor = 1.0f;
@@ -91,7 +73,7 @@ void Model::DataStructures::RectGraph::addTarget(const Shape::Rectangle &targetR
 
     m_edgesToTarget.clear();
 
-    auto *shrunkTargetRectangle = new Shape::Rectangle(targetRectangle.shrink(shrinkFactor));
+    auto *shrunkTargetRectangle = new Shapes::Rectangle(targetRectangle.shrink(shrinkFactor));
     for (size_t i = 0; i != m_rectangles.size(); ++i) {
         const auto &rect1 = m_rectangles.at(i);
 
@@ -104,19 +86,20 @@ void Model::DataStructures::RectGraph::addTarget(const Shape::Rectangle &targetR
     m_target.reset(shrunkTargetRectangle);
 }
 
-Model::Shape::Point Model::DataStructures::RectGraph::findDirectionToTarget(const Shape::Rectangle &rectangle,
-                                                                            const Entities::LevelWrapper &levelWrapper,
-                                                                            float shrinkFactor) const {
+Model::Shapes::Point Model::DataStructures::RectGraph::findDirectionToTarget(const Shapes::Rectangle &rectangle,
+                                                                             const Entities::LevelWrapper &levelWrapper,
+                                                                             float shrinkFactor) const {
     // ToDo omdat anders de vijanden kleiner worden en eigenlijk niet passen!
     shrinkFactor = 1.0f;
 
-    if (m_rectangles.empty()) {
+    if (not hasTarget() || m_edgesToTarget.empty() || m_rectangles.empty()) {
+
         return {0.0f, 0.0f};
     }
 
     auto dijkstraVertices = buildDijkstraVertices();
 
-    const Shape::Rectangle shrunkRectangle = Shape::Rectangle(rectangle.shrink(shrinkFactor));
+    const Shapes::Rectangle shrunkRectangle = Shapes::Rectangle(rectangle.shrink(shrinkFactor));
 
     std::map<size_t, float> edgesToRectangle;
     size_t minIndex = std::numeric_limits<size_t>::max();
@@ -229,4 +212,20 @@ Model::DataStructures::RectGraph::findClosestNotYetAdded(
         }
     }
     return {minIndex, minDist};
+}
+
+const std::map<std::pair<size_t, size_t>, float> &Model::DataStructures::RectGraph::getEdges() const {
+    return m_edges;
+}
+
+const std::vector<Model::Shapes::Rectangle> &Model::DataStructures::RectGraph::getRectangles() const {
+    return m_rectangles;
+}
+
+const std::map<size_t, float> &Model::DataStructures::RectGraph::getEdgesToTarget() const {
+    return m_edgesToTarget;
+}
+
+const std::unique_ptr<Model::Shapes::Rectangle> &Model::DataStructures::RectGraph::getTarget() const {
+    return m_target;
 }

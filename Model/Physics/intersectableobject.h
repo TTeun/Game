@@ -22,7 +22,7 @@ namespace Model {
         class IntersectableObject : public PhysicsObject {
 
         public:
-            explicit IntersectableObject(Model::Shape::Rectangle &&shape);
+            explicit IntersectableObject(Model::Shapes::ColoredRectangle &&shape);
 
             void update(float dt, const Model::Entities::Level &level, const Physics::Constants &constants);
 

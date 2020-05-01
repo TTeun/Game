@@ -10,7 +10,7 @@
 #include <SFML/System/Vector2.hpp>
 
 namespace Model {
-    namespace Shape {
+    namespace Shapes {
 
         class Line {
 
@@ -25,6 +25,6 @@ namespace Model {
             Point m_point1;
             Point m_point2;
         };
-    } // namespace Shape
+    } // namespace Shapes
 } // namespace Model
 #endif // TEUN_GAME_LINE_H

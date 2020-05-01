@@ -7,6 +7,7 @@
 
 #include "terrainblock.h"
 #include "../DataStructures/rectgraph.h"
+#include "../../View/drawable.h"
 
 #include <list>
 #include <memory>
@@ -24,7 +25,7 @@ namespace Model {
     namespace Entities {
         class Player;
 
-        class Level {
+    class Level  : public View::Drawable{
 
             friend LevelWrapper;
             friend Loaders;
@@ -32,15 +33,17 @@ namespace Model {
         public:
             Level();
 
-            const std::list<std::unique_ptr<TerrainBlock>> &getTerrainBlocks() const;
+        void draw(View::Window &window) const override;
+
+        const std::list<std::unique_ptr<TerrainBlock>> &getTerrainBlocks() const;
 
         private:
 
-            bool intersects(const Shape::Line &line) const;
+            bool intersects(const Shapes::Line &line) const;
 
-            bool intersects(const Shape::Rectangle &rect) const;
+            bool intersects(const Shapes::Rectangle &rect) const;
 
-            size_t addTerrainBlock(float x, float y, float width, float height);
+            size_t addTerrainBlock(Model::Shapes::ColoredRectangle &&coloredRectangle);
 
             std::list<std::unique_ptr<Entities::TerrainBlock>> m_terrainBlocks;
         };

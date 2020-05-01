@@ -3,11 +3,13 @@
 //
 
 #include "player.h"
+#include "../../View/drawinterface.h"
 
 Model::Entities::Player::Player(float x, float y, float height, float width, const sf::Color &color)
         : Physics::IntersectableObject(
-        Model::Shape::Rectangle(Model::Shape::Point{width, height}, Model::Shape::Point{x, y}, color)) {
+        Model::Shapes::ColoredRectangle(Model::Shapes::Point{width, height}, Model::Shapes::Point{x, y}, color)) {
     setFeelsGravity(true);
+//    m_shape.setColor(color);
 }
 
 void Model::Entities::Player::addHorizontalForce(float force) {
@@ -39,7 +41,7 @@ void Model::Entities::Player::jump(const Physics::Constants &constants) {
 
 void Model::Entities::Player::checkAndHandlePressedIntoWall(float dt, const Model::Physics::Constants &constants) {
     if (m_whereIsSnappedTerrain == WHERE_IS_SNAPPED_TERRAIN::RIGHT) {
-        const auto movedRect = m_shape + m_shape.width * 0.5f * Model::Shape::Point{1.0f, 0.0f};
+        const auto movedRect = m_shape + m_shape.width * 0.5f * Model::Shapes::Point{1.0f, 0.0f};
         if (not m_snappedTerrainBlock.get().getShape().intersects(movedRect)) {
             m_snappedTerrainBlock.set(nullptr);
         }
@@ -54,7 +56,7 @@ void Model::Entities::Player::checkAndHandlePressedIntoWall(float dt, const Mode
             m_snappedTerrainBlock.set(nullptr);
         }
     } else if (m_whereIsSnappedTerrain == WHERE_IS_SNAPPED_TERRAIN::LEFT) {
-        const auto movedRect = m_shape + m_shape.width * 0.5f * Model::Shape::Point{-1.0f, 0.0f};
+        const auto movedRect = m_shape + m_shape.width * 0.5f * Model::Shapes::Point{-1.0f, 0.0f};
         if (not m_snappedTerrainBlock.get().getShape().intersects(movedRect)) {
             m_snappedTerrainBlock.set(nullptr);
         }
@@ -69,4 +71,8 @@ void Model::Entities::Player::checkAndHandlePressedIntoWall(float dt, const Mode
             m_snappedTerrainBlock.set(nullptr);
         }
     }
+}
+
+void Model::Entities::Player::draw(View::Window &window) const {
+    View::DrawInterface::draw(*this, window);
 }

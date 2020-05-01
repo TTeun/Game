@@ -12,7 +12,7 @@ add_executable(sfml main.cpp
         Model/Entities/player.h
         colors.h View/window.cpp
         View/window.h
-        Model/entitycontroller.cpp Model/entitycontroller.h
+        Model/Entities/entitycontroller.cpp Model/Entities/entitycontroller.h
         Model/Entities/debris.cpp
         Model/Entities/debris.h
         Model/Entities/debrisexplosion.cpp
@@ -40,7 +40,7 @@ add_executable(sfml main.cpp
         ThirdParty/inih-master/cpp/INIReader.cpp
         ThirdParty/inih-master/cpp/INIReader.h Model/Physics/deathtimer.cpp Model/Physics/deathtimer.h Model/Physics/finiteduration.h
         ThirdParty/tinyxml/tinystr.cpp ThirdParty/tinyxml/tinystr.h ThirdParty/tinyxml/tinyxml.cpp ThirdParty/tinyxml/tinyxml.h ThirdParty/tinyxml/tinyxmlerror.cpp ThirdParty/tinyxml/tinyxmlparser.cpp
-        View/tilemap.cpp View/tilemap.h Model/Loaders/levelloader.cpp Model/Loaders/levelloader.h Model/Entities/enemy.cpp Model/Entities/enemy.h Model/DataStructures/rectgraph.cpp Model/DataStructures/rectgraph.h Model/Shape/rectangle.cpp Model/Shape/rectangle.h Model/Shape/line.cpp Model/Shape/line.h Model/Shape/point.cpp Model/Shape/point.h Aux/mathtools.h Aux/mathtools.cpp Model/Physics/object.cpp Model/Physics/physicsobject.cpp Model/Physics/intersectableobject.cpp Aux/constpointerwrapper.h Model/Entities/ai.h Model/Entities/levelwrapper.cpp Model/Entities/levelwrapper.h Model/Physics/constants.cpp Aux/inireaderwrapper.cpp Aux/inireaderwrapper.h Model/water.cpp Model/water.h Model/Shape/triangle.cpp Model/Shape/triangle.h Model/Shape/quadrilateral.cpp Model/Shape/quadrilateral.h)
+        View/tilemap.cpp View/tilemap.h Model/Loaders/levelloader.cpp Model/Loaders/levelloader.h Model/Entities/enemy.cpp Model/Entities/enemy.h Model/DataStructures/rectgraph.cpp Model/DataStructures/rectgraph.h Model/Shapes/rectangle.cpp Model/Shapes/rectangle.h Model/Shapes/line.cpp Model/Shapes/line.h Model/Shapes/point.cpp Model/Shapes/point.h Aux/mathtools.h Aux/mathtools.cpp Model/Physics/object.cpp Model/Physics/physicsobject.cpp Model/Physics/intersectableobject.cpp Aux/constpointerwrapper.h Model/Entities/ai.h Model/Entities/levelwrapper.cpp Model/Entities/levelwrapper.h Model/Physics/constants.cpp Aux/inireaderwrapper.cpp Aux/inireaderwrapper.h Model/water.cpp Model/water.h Model/Shapes/triangle.cpp Model/Shapes/triangle.h Model/Shapes/quadrilateral.cpp Model/Shapes/quadrilateral.h Model/Shapes/coloredrectangle.cpp Model/Shapes/coloredrectangle.h Model/Shapes/shape.cpp Model/Shapes/shape.h Model/Shapes/snake.cpp Model/Shapes/snake.h View/drawable.h)
 
 
 # Find SFML

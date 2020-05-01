@@ -22,7 +22,7 @@ namespace Controller {
         };
 
     public:
-        KeyState(BEHAVIOUR behaviour, sf::Keyboard::Key key, float resetTime = 0.001f);
+        KeyState(BEHAVIOUR behaviour, sf::Keyboard::Key key, float resetTime = 0.5f);
 
     private:
         KEY_EVENT_TYPE update(bool keyIsPressed);

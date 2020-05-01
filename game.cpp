@@ -4,18 +4,25 @@
 
 #include "Model/Loaders/levelloader.h"
 
-Game::Game()
-        : m_window(new View::Window(1200, 800, "Game")),
-          m_drawInterface(new View::DrawInterface),
-          m_entityController(new Model::EntityController()),
-          m_keyBoardHandler(new Controller::KeyBoardHandler),
-          m_constants(std::move(Model::Physics::Constants::create())) {
-    m_window->setShowFrameRate(true);
+Game::Game() {
+    m_window = std::make_unique<View::Window>(1200, 800, "Game");
+
+    m_drawInterface = std::make_unique<View::DrawInterface>();
+    m_keyBoardHandler = std::make_unique<Controller::KeyBoardHandler>();
+    m_constants = Model::Physics::Constants::create();
+
+    init();
 }
 
 void Game::init() {
     srand(static_cast<unsigned int>(time(0)));
+
+    m_entityController = std::make_unique<Model::Entities::EntityController>();
+    m_entityController->addPlayer();
+
     Model::Loaders::loadLevel("../Assets/Levels/level1.xml", *this);
+    m_window->setShowFrameRate(true);
+
 }
 
 void Game::play() {
@@ -24,16 +31,13 @@ void Game::play() {
         m_keyBoardHandler->handleKeyInput(*this);
 
         m_window->clear(Colors::windowClearColor);
+        m_entityController->getLevelWrapper().setCornerRectGraph(40, 40);
         if (not m_isPaused) {
             m_entityController->update(m_window->getDtInSeconds(), *m_constants);
 
-            const auto cornerRectGraph = m_entityController->getLevelWrapper().buildCornerRectGraphWithPlayer(
-                    40, 40, static_cast<const Model::EntityController *>(m_entityController.get())->getPlayer()
-            );
+            m_entityController->getLevelWrapper().getCornerRectGraph().draw(*m_window);
 
-            cornerRectGraph.draw(*m_window);
-
-            m_entityController->handleAi(m_window->getDtInSeconds(), cornerRectGraph);
+            m_entityController->handleAi(m_window->getDtInSeconds());
         }
         m_window->drawModel(*m_entityController, getDrawInterface());
 
@@ -41,14 +45,12 @@ void Game::play() {
     }
 }
 
-Model::EntityController &Game::getModel() {
+Model::Entities::EntityController &Game::getModel() {
     return *m_entityController;
 }
 
 void Game::reset() {
-    m_entityController = std::make_unique<Model::EntityController>();
-    m_constants = Model::Physics::Constants::create();
-    Model::Loaders::loadLevel("../Assets/Levels/level1.xml", *this);
+    init();
 }
 
 void Game::togglePause() {

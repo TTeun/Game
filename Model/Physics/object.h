@@ -5,7 +5,7 @@
 #ifndef TEUN_GAME_OBJECT_H
 #define TEUN_GAME_OBJECT_H
 
-#include "../Shape/rectangle.h"
+#include "../Shapes/coloredrectangle.h"
 
 #include <utility>
 
@@ -16,12 +16,12 @@ namespace Model {
         class Object {
 
         public:
-            const Model::Shape::Rectangle &getShape() const;
+            const Shapes::ColoredRectangle & getShape() const;
 
         protected:
-            Object(Model::Shape::Rectangle &&shape);
+            Object(Shapes::ColoredRectangle &&shape);
 
-            Model::Shape::Rectangle m_shape;
+            Model::Shapes::ColoredRectangle m_shape;
         };
     } // namespace Physics
 } // namespace Model

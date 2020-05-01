@@ -9,20 +9,20 @@
 
 namespace Model {
 
-    namespace Shape {
+    namespace Shapes {
 
         class Triangle {
 
         public:
 
-            Model::Shape::Point getPoint(size_t i) const;
+            Model::Shapes::Point getPoint(size_t i) const;
 
             Triangle(const Point &point1, const Point &point2, const Point &point3);
 
         private:
-            Model::Shape::Point m_point0;
-            Model::Shape::Point m_point1;
-            Model::Shape::Point m_point2;
+            Model::Shapes::Point m_point0;
+            Model::Shapes::Point m_point1;
+            Model::Shapes::Point m_point2;
 
         };
 

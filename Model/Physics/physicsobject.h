@@ -18,7 +18,7 @@ namespace Model {
         class PhysicsObject : public Object {
 
         public:
-            explicit PhysicsObject(Model::Shape::Rectangle &&shape);
+            explicit PhysicsObject(Shapes::ColoredRectangle &&shape);
 
             void setVelocity(const sf::Vector2f &velocity);
 

@@ -6,6 +6,7 @@
 #define TEUN_GAME_PLAYER_H
 
 #include "../Physics/intersectableobject.h"
+#include "../../View/drawable.h"
 
 #include <SFML/Graphics/RectangleShape.hpp>
 
@@ -15,16 +16,24 @@ namespace Model {
 
         class Level;
 
-        class Player : public Physics::IntersectableObject {
+        class Player : public Physics::IntersectableObject, public View::Drawable {
 
         public:
+            Player(Shapes::ColoredRectangle &&shape) : IntersectableObject(
+                    std::move(shape)) {};
+
             Player(float x, float y, float height, float width, const sf::Color &color);
+
+            void draw(View::Window &window) const override;
 
             void addHorizontalForce(float force);
 
             void jump(const Physics::Constants &constants);
 
         private:
+
+            bool m_isInitialized = false;
+
         protected:
             void checkAndHandlePressedIntoWall(float dt, const Physics::Constants &constants) override;
 

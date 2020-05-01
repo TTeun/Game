@@ -6,7 +6,7 @@
 
 Model::
 
-Physics::PhysicsObject::PhysicsObject(Model::Shape::Rectangle &&shape)
+Physics::PhysicsObject::PhysicsObject(Shapes::ColoredRectangle &&shape)
         : Object(std::move(shape)) {
 }
 

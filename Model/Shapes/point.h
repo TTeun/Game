@@ -9,7 +9,7 @@
 #include <ostream>
 
 namespace Model {
-    namespace Shape {
+    namespace Shapes {
 
         class Point : public sf::Vector2f {
         public:
@@ -21,6 +21,6 @@ namespace Model {
 
             void normalize();
         };
-    } // namespace Shape
+    } // namespace Shapes
 } // namespace Model
 #endif // TEUN_GAME_POINT_H

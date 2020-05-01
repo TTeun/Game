@@ -5,7 +5,8 @@
 #ifndef TEUN_GAME_RECTGRAPH_H
 #define TEUN_GAME_RECTGRAPH_H
 
-#include "../Shape/rectangle.h"
+#include "../Shapes/rectangle.h"
+#include "../../View/drawable.h"
 
 #include <map>
 #include <memory>
@@ -24,21 +25,33 @@ namespace Model {
 namespace Model {
     namespace DataStructures {
 
-        class RectGraph {
+    class RectGraph : public View::Drawable{
 
         public:
             RectGraph(float width, float height, const Entities::LevelWrapper &levelWrapper);
 
-            void draw(View::Window &window) const;
+            void draw(View::Window &window) const override ;
 
-            void addTarget(const Shape::Rectangle &targetRectangle, const Entities::LevelWrapper &levelWrapper,
+            void addTarget(const Shapes::Rectangle &targetRectangle, const Entities::LevelWrapper &levelWrapper,
                            float shrinkFactor);
 
-            Model::Shape::Point findDirectionToTarget(const Shape::Rectangle &rectangle,
-                                                      const Model::Entities::LevelWrapper &levelWrapper,
-                                                      float shrinkFactor) const;
+            Model::Shapes::Point findDirectionToTarget(const Shapes::Rectangle &rectangle,
+                                                       const Model::Entities::LevelWrapper &levelWrapper,
+                                                       float shrinkFactor) const;
 
-        private:
+            bool hasTarget() const {
+                return static_cast<bool>(m_target);
+            }
+
+        const std::map<std::pair<size_t, size_t>, float> &getEdges() const;
+
+        const std::vector<Shapes::Rectangle> &getRectangles() const;
+
+        const std::map<size_t, float> &getEdgesToTarget() const;
+
+        const std::unique_ptr<Shapes::Rectangle> &getTarget() const;
+
+    private:
             struct DijkstraInfo {
                 DijkstraInfo(size_t index) : m_index(index) {
 
@@ -60,11 +73,11 @@ namespace Model {
 
             std::map<std::pair<size_t, size_t>, float> m_edges;
 
-            std::vector<Shape::Rectangle> m_rectangles;
+            std::vector<Shapes::Rectangle> m_rectangles;
 
             std::map<size_t, float> m_edgesToTarget;
 
-            std::unique_ptr<Shape::Rectangle> m_target;
+            std::unique_ptr<Shapes::Rectangle> m_target;
 
             std::vector<std::vector<size_t>> m_edgeArray;
 

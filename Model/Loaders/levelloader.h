@@ -6,6 +6,8 @@
 #define TEUN_GAME_LEVELLOADER_H
 
 #include <string>
+#include "../../View/drawinterface.h"
+
 
 class Game;
 
@@ -15,6 +17,7 @@ namespace Model {
     public:
         static void loadLevel(std::string pathToLevelXml, Game &game);
     };
+
 
 } // namespace Model
 

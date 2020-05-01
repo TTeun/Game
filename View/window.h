@@ -5,10 +5,11 @@
 #ifndef TEUN_GAME_WINDOW_H
 #define TEUN_GAME_WINDOW_H
 
-#include "../Model/Shape/rectangle.h"
+#include "../Model/Shapes/rectangle.h"
+#include "../Model/Shapes/triangle.h"
+#include "../Model/Shapes/quadrilateral.h"
 #include "drawinterface.h"
-#include "../Model/Shape/triangle.h"
-#include "../Model/Shape/quadrilateral.h"
+#include "../Model/Entities/entitycontroller.h"
 
 #include <SFML/Graphics/Font.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
@@ -26,21 +27,23 @@ namespace View {
 
         sf::View calculateViewPort(const Model::Entities::Player &player);
 
-        const sf::FloatRect &getViewRect() const;
+        const Model::Shapes::Rectangle &getViewRect() const;
 
         void drawRectangle(float x, float y, float width, float height, const sf::Color &color = sf::Color::White);
 
-        void drawRectangle(const Model::Shape::Rectangle &rec);
+        void drawRectangle(const Model::Shapes::ColoredRectangle &rect);
 
         void drawLine(const sf::Vector2f &p1, const sf::Vector2f &p2, const sf::Color &color = sf::Color::White);
 
         float getFrameRate() const;
 
-        void drawModel(const Model::EntityController &entityController, DrawInterface &drawInterface);
+        void drawModel(const Model::Entities::EntityController &entityController, DrawInterface &drawInterface);
 
-        void drawTriangle(const Model::Shape::Triangle &triangle, const sf::Color &color);
+        void drawTriangle(const Model::Shapes::Triangle &triangle, const sf::Color &color);
 
-        void drawQuadrilateral(const Model::Shape::Quadrilateral &quadrilateral, const sf::Color &color);
+        void drawQuadrilateral(const Model::Shapes::Quadrilateral &quadrilateral, const sf::Color &color);
+
+        void drawRectangle(const Model::Shapes::Rectangle &rect, const sf::Color &color = sf::Color::Black);
 
     private:
         bool m_showFrameRate;
@@ -52,7 +55,7 @@ namespace View {
 
         float m_dt = 0.1;
 
-        sf::FloatRect m_viewRect;
+        Model::Shapes::Rectangle m_viewRect;
         sf::Vector2f m_viewPortPositionVelocityOffset = {0.0f, 0.0f};
 
     };
