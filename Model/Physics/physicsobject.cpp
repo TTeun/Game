@@ -2,6 +2,8 @@
 
 #include "constants.h"
 
+#include <cassert>
+
 Model::
 
     Physics::PhysicsObject::PhysicsObject(Geometry::ColoredRectangle && shape)
@@ -43,4 +45,9 @@ void Model::Physics::PhysicsObject::applyGravity(float dt, const Constants & con
             m_velocity.y = constants.m_maxVerticalSpeed;
         }
     }
+}
+void Model::Physics::PhysicsObject::setMaxVelocity(float maxVelocity)
+{
+    assert(maxVelocity >= 0.0f);
+    m_maxVelocity = maxVelocity;
 }

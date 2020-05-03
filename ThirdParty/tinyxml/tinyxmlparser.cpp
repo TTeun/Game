@@ -484,7 +484,7 @@ const char * TiXmlBase::GetEntity(const char * p, char * value, int * length, Ti
 
     // So it wasn't an entity, its unrecognized, or something like that.
     *value = *p; // Don't put back the last one, since we return it!
-    //*length = 1;	// Leave unrecognized entities - this doesn't really
+    //*getLength = 1;	// Leave unrecognized entities - this doesn't really
     // work.
     // Just writes strange XML.
     return p + 1;
@@ -590,7 +590,7 @@ void TiXmlDocument::StreamIn(std::istream * in, TIXML_STRING * tag)
     }
 
     while (in->good()) {
-        int tagIndex = (int)tag->length();
+        int tagIndex = (int)tag->getLength();
         while (in->good() && in->peek() != '>') {
             int c = in->get();
             if (c <= 0) {
@@ -849,7 +849,7 @@ void TiXmlElement::StreamIn(std::istream * in, TIXML_STRING * tag)
             if (!in->good())
                 return;
             assert(in->peek() == '<');
-            int tagIndex = (int)tag->length();
+            int tagIndex = (int)tag->getLength();
 
             bool closingTag     = false;
             bool firstCharFound = false;
@@ -1176,7 +1176,7 @@ void TiXmlComment::StreamIn(std::istream * in, TIXML_STRING * tag)
 
         (*tag) += (char)c;
 
-        if (c == '>' && tag->at(tag->length() - 2) == '-' && tag->at(tag->length() - 3) == '-') {
+        if (c == '>' && tag->at(tag->length() - 2) == '-' && tag->at(tag->getLength() - 3) == '-') {
             // All is well.
             return;
         }

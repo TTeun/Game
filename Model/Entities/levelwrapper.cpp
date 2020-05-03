@@ -42,5 +42,5 @@ void Model::Entities::LevelWrapper::setCornerRectGraph(float width, float height
 void Model::Entities::LevelWrapper::addPlayerToCornerRectGraph(const Model::Entities::Player & player)
 {
     assert(m_cornerRectGraph);
-    m_cornerRectGraph->addTarget(player.getShape(), *this, 1.0f);
+    m_cornerRectGraph->addTarget(player.getShape(), *this, 0.9f);
 }

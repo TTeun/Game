@@ -33,10 +33,11 @@ void Model::Entities::EntityController::handleAi(float dt)
 {
     for (auto & enemy : m_enemyVector) {
         auto vel =
-            getLevelWrapper().getCornerRectGraph().findDirectionToTarget(enemy.getShape(), getLevelWrapper(), 0.9f);
-        const float length = vel.length();
+            getLevelWrapper().getCornerRectGraph().findDirectionToTarget(enemy.getShape(), getLevelWrapper(), 1.0f);
+        const float length = vel.getLength();
         vel /= length != 0 ? length : 1.0f;
-        enemy.setVelocity(vel * 100.f);
+        //        enemy.setVelocity(vel * 100.f);
+        enemy.addForce(dt, 500.0f * vel);
     }
 }
 
@@ -110,7 +111,7 @@ const Model::Entities::Water & Model::Entities::EntityController::getWater() con
 
 void Model::Entities::EntityController::addPlayer(float x, float y, float width, float height, const sf::Color & color)
 {
-    m_player = std::make_unique<Model::Entities::Player>(x, y, width, height, color);
+    m_player = std::make_unique<Model::Entities::Player>(x, y, width, height, 1400.0f, color);
 }
 
 Model::Entities::LevelWrapper & Model::Entities::EntityController::getLevelWrapper()

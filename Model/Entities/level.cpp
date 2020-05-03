@@ -15,11 +15,9 @@ const std::list<std::unique_ptr<Model::Entities::TerrainBlock>> & Model::Entitie
     return m_terrainBlocks;
 }
 
-size_t Model::Entities::Level::addTerrainBlock(Model::Geometry::ColoredRectangle && coloredRectangle)
+void Model::Entities::Level::addTerrainBlock(Model::Geometry::ColoredRectangle && coloredRectangle)
 {
-    const size_t id = m_terrainBlocks.size();
-    m_terrainBlocks.emplace_back(new TerrainBlock(id, std::move(coloredRectangle)));
-    return id;
+    m_terrainBlocks.emplace_back(new TerrainBlock(m_terrainBlocks.size(), std::move(coloredRectangle)));
 }
 
 bool Model::Entities::Level::intersects(const Model::Geometry::Rectangle & rect) const

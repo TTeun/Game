@@ -23,6 +23,8 @@ namespace Model {
 
             void setVelocity(const Geometry::Vector2d & velocity);
 
+            void setMaxVelocity(float maxVelocity);
+
             const Geometry::Vector2d & getVelocity() const;
 
             void update(float dt, const Constants & constants);
@@ -35,6 +37,8 @@ namespace Model {
             void applyGravity(float dt, const Constants & constants);
 
             Model::Geometry::Vector2d m_velocity;
+
+            float m_maxVelocity = 200.0f;
 
             float m_mass = 1.0f;
 

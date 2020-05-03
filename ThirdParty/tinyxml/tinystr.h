@@ -131,13 +131,13 @@ public:
         return rep_->str;
     }
 
-    // Return the length of a TiXmlString
+    // Return the getLength of a TiXmlString
     size_type length() const
     {
         return rep_->size;
     }
 
-    // Alias for length()
+    // Alias for getLength()
     size_type size() const
     {
         return rep_->size;

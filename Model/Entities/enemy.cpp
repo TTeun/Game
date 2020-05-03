@@ -17,6 +17,7 @@ Model::Entities::Enemy Model::Entities::Enemy::create(const Geometry::Point & po
 {
     auto enemy = Model::Entities::Enemy({20, 20}, position);
     enemy.m_shape.setColor(sf::Color::Yellow);
+    enemy.setMaxVelocity(350.0f);
     return enemy;
 }
 

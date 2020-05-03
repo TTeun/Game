@@ -38,7 +38,7 @@ void Model::Loaders::loadLevel(const std::string & pathToLevelXml, Game & game)
     const TiXmlElement * blockElement = levelElement->FirstChildElement();
 
     while (blockElement) {
-        const size_t id = level->addTerrainBlock(getRect(blockElement));
+        level->addTerrainBlock(getRect(blockElement));
         //        auto *tileMap = new View::TileMap("../Assets/images/Tileset_ground.png",
         //                                          {32, 32},
         //                                          static_cast<size_t>(rectangle.m_width),

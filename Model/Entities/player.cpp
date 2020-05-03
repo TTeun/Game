@@ -8,12 +8,12 @@
 #include "../Physics/constants.h"
 #include "terrainblock.h"
 
-Model::Entities::Player::Player(float x, float y, float height, float width, const sf::Color & color)
+Model::Entities::Player::Player(float x, float y, float height, float width, float maxVelocity, const sf::Color & color)
     : Physics::IntersectableObject(
           Model::Geometry::ColoredRectangle(Model::Geometry::Point{width, height}, Model::Geometry::Point{x, y}, color))
 {
     setFeelsGravity(true);
-    //    m_shape.setColor(color);
+    setMaxVelocity(maxVelocity);
 }
 
 void Model::Entities::Player::addHorizontalForce(float force)

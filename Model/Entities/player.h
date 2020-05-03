@@ -19,9 +19,7 @@ namespace Model {
         class Player : public Physics::IntersectableObject, public View::Drawable {
 
         public:
-            Player(Geometry::ColoredRectangle && shape) : IntersectableObject(std::move(shape)){};
-
-            Player(float x, float y, float height, float width, const sf::Color & color);
+            Player(float x, float y, float height, float width, float maxVelocity, const sf::Color & color);
 
             void draw(View::Window & window) const override;
 

@@ -14,6 +14,7 @@ void Model::Physics::IntersectableObject::update(float dt,
                                                  const Model::Entities::Level & level,
                                                  const Constants & constants)
 {
+    m_velocity.clampLength(m_maxVelocity);
     if (m_snappedTerrainBlock) {
         updateSnapped(dt, level, constants);
     } else {
@@ -40,11 +41,8 @@ Model::Physics::IntersectableObject::whichDirectionIsTerrainBlock(
     } else if (thisTopLeft.y >= terrainBottomRight.y) {
         return WHERE_IS_SNAPPED_TERRAIN::ABOVE;
     }
-
-    //    std::cout << thisBottomRight.y - terrainTopLeft.y << '\t' << thisBottomRight.x - terrainTopLeft.x << '\t'
-    //              << thisTopLeft.x - terrainBottomRight.x << '\t' << thisTopLeft.y - terrainBottomRight.y << '\n';
-
-    //    assert(false);
+    std::cout << thisBottomRight.y - terrainTopLeft.y << '\t' << thisBottomRight.x - terrainTopLeft.x << '\t'
+              << thisTopLeft.x - terrainBottomRight.x << '\t' << thisTopLeft.y - terrainBottomRight.y << '\n';
 }
 
 void Model::Physics::IntersectableObject::updateSnapped(float dt,
@@ -149,6 +147,14 @@ void Model::Physics::IntersectableObject::checkAndHandlePressedIntoWall(float dt
     if (not m_snappedTerrainBlock.get().getShape().intersects(movedRect)) {
         unSnap();
     }
+    bool isMovingAwayFromWall = (m_whereIsSnappedTerrain == WHERE_IS_SNAPPED_TERRAIN::LEFT && m_velocity.x > 0.0f) ||
+                                (m_whereIsSnappedTerrain == WHERE_IS_SNAPPED_TERRAIN::RIGHT && m_velocity.x < 0.0f);
+    if (isMovingAwayFromWall) {
+        unSnap();
+        applyGravity(dt, constants);
+        return;
+    }
+
     bool isPressingIntoWall = (m_whereIsSnappedTerrain == WHERE_IS_SNAPPED_TERRAIN::RIGHT && m_velocity.x > 0.0f) ||
                               (m_whereIsSnappedTerrain == WHERE_IS_SNAPPED_TERRAIN::LEFT && m_velocity.x < 0.0f);
     applyGravity(dt, constants);

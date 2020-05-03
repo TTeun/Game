@@ -18,9 +18,13 @@ namespace Model {
 
             Point(const sf::Vector2f & point);
 
-            float length() const;
+            float getLength() const;
 
             void normalize();
+
+            void setSize(float newLength);
+
+            void clampLength(float maxlength);
         };
 
         typedef Point Vector2d;

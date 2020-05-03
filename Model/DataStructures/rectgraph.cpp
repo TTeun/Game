@@ -86,9 +86,6 @@ void Model::DataStructures::RectGraph::addTarget(const Geometry::Rectangle & tar
 Model::Geometry::Point Model::DataStructures::RectGraph::findDirectionToTarget(
     const Geometry::Rectangle & rectangle, const Entities::LevelWrapper & levelWrapper, float shrinkFactor) const
 {
-    // ToDo omdat anders de vijanden kleiner worden en eigenlijk niet passen!
-    shrinkFactor = 1.0f;
-
     if (not hasTarget() || m_edgesToTarget.empty() || m_rectangles.empty()) {
         return {0.0f, 0.0f};
     }

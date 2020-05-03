@@ -41,7 +41,7 @@ namespace Model {
 
             bool intersects(const Geometry::Rectangle & rect) const;
 
-            size_t addTerrainBlock(Model::Geometry::ColoredRectangle && coloredRectangle);
+            void addTerrainBlock(Model::Geometry::ColoredRectangle && coloredRectangle);
 
             std::list<std::unique_ptr<Entities::TerrainBlock>> m_terrainBlocks;
         };

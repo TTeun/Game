@@ -388,7 +388,7 @@ protected:
     static const char * GetEntity(const char * in, char * value, int * length, TiXmlEncoding encoding);
 
     // Get a character, while interpreting entities.
-    // The length can be from 0 to 4 bytes.
+    // The getLength can be from 0 to 4 bytes.
     inline static const char * GetChar(const char * p, char * _value, int * length, TiXmlEncoding encoding)
     {
         assert(p);
@@ -405,7 +405,7 @@ protected:
             *_value = *p;
             return p + 1;
         } else if (*length) {
-            // strncpy( _value, p, *length );	// lots of compilers don't like
+            // strncpy( _value, p, *getLength );	// lots of compilers don't like
             // this function (unsafe),
             // and the null terminator isn't needed
             for (int i = 0; p[i] && i < *length; ++i) {
@@ -2331,7 +2331,7 @@ public:
         return buffer.c_str();
     }
 
-    /// Return the length of the result string.
+    /// Return the getLength of the result string.
     size_t Size()
     {
         return buffer.size();
